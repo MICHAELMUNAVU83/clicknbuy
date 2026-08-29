@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" class="[scrollbar-gutter:stable] scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content={get_csrf_token()} />
+
+    <%!-- Page title --%>
+    <.live_title default="ClicknBuy | Shop Smart, Buy Fast" suffix=" | ClicknBuy">
+      {assigns[:page_title]}
+    </.live_title>
+
+    <%!-- Primary SEO --%>
+    <meta
+      name="description"
+      content={assigns[:meta_description] || "ClicknBuy — Shop Smart, Buy Fast. Electronics, gadgets and everyday essentials at competitive prices, with fast delivery and secure payment."}
+    />
+    <meta name="keywords" content="ClicknBuy, online shopping Kenya, electronics Kenya, gadgets, headphones, smart watches, Nairobi ecommerce" />
+    <meta name="author" content="ClicknBuy" />
+    <meta name="robots" content="index, follow" />
+
+    <%!-- Open Graph (Facebook / WhatsApp previews) --%>
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ClicknBuy" />
+    <meta
+      property="og:title"
+      content={assigns[:page_title] || "ClicknBuy | Shop Smart, Buy Fast"}
+    />
+    <meta
+      property="og:description"
+      content={assigns[:meta_description] || "Electronics, gadgets and everyday essentials at competitive prices, with fast delivery and secure payment."}
+    />
+    <meta
+      property="og:image"
+      content={assigns[:og_image] || "/images/clicknbuy-logo.png"}
+    />
+    <meta property="og:url" content={assigns[:canonical_url] || "https://clicknbuy.com"} />
+
+    <%!-- Twitter / X Card --%>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@clicknbuy" />
+    <meta
+      name="twitter:title"
+      content={assigns[:page_title] || "ClicknBuy | Shop Smart, Buy Fast"}
+    />
+    <meta
+      name="twitter:description"
+      content={assigns[:meta_description] || "Electronics, gadgets and everyday essentials — fast delivery, secure payment."}
+    />
+    <meta
+      name="twitter:image"
+      content={assigns[:og_image] || "/images/clicknbuy-logo.png"}
+    />
+
+    <%!-- Favicon --%>
+    <link rel="icon" type="image/png" href="/images/clicknbuy-logo.png" />
+    <link rel="apple-touch-icon" href="/images/clicknbuy-logo.png" />
+
+    <%!-- Fonts & Styles --%>
+    <% settings = Clicknbuy.SiteSettings.get() %>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href={Clicknbuy.SiteSettings.google_fonts_url([settings.font_body, settings.font_heading, settings.font_script])}
+    />
+    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js">
+    </script>
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
+    </script>
+    <%!-- Dynamic brand CSS variables — overrides defaults in app.css --%>
+    <style>
+      :root {
+        --brand-primary:      <%= settings.primary_color %>;
+        --brand-primary-dark: color-mix(in srgb, <%= settings.primary_color %> 78%, black);
+        --brand-primary-soft: color-mix(in srgb, <%= settings.primary_color %> 8%, white);
+        --brand-accent:       <%= settings.accent_color || "#DB4A44" %>;
+        --brand-accent-dark:  color-mix(in srgb, <%= settings.accent_color || "#DB4A44" %> 82%, black);
+        --font-heading: "<%= settings.font_heading %>", ui-sans-serif, system-ui, sans-serif;
+        --font-body:    "<%= settings.font_body %>", ui-sans-serif, system-ui, sans-serif;
+        --font-script:  "<%= settings.font_script %>", cursive;
+      }
+      /* Apply brand fonts */
+      body { font-family: var(--font-body); color: var(--brand-ink); }
+      h1, h2, h3, h4, h5 { font-family: var(--font-heading); }
+      .font-script, .brand-script { font-family: var(--font-script) !important; }
+      /* Legacy hardcoded #C8001F classes now resolve to the red CTA accent, so
+         pages not yet rebuilt keep red buttons instead of turning indigo. */
+      .bg-\[\#C8001F\]            { background-color: var(--brand-accent) !important; }
+      .text-\[\#C8001F\]          { color: var(--brand-accent) !important; }
+      .border-\[\#C8001F\]        { border-color: var(--brand-accent) !important; }
+      .ring-\[\#C8001F\]          { --tw-ring-color: var(--brand-accent) !important; }
+      .from-\[\#C8001F\]          { --tw-gradient-from: var(--brand-accent) !important; }
+      .to-\[\#C8001F\]            { --tw-gradient-to: var(--brand-accent) !important; }
+      .hover\:bg-\[\#C8001F\]:hover    { background-color: var(--brand-accent) !important; }
+      .hover\:text-\[\#C8001F\]:hover  { color: var(--brand-accent) !important; }
+      .hover\:border-\[\#C8001F\]:hover { border-color: var(--brand-accent) !important; }
+      .focus\:border-\[\#C8001F\]\/60:focus { border-color: color-mix(in srgb, var(--brand-accent) 60%, transparent) !important; }
+      .focus\:ring-\[\#C8001F\]\/30:focus { --tw-ring-color: color-mix(in srgb, var(--brand-accent) 30%, transparent) !important; }
+      /* Opacity variants */
+      .bg-\[\#C8001F\]\/3  { background-color: color-mix(in srgb, var(--brand-accent)  3%, transparent) !important; }
+      .bg-\[\#C8001F\]\/5  { background-color: color-mix(in srgb, var(--brand-accent)  5%, transparent) !important; }
+      .bg-\[\#C8001F\]\/10 { background-color: color-mix(in srgb, var(--brand-accent) 10%, transparent) !important; }
+      .bg-\[\#C8001F\]\/20 { background-color: color-mix(in srgb, var(--brand-accent) 20%, transparent) !important; }
+      .text-\[\#C8001F\]\/40 { color: color-mix(in srgb, var(--brand-accent) 40%, transparent) !important; }
+      .text-\[\#C8001F\]\/50 { color: color-mix(in srgb, var(--brand-accent) 50%, transparent) !important; }
+      .text-\[\#C8001F\]\/70 { color: color-mix(in srgb, var(--brand-accent) 70%, transparent) !important; }
+      .border-\[\#C8001F\]\/30 { border-color: color-mix(in srgb, var(--brand-accent) 30%, transparent) !important; }
+      .border-\[\#C8001F\]\/40 { border-color: color-mix(in srgb, var(--brand-accent) 40%, transparent) !important; }
+      .shadow-\[\#C8001F\]\/10 { --tw-shadow-color: color-mix(in srgb, var(--brand-accent) 10%, transparent) !important; }
+      .hover\:shadow-\[\#C8001F\]\/10:hover { --tw-shadow-color: color-mix(in srgb, var(--brand-accent) 10%, transparent) !important; }
+      .hover\:bg-\[\#C8001F\]\/5:hover { background-color: color-mix(in srgb, var(--brand-accent) 5%, transparent) !important; }
+      .group:hover .group-hover\:text-\[\#C8001F\] { color: var(--brand-accent) !important; }
+      .group:hover .group-hover\:border-\[\#C8001F\] { border-color: var(--brand-accent) !important; }
+      /* Hover/focus dark states — were hardcoded as red-800 */
+      .hover\:bg-red-800:hover { background-color: var(--brand-accent-dark) !important; }
+      .bg-red-800 { background-color: var(--brand-accent-dark) !important; }
+    </style>
+  </head>
+  <body class="bg-white font-body-brand text-ink-brand antialiased">
+    {@inner_content}
+  </body>
+</html>

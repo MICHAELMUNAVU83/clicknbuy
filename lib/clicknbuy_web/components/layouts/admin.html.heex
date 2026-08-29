@@ -1,0 +1,23 @@
+<div class="flex h-screen overflow-hidden">
+  <.admin_sidebar
+    current_path={@current_path}
+    current_user={Map.get(assigns, :current_user)}
+    counts={
+      Map.merge(
+        %{
+          products: Clicknbuy.Repo.aggregate(Clicknbuy.Products.Product, :count),
+          collections: Clicknbuy.Repo.aggregate(Clicknbuy.Collections.Collection, :count),
+          bundles: Clicknbuy.Repo.aggregate(Clicknbuy.Bundles.Bundle, :count),
+          orders: Map.get(Clicknbuy.Orders.count_by_status(), "all", 0),
+          customers: Clicknbuy.Customers.count_customers(),
+          promotions: Clicknbuy.Promotions.count_promo_codes(),
+          open_chats: Clicknbuy.Chat.count_open_sessions()
+        },
+        Map.get(assigns, :counts, %{})
+      )
+    }
+  />
+  <main class="flex-1 p-4 overflow-y-auto">
+    {@inner_content}
+  </main>
+</div>
