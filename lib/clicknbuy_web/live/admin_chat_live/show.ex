@@ -145,18 +145,18 @@ defmodule ClicknbuyWeb.AdminChatLive.Show do
     <div class="mb-6 flex items-center justify-between">
       <div class="flex items-center gap-4">
         <.link navigate={~p"/admin/chat"}>
-          <button class="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 text-gray-400 transition hover:border-gray-300 hover:text-gray-700">
+          <button class="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 text-gray-500 transition hover:border-gray-300 hover:text-gray-700">
             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
         </.link>
         <div>
-          <p class="text-xs font-semibold uppercase tracking-widest text-gray-400">Live Chat</p>
-          <h1 class="mt-0.5 text-2xl font-bold text-gray-900">
+          <p class="text-xs font-semibold uppercase tracking-widest text-gray-500">Live Chat</p>
+          <h1 class="mt-0.5 text-2xl font-bold text-ink">
             {(@session.visitor_name || "Visitor")}
             <%= if @session.product_name do %>
-              <span class="text-sm font-normal text-gray-400">— re: {@session.product_name}</span>
+              <span class="text-sm font-normal text-gray-500">— re: {@session.product_name}</span>
             <% end %>
           </h1>
         </div>
@@ -167,7 +167,7 @@ defmodule ClicknbuyWeb.AdminChatLive.Show do
           <button
             phx-click="close_session"
             data-confirm="Close this chat session?"
-            class="rounded-xl border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-600 transition hover:border-gray-300 hover:text-gray-900"
+            class="rounded-xl border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-600 transition hover:border-gray-300 hover:text-ink"
           >
             Close Chat
           </button>
@@ -186,7 +186,7 @@ defmodule ClicknbuyWeb.AdminChatLive.Show do
     </div>
 
     <%!-- Chat area --%>
-    <div class="flex h-[calc(100vh-220px)] flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white">
+    <div class="flex h-[calc(100vh-220px)] flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
       <%!-- Messages --%>
       <div
         id="chat-messages"
@@ -194,7 +194,7 @@ defmodule ClicknbuyWeb.AdminChatLive.Show do
         class="flex-1 space-y-4 overflow-y-auto p-6"
       >
         <%= if Enum.empty?(@messages) do %>
-          <p class="text-center text-sm text-gray-400">No messages yet.</p>
+          <p class="text-center text-sm text-gray-500">No messages yet.</p>
         <% else %>
           <%= for msg <- @messages do %>
             <div class={[
@@ -204,10 +204,10 @@ defmodule ClicknbuyWeb.AdminChatLive.Show do
               <%= if msg.message_type == "product_suggestion" do %>
                 <%!-- Product suggestion card --%>
                 <div class="max-w-xs space-y-2">
-                  <p class="text-xs text-gray-400">
+                  <p class="text-xs text-gray-500">
                     <%= if msg.sender == "admin", do: "You suggested", else: "Sales rep suggested" %>
                   </p>
-                  <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+                  <div class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
                     <%= if msg.suggested_product_image do %>
                       <img
                         src={msg.suggested_product_image}
@@ -216,7 +216,7 @@ defmodule ClicknbuyWeb.AdminChatLive.Show do
                       />
                     <% end %>
                     <div class="p-3">
-                      <p class="text-sm font-semibold text-gray-900">{msg.suggested_product_name}</p>
+                      <p class="text-sm font-semibold text-ink">{msg.suggested_product_name}</p>
                       <p class="mt-0.5 text-sm font-bold text-gray-700">
                         KES {ClicknbuyWeb.Format.price(msg.suggested_product_price)}
                       </p>
@@ -229,22 +229,22 @@ defmodule ClicknbuyWeb.AdminChatLive.Show do
                       </a>
                     </div>
                   </div>
-                  <p class="text-right text-[10px] text-gray-400">{format_time(msg.inserted_at)}</p>
+                  <p class="text-right text-[10px] text-gray-500">{format_time(msg.inserted_at)}</p>
                 </div>
               <% else %>
                 <%!-- Regular text bubble --%>
                 <div class="max-w-xs lg:max-w-md">
                   <div class={[
-                    "rounded-2xl px-4 py-2.5 text-sm",
+                    "rounded-lg px-4 py-2.5 text-sm",
                     if(msg.sender == "admin",
                       do: "rounded-tr-sm bg-gray-900 text-white",
-                      else: "rounded-tl-sm bg-gray-100 text-gray-900"
+                      else: "rounded-tl-sm bg-gray-100 text-ink"
                     )
                   ]}>
                     {msg.content}
                   </div>
                   <p class={[
-                    "mt-1 text-[10px] text-gray-400",
+                    "mt-1 text-[10px] text-gray-500",
                     if(msg.sender == "admin", do: "text-right", else: "text-left")
                   ]}>
                     {format_time(msg.inserted_at)}
@@ -259,7 +259,7 @@ defmodule ClicknbuyWeb.AdminChatLive.Show do
       <%!-- Product search panel --%>
       <%= if @show_product_search do %>
         <div class="border-t border-gray-100 bg-gray-50 p-4">
-          <p class="mb-2 text-xs font-semibold uppercase tracking-widest text-gray-400">
+          <p class="mb-2 text-xs font-semibold uppercase tracking-widest text-gray-500">
             Suggest a Product
           </p>
           <form phx-change="search_products" phx-submit="search_products">
@@ -281,7 +281,7 @@ defmodule ClicknbuyWeb.AdminChatLive.Show do
                     <img src={p.image} class="h-12 w-12 flex-shrink-0 rounded-lg object-cover object-top" />
                   <% end %>
                   <div class="min-w-0 flex-1">
-                    <p class="truncate text-sm font-semibold text-gray-900">{p.name}</p>
+                    <p class="truncate text-sm font-semibold text-ink">{p.name}</p>
                     <p class="text-xs text-gray-500">KES {ClicknbuyWeb.Format.price(p.base_price)}</p>
                   </div>
                   <button
@@ -313,7 +313,7 @@ defmodule ClicknbuyWeb.AdminChatLive.Show do
               value={@reply_text}
               phx-change="update_reply"
               disabled={@session.status == "closed"}
-              class="w-full resize-none rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 transition focus:border-gray-400 focus:bg-white focus:outline-none disabled:opacity-50"
+              class="w-full resize-none rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-ink placeholder-gray-400 transition focus:border-gray-400 focus:bg-white focus:outline-none disabled:opacity-50"
             >{@reply_text}</textarea>
           </div>
           <div class="flex flex-col gap-2">
@@ -325,7 +325,7 @@ defmodule ClicknbuyWeb.AdminChatLive.Show do
                 "flex h-10 w-10 items-center justify-center rounded-xl border transition",
                 if(@show_product_search,
                   do: "border-gray-900 bg-gray-900 text-white",
-                  else: "border-gray-200 text-gray-400 hover:border-gray-400 hover:text-gray-700"
+                  else: "border-gray-200 text-gray-500 hover:border-gray-400 hover:text-gray-700"
                 )
               ]}
             >

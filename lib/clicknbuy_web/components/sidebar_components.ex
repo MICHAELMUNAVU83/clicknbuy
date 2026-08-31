@@ -16,7 +16,7 @@ defmodule ClicknbuyWeb.SidebarComponents do
       |> assign_new(:current_user, fn -> nil end)
 
     ~H"""
-    <aside class="flex h-screen w-[220px] flex-shrink-0 flex-col border-r border-gray-200 bg-white xl:w-[240px]">
+    <aside class="flex h-screen w-[220px] flex-shrink-0 flex-col border-r border-gray-100 bg-white xl:w-[240px]">
       <.sidebar_logo />
 
       <nav class="flex-1 overflow-y-auto px-3 py-4 space-y-0.5">
@@ -150,21 +150,21 @@ defmodule ClicknbuyWeb.SidebarComponents do
 
   defp sidebar_logo(assigns) do
     ~H"""
-    <div class="flex items-center gap-2.5 border-b border-gray-200 px-4 py-3.5">
+    <div class="flex items-center gap-2.5 border-b border-gray-100 px-4 py-3.5">
       <img
         src="/images/clicknbuy-logo.png"
         alt="ClicknBuy"
-        class="h-8 w-8 flex-shrink-0 rounded-full object-cover object-top ring-2 ring-[#C8001F]/60"
+        class="h-8 w-8 flex-shrink-0 rounded-full object-cover object-top ring-2 ring-brand/60"
       />
       <div class="min-w-0">
-        <span class="brand-logo block text-[17px] leading-tight text-gray-900">
-          ClicknBuy<span class="text-[#C8001F]">.</span>
+        <span class="font-heading-brand block text-[17px] font-extrabold leading-tight tracking-tight text-brand">
+          ClicknBuy<span class="text-accent">.</span>
         </span>
-        <span class="block text-[9px] uppercase tracking-widest text-gray-400">
+        <span class="block text-[9px] uppercase tracking-widest text-gray-500">
           Fashion &amp; Function
         </span>
       </div>
-      <span class="ml-auto flex-shrink-0 rounded-md bg-[#C8001F]/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#C8001F]">
+      <span class="ml-auto flex-shrink-0 rounded bg-brand/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand">
         Admin
       </span>
     </div>
@@ -175,7 +175,7 @@ defmodule ClicknbuyWeb.SidebarComponents do
 
   defp nav_section(assigns) do
     ~H"""
-    <p class="mb-1 mt-2 px-2 text-[10px] font-semibold uppercase tracking-widest text-gray-400">
+    <p class="mb-1 mt-2 px-2 text-[10px] font-semibold uppercase tracking-widest text-gray-500">
       {@label}
     </p>
     """
@@ -213,14 +213,14 @@ defmodule ClicknbuyWeb.SidebarComponents do
     <a
       href={@path}
       class={[
-        "group flex items-center gap-2.5 rounded-xl px-2.5 py-2 text-[13px] font-medium transition-all",
+        "group flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-[13px] font-medium transition-all",
         if(@active,
-          do: "bg-[#C8001F] text-white shadow-sm shadow-[#C8001F]/30",
-          else: "text-gray-600 hover:bg-[#C8001F]/8 hover:text-[#C8001F]"
+          do: "bg-brand text-white shadow-sm shadow-brand/30",
+          else: "text-ink-600 hover:bg-brand-50 hover:text-brand"
         )
       ]}
     >
-      <span class={if @active, do: "text-white", else: "text-gray-400 group-hover:text-[#C8001F]"}>
+      <span class={if @active, do: "text-white", else: "text-ink-400 group-hover:text-brand"}>
         <.nav_icon name={@icon} />
       </span>
 
@@ -231,7 +231,7 @@ defmodule ClicknbuyWeb.SidebarComponents do
           "ml-auto rounded-full px-2 py-0.5 text-[10px] font-semibold tabular-nums",
           if(@active,
             do: "bg-white/20 text-white",
-            else: "bg-[#C8001F]/10 text-[#C8001F]"
+            else: "bg-brand-50 text-brand"
           )
         ]}>
           {@badge}
@@ -241,10 +241,10 @@ defmodule ClicknbuyWeb.SidebarComponents do
     """
   end
 
-  defp badge_class(:alert), do: "bg-red-100 text-red-600"
-  defp badge_class(:count), do: "bg-gray-100 text-gray-500"
-  defp badge_class(:default), do: "bg-gray-100 text-gray-600"
-  defp badge_class(_), do: "bg-gray-100 text-gray-500"
+  defp badge_class(:alert), do: "bg-accent-50 text-accent-700"
+  defp badge_class(:count), do: "bg-surface-200 text-ink-500"
+  defp badge_class(:default), do: "bg-surface-200 text-ink-600"
+  defp badge_class(_), do: "bg-surface-200 text-ink-500"
 
   # ── Footer / User ─────────────────────────────────────────────────
 
@@ -256,16 +256,16 @@ defmodule ClicknbuyWeb.SidebarComponents do
       <!-- User row -->
       <a
         href={~p"/admin/team"}
-        class="group flex items-center gap-2.5 rounded-xl px-2 py-2 transition hover:bg-gray-50"
+        class="group flex items-center gap-2.5 rounded-lg px-2 py-2 transition hover:bg-surface-200"
       >
         <div class={"flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold text-white shadow-sm #{user_avatar_color(@current_user)}"}>
           {user_initials(@current_user)}
         </div>
         <div class="min-w-0 flex-1">
-          <p class="truncate text-[13px] font-semibold text-gray-900">
+          <p class="truncate text-[13px] font-semibold text-ink">
             {user_display_name(@current_user)}
           </p>
-          <p class="text-[11px] text-gray-400">{user_role_label(@current_user)}</p>
+          <p class="text-[11px] text-gray-500">{user_role_label(@current_user)}</p>
         </div>
         <svg
           class="h-3.5 w-3.5 flex-shrink-0 text-gray-300 group-hover:text-gray-500"
@@ -281,10 +281,10 @@ defmodule ClicknbuyWeb.SidebarComponents do
     <!-- Back to website -->
       <a
         href="/"
-        class="group flex w-full items-center gap-2.5 rounded-xl px-2.5 py-2 text-[13px] font-medium text-gray-500 transition hover:bg-gray-100 hover:text-gray-900"
+        class="group flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-[13px] font-medium text-ink-500 transition hover:bg-surface-200 hover:text-ink"
       >
         <svg
-          class="h-4 w-4 text-gray-400 group-hover:text-gray-600"
+          class="h-4 w-4 text-gray-500 group-hover:text-gray-600"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -305,10 +305,10 @@ defmodule ClicknbuyWeb.SidebarComponents do
         <input type="hidden" name="_csrf_token" value={Plug.CSRFProtection.get_csrf_token()} />
         <button
           type="submit"
-          class="group flex w-full items-center gap-2.5 rounded-xl px-2.5 py-2 text-[13px] font-medium text-gray-500 transition hover:bg-red-50 hover:text-[#C8001F]"
+          class="group flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-[13px] font-medium text-ink-500 transition hover:bg-accent-50 hover:text-accent-700"
         >
           <svg
-            class="h-4 w-4 text-gray-400 group-hover:text-[#C8001F]"
+            class="h-4 w-4 text-gray-500 group-hover:text-accent-700"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -351,16 +351,17 @@ defmodule ClicknbuyWeb.SidebarComponents do
     email |> String.slice(0, 2) |> String.upcase()
   end
 
-  defp user_avatar_color(nil), do: "bg-[#C8001F]"
+  defp user_avatar_color(nil), do: "bg-brand"
 
   defp user_avatar_color(%{id: id}) do
+    # Drawn from the storefront palette so admin avatars stay on-brand.
     colors = [
-      "bg-[#C8001F]",
-      "bg-blue-500",
-      "bg-violet-500",
-      "bg-teal-500",
-      "bg-amber-500",
-      "bg-pink-500"
+      "bg-brand",
+      "bg-ink",
+      "bg-accent",
+      "bg-brand-500",
+      "bg-ink-600",
+      "bg-accent-600"
     ]
 
     Enum.at(colors, rem(id, length(colors)))

@@ -5,6 +5,13 @@ alias Clicknbuy.ProductVariants.ProductVariant
 alias Clicknbuy.Testimonials.Testimonial
 alias Clicknbuy.InfoPages.InfoPage
 
+# Stable Unsplash CDN URLs keep the seed data realistic without checking large
+# binary assets into the repository. The photo IDs are fixed; only Unsplash's
+# delivery parameters are varied by the browser/CDN.
+unsplash_photo = fn photo_id ->
+  "https://images.unsplash.com/photo-#{photo_id}?auto=format&fit=crop&w=1200&q=85"
+end
+
 # Clear existing seed data so seeds can be re-run safely
 Repo.delete_all(Clicknbuy.Testimonials.Testimonial)
 Repo.delete_all(Clicknbuy.BundleItems.BundleItem)
@@ -20,37 +27,37 @@ IO.puts("🗑️   Cleared existing data.")
 collections =
   [
     %{
-      title: "Co-ord Sets",
-      slug: "coord-sets",
-      image: "/images/products/red-denim-coord-set.jpg",
+      title: "Audio & Sound",
+      slug: "audio-sound",
+      image: unsplash_photo.("1505740420928-5e560c06d30e"),
       position: 1,
       is_active: true
     },
     %{
-      title: "Wide-Leg Pants",
-      slug: "wide-leg-pants",
-      image: "/images/products/black-wide-leg-pants-floral-top.jpg",
+      title: "Wearables",
+      slug: "wearables",
+      image: unsplash_photo.("1523275335684-37898b6baf30"),
       position: 2,
       is_active: true
     },
     %{
-      title: "Skirts",
-      slug: "skirts",
-      image: "/images/products/denim-maxi-skirt-front.jpg",
+      title: "Computing",
+      slug: "computing",
+      image: unsplash_photo.("1527443224154-c4a3942d3acf"),
       position: 3,
       is_active: true
     },
     %{
-      title: "Jumpsuits",
-      slug: "jumpsuits",
-      image: "/images/products/sage-linen-jumpsuit.jpg",
+      title: "Phones & Accessories",
+      slug: "phones-accessories",
+      image: unsplash_photo.("1511707171634-5f897ff02aa9"),
       position: 4,
       is_active: true
     },
     %{
-      title: "Tops & Knits",
-      slug: "tops-and-knits",
-      image: "/images/products/grey-layered-knit-set-front.jpg",
+      title: "Gaming & VR",
+      slug: "gaming-vr",
+      image: unsplash_photo.("1622979135225-d2ba269cf1ac"),
       position: 5,
       is_active: true
     }
@@ -73,14 +80,18 @@ end
 # ─── Products ────────────────────────────────────────────────────────────────
 
 products = [
-  # ── Co-ord Sets ──────────────────────────────────────────────────────────
+  # ProductVariant requires a size, so `sizes` carries the variant axis where
+  # one exists (case size, capacity, layout) and ["Standard"] where it doesn't.
+  # ── Audio & Sound ──
   %{
-    name: "Red & Denim Co-ord Set",
-    slug: "red-denim-coord-set",
+    name: "Wireless Airbuds Pro",
+    slug: "wireless-airbuds-pro",
     description:
-      "A bold statement co-ord set featuring a cropped red sweatshirt layered over a denim shirt, paired with matching red wide-leg trousers finished with raw-hem denim side-stripe detailing. Effortlessly cool with white sneakers.",
-    base_price: 4_800,
-    image: "/images/products/red-denim-coord-set.jpg",
+      "True-wireless earbuds with active noise cancellation, 6 hours of playback per charge and 24 hours total from the pocket-sized case. Bluetooth 5.3 pairs instantly and stays locked in on the move.",
+    base_price: 3_500,
+    compare_at_price: 4_800,
+    sku: "CNB-AUD-1001",
+    image: unsplash_photo.("1606220945770-b5b6c2c55bf1"),
     badge_label: "Bestseller",
     badge_color: "red",
     is_featured: true,
@@ -89,300 +100,331 @@ products = [
     position: 1,
     status: "active",
     size_advice:
-      "Runs true to size. The trousers have a drawstring waist for a flexible fit. If between sizes, size up for comfort. Model is 5'6\" wearing a size M. Measure your bust and hips before ordering.",
+      "One size, with small, medium and large silicone tips in the box. Use the largest tip that stays comfortable — a proper seal is what makes noise cancellation work.",
     shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "coord-sets",
-    colors: [{"Red", "#CC2936"}, {"Denim Blue", "#4A7FB5"}]
+      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). 12-month warranty on manufacturing defects. Sealed returns within 7 days. WhatsApp 0796 770 862.",
+    collection_slug: "audio-sound",
+    sizes: ["Standard"],
+    colors: [{"Midnight Black", "#1A1A1A"}, {"Pearl White", "#F5F5F5"}]
   },
   %{
-    name: "Orange & Denim Co-ord Set",
-    slug: "orange-denim-coord-set",
+    name: "Digital Bluetooth Speaker",
+    slug: "digital-bluetooth-speaker",
     description:
-      "Vibrant burnt-orange co-ord set with a cropped pullover and wide-leg trousers, both accented with frayed denim contrast panels and cuffs. A denim shirt peeking underneath adds a layered finish.",
-    base_price: 4_800,
-    image: "/images/products/orange-denim-coord-set.jpg",
-    badge_label: "New",
-    badge_color: "green",
+      "Pill-shaped portable speaker with dual passive radiators for bass you can feel. IPX6 splash resistance, 12-hour battery and a built-in mic for hands-free calls.",
+    base_price: 6_200,
+    compare_at_price: 7_500,
+    sku: "CNB-AUD-1002",
+    image: unsplash_photo.("1608043152269-423dbba4e7e1"),
+    badge_label: "On Sale",
+    badge_color: "blue",
     is_featured: true,
-    is_bestseller: false,
-    is_new_arrival: true,
+    is_bestseller: true,
+    is_new_arrival: false,
     position: 2,
     status: "active",
     size_advice:
-      "Runs true to size. Bold, relaxed silhouette — if you prefer a more fitted look, size down. Drawstring trousers adjust easily. Measure your waist and hips for the best fit.",
+      "Compact at 18cm long — fits a backpack side pocket. Pair two units over Bluetooth for true stereo.",
     shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "coord-sets",
-    colors: [{"Orange", "#F97316"}, {"Denim Blue", "#4A7FB5"}]
+      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). 12-month warranty. Sealed returns within 7 days. WhatsApp 0796 770 862.",
+    collection_slug: "audio-sound",
+    sizes: ["Standard"],
+    colors: [{"Black", "#1A1A1A"}, {"Navy", "#1E3A5F"}]
   },
   %{
-    name: "Chocolate Knit Co-ord Set",
-    slug: "chocolate-knit-coord-set",
+    name: "Studio Over-Ear Headphones",
+    slug: "studio-over-ear-headphones",
     description:
-      "Luxuriously soft chocolate-brown knit co-ord set comprising an oversized drop-shoulder sweater with a cream contrast stripe hem and matching wide-leg knit trousers. The ultimate cosy-chic look.",
-    base_price: 5_200,
-    image: "/images/products/chocolate-knit-coord-set.jpg",
-    badge_label: "New",
-    badge_color: "green",
+      "Closed-back over-ear headphones with 40mm drivers and memory-foam cushions that stay comfortable through long sessions. Wired or wireless, with 30 hours of playback.",
+    base_price: 8_900,
+    sku: "CNB-AUD-1003",
+    image: unsplash_photo.("1505740420928-5e560c06d30e"),
+    badge_label: nil,
+    badge_color: nil,
     is_featured: false,
-    is_bestseller: false,
+    is_bestseller: true,
     is_new_arrival: true,
     position: 3,
     status: "active",
     size_advice:
-      "This oversized knit set runs generously. For a cosy relaxed fit, take your usual size. For a more structured look, size down one. The sweater has a deep drop-shoulder so measure your bust width.",
+      "Adjustable headband fits most adults. Ear cups swivel flat for storage in the included case.",
     shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "coord-sets",
-    colors: [{"Chocolate", "#7B3F00"}, {"Cream", "#F5F0E8"}]
+      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). 12-month warranty. Sealed returns within 7 days. WhatsApp 0796 770 862.",
+    collection_slug: "audio-sound",
+    sizes: ["Standard"],
+    colors: [{"Black", "#1A1A1A"}, {"Sand", "#D4B896"}]
   },
   %{
-    name: "Sage Linen Co-ord Set",
-    slug: "sage-linen-coord-set",
+    name: "Portable Party Speaker 40W",
+    slug: "portable-party-speaker",
     description:
-      "Breezy sage-green linen co-ord set with a frilled-shoulder crop top and matching drawstring wide-leg trousers. Lightweight and effortlessly elegant for warm days.",
-    base_price: 4_200,
-    image: "/images/products/sage-linen-coord-set.jpg",
-    badge_label: "Featured",
+      "40W of output with a carry handle, RGB light ring and a wired mic input for karaoke. Plays 10 hours at volume and doubles as a power bank for your phone.",
+    base_price: 12_500,
+    compare_at_price: 15_000,
+    sku: "CNB-AUD-1004",
+    image: unsplash_photo.("1589003077984-894e133dabab"),
+    badge_label: "On Sale",
     badge_color: "blue",
-    is_featured: true,
+    is_featured: false,
     is_bestseller: false,
-    is_new_arrival: false,
+    is_new_arrival: true,
     position: 4,
     status: "active",
     size_advice:
-      "Runs true to size. Linen has a natural relaxed drape. The frilled shoulder top suits a range of bust sizes and the drawstring trousers give flexibility. Model is 5'6\" in a size M.",
+      "32cm tall and 2.4kg — portable but substantial. Mic and 3.5mm cable are included.",
     shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "coord-sets",
-    colors: [{"Sage Green", "#8FAF7E"}, {"Olive", "#6B7C4A"}]
-  },
-  %{
-    name: "Olive Linen Co-ord Set",
-    slug: "olive-linen-coord-set",
-    description:
-      "Relaxed olive-green linen co-ord featuring a V-neck button-front tunic top with pearl buttons and matching wide-leg trousers. Pairs beautifully with heeled sandals for a polished casual look.",
-    base_price: 4_500,
-    image: "/images/products/olive-linen-coord-set.jpg",
-    badge_label: nil,
-    badge_color: nil,
-    is_featured: false,
-    is_bestseller: false,
-    is_new_arrival: false,
-    position: 5,
-    status: "active",
-    size_advice:
-      "Runs true to size. The V-neck button-front top has a relaxed fit — measure your bust for the best button closure. Trousers have an elasticated drawstring waist for a comfortable, adjustable fit.",
-    shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "coord-sets",
-    colors: [{"Olive", "#6B7C4A"}, {"Cream", "#F5F0E8"}]
+      "Nairobi delivery KES 300 (1–2 days). Countrywide KES 600–800 (2–4 days). 12-month warranty. Sealed returns within 7 days. WhatsApp 0796 770 862.",
+    collection_slug: "audio-sound",
+    sizes: ["Standard"],
+    colors: [{"Black", "#1A1A1A"}]
   },
 
-  # ── Wide-Leg Pants ────────────────────────────────────────────────────────
+  # ── Wearables ──
   %{
-    name: "Black Wide-Leg Palazzo Pants",
-    slug: "black-wide-leg-palazzo-pants",
+    name: "Smart Watch Series 5",
+    slug: "smart-watch-series-5",
     description:
-      "Sleek high-waisted black palazzo pants with a structured belt and deep pleats for a dramatic silhouette. The statement piece in any wardrobe — style with a crop top or tucked-in blouse.",
-    base_price: 2_800,
-    image: "/images/products/black-wide-leg-pants-floral-top.jpg",
+      "1.85-inch AMOLED smart watch tracking heart rate, blood oxygen and sleep, with over 100 workout modes. Bluetooth calling built in and 7 days between charges.",
+    base_price: 7_800,
+    compare_at_price: 9_500,
+    sku: "CNB-WEA-2001",
+    image: unsplash_photo.("1523275335684-37898b6baf30"),
     badge_label: "Bestseller",
     badge_color: "red",
     is_featured: true,
     is_bestseller: true,
-    is_new_arrival: false,
+    is_new_arrival: true,
+    position: 5,
+    status: "active",
+    size_advice:
+      "Two case sizes: 41mm suits wrists under 17cm, 45mm above. Straps are quick-release and swap in seconds.",
+    shipping_returns:
+      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). 12-month warranty. Sealed returns within 7 days. WhatsApp 0796 770 862.",
+    collection_slug: "wearables",
+    sizes: ["41mm", "45mm"],
+    colors: [{"Black", "#1A1A1A"}, {"Silver", "#C0C0C0"}, {"Rose Gold", "#E8B4A0"}]
+  },
+  %{
+    name: "Fitness Tracker Band",
+    slug: "fitness-tracker-band",
+    description:
+      "Lightweight band with a colour touch display, step and calorie tracking, sleep scoring and smartphone notifications. Water resistant to 50m and runs 14 days per charge.",
+    base_price: 3_200,
+    sku: "CNB-WEA-2002",
+    image: unsplash_photo.("1575311373937-040b8e1fd5b6"),
+    badge_label: "New",
+    badge_color: "green",
+    is_featured: true,
+    is_bestseller: false,
+    is_new_arrival: true,
     position: 6,
     status: "active",
     size_advice:
-      "High-waisted fit — measure your natural waist. These run true to size with no stretch. The belt is included and fully adjustable. Model wears a size M. If between sizes, size up for the waist.",
+      "Silicone strap adjusts from 14cm to 21cm, so it fits most wrists including children's.",
     shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "wide-leg-pants",
-    colors: [{"Black", "#1A1A1A"}, {"White", "#F5F5F5"}]
+      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). 12-month warranty. Sealed returns within 7 days. WhatsApp 0796 770 862.",
+    collection_slug: "wearables",
+    sizes: ["Standard"],
+    colors: [{"Purple", "#8B7BD8"}, {"Black", "#1A1A1A"}, {"Teal", "#3AA8A0"}]
   },
   %{
-    name: "Navy Wide-Leg Palazzo Pants",
-    slug: "navy-wide-leg-palazzo-pants",
+    name: "Chronograph Luxury Watch",
+    slug: "chronograph-luxury-watch",
     description:
-      "Fluid navy high-waisted palazzo pants with a matching belt and front pleats. Versatile enough for day or evening wear — shown here with a tie-dye bandeau and a pop-colour mini bag.",
-    base_price: 2_800,
-    image: "/images/products/navy-wide-leg-pants-bandeau.jpg",
+      "Stainless steel chronograph with a sunray dial, luminous hands and a sapphire-coated crystal. Quartz movement, 44mm case and 50m water resistance.",
+    base_price: 14_500,
+    sku: "CNB-WEA-2003",
+    image: unsplash_photo.("1524805444758-089113d48a6d"),
     badge_label: nil,
     badge_color: nil,
     is_featured: false,
-    is_bestseller: false,
+    is_bestseller: true,
     is_new_arrival: false,
     position: 7,
     status: "active",
     size_advice:
-      "High-waisted structured fit — runs true to size. These do not have stretch, so measure your natural waist carefully. The front pleats add ease around the hips. Belt included and adjustable.",
+      "44mm case with a 22mm strap — a deliberately bold profile. Links can be removed by any jeweller for a closer fit.",
     shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "wide-leg-pants",
-    colors: [{"Navy", "#1B2A6B"}, {"Black", "#1A1A1A"}]
+      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). 24-month movement warranty. Sealed returns within 7 days. WhatsApp 0796 770 862.",
+    collection_slug: "wearables",
+    sizes: ["Standard"],
+    colors: [{"Gold/Black", "#C9A227"}, {"Silver/Blue", "#8A9BB0"}]
   },
+
+  # ── Computing ──
   %{
-    name: "Olive High-Waist Wide-Leg Trousers",
-    slug: "olive-wide-leg-trousers",
+    name: "RGB Mechanical Gaming Keyboard",
+    slug: "rgb-mechanical-keyboard",
     description:
-      "Tailored olive-green wide-leg trousers with a high waist and front button detail. A clean silhouette that pairs perfectly with a white crop shirt for an elevated smart-casual look.",
-    base_price: 2_600,
-    image: "/images/products/olive-wide-leg-pants-white-crop.jpg",
-    badge_label: nil,
-    badge_color: nil,
-    is_featured: false,
-    is_bestseller: false,
+      "Full-size mechanical keyboard with hot-swappable blue switches, per-key RGB lighting and a detachable USB-C cable. Double-shot keycaps that won't wear smooth.",
+    base_price: 6_800,
+    compare_at_price: 8_200,
+    sku: "CNB-CMP-3001",
+    image: unsplash_photo.("1587829741301-dc798b83add3"),
+    badge_label: "On Sale",
+    badge_color: "blue",
+    is_featured: true,
+    is_bestseller: true,
     is_new_arrival: false,
     position: 8,
     status: "active",
     size_advice:
-      "Tailored structured waist — no stretch, so measure your waist exactly. Runs true to size. The front button detail sits flat when the correct size is chosen. Size up if you're between sizes.",
+      "Choose full-size for the number pad, or TKL to free up desk space for mouse movement.",
     shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "wide-leg-pants",
-    colors: [{"Olive", "#6B7C4A"}, {"Camel", "#C9A882"}]
+      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). 12-month warranty. Sealed returns within 7 days. WhatsApp 0796 770 862.",
+    collection_slug: "computing",
+    sizes: ["Full-size", "TKL"],
+    colors: [{"Black", "#1A1A1A"}, {"White", "#F5F5F5"}]
   },
   %{
-    name: "Light-Wash Wide-Leg Jeans",
-    slug: "light-wash-wide-leg-jeans",
+    name: "Wireless Optical Mouse",
+    slug: "wireless-optical-mouse",
     description:
-      "Relaxed-fit light-wash wide-leg jeans with a high rise and a clean, minimal finish. A wardrobe staple that grounds structured tops like a navy vest perfectly.",
-    base_price: 3_200,
-    image: "/images/products/navy-vest-wide-leg-jeans.jpg",
+      "Quiet-click 2.4GHz wireless mouse with a 1600 DPI optical sensor and contoured grip. Runs about 9 months on one AA battery and the nano receiver stores inside.",
+    base_price: 1_800,
+    sku: "CNB-CMP-3002",
+    image: unsplash_photo.("1527814050087-3793815479db"),
+    badge_label: nil,
+    badge_color: nil,
+    is_featured: true,
+    is_bestseller: false,
+    is_new_arrival: false,
+    position: 9,
+    status: "active",
+    size_advice: "Mid-size ambidextrous shell that suits palm and claw grips alike.",
+    shipping_returns:
+      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). 12-month warranty. Sealed returns within 7 days. WhatsApp 0796 770 862.",
+    collection_slug: "computing",
+    sizes: ["Standard"],
+    colors: [{"Red", "#CC2936"}, {"Black", "#1A1A1A"}, {"Grey", "#8A8A8A"}]
+  },
+  %{
+    name: "27-inch 4K UHD Monitor",
+    slug: "4k-uhd-monitor-27",
+    description:
+      "27-inch 3840×2160 IPS panel covering 99% sRGB, with HDR10, a 75Hz refresh rate and a tilt stand. Two HDMI inputs plus DisplayPort and built-in speakers.",
+    base_price: 42_000,
+    compare_at_price: 48_000,
+    sku: "CNB-CMP-3003",
+    image: unsplash_photo.("1527443224154-c4a3942d3acf"),
+    badge_label: "On Sale",
+    badge_color: "blue",
+    is_featured: true,
+    is_bestseller: true,
+    is_new_arrival: true,
+    position: 10,
+    status: "active",
+    size_advice:
+      "27-inch is the sweet spot for 4K at normal desk distance. Go 32-inch if you sit further back or want larger text without scaling.",
+    shipping_returns:
+      "Nairobi delivery KES 500 (1–2 days, boxed). Countrywide KES 1,000–1,500 (2–4 days). 24-month warranty with dead-pixel cover. Sealed returns within 7 days. WhatsApp 0796 770 862.",
+    collection_slug: "computing",
+    sizes: ["27-inch", "32-inch"],
+    colors: [{"Black", "#1A1A1A"}]
+  },
+  %{
+    name: "USB-C Docking Station",
+    slug: "usb-c-docking-station",
+    description:
+      "Nine-in-one hub turning a single USB-C port into dual HDMI, three USB-A ports, gigabit ethernet, SD and microSD readers, plus 100W pass-through charging.",
+    base_price: 9_500,
+    sku: "CNB-CMP-3004",
+    image: unsplash_photo.("1496181133206-80ce9b88a853"),
     badge_label: "New",
     badge_color: "green",
     is_featured: false,
     is_bestseller: false,
     is_new_arrival: true,
-    position: 9,
-    status: "active",
-    size_advice:
-      "High-rise denim runs slightly small in the waist — size up if you're between sizes. Denim has minimal stretch. Measure your waist and hips. The wide leg gives a relaxed, flattering silhouette on most body types.",
-    shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "wide-leg-pants",
-    colors: [{"Light Wash", "#B8D4E8"}, {"Dark Wash", "#2C4F7C"}]
-  },
-  %{
-    name: "Navy Pinstripe Wide-Leg Trousers",
-    slug: "navy-pinstripe-wide-leg-trousers",
-    description:
-      "Smart navy pinstripe wide-leg trousers from the matching blazer set. Power-dressing with an effortless twist — wear as a set or mix and match.",
-    base_price: 3_000,
-    image: "/images/products/navy-pinstripe-blazer-set.jpg",
-    badge_label: "Featured",
-    badge_color: "blue",
-    is_featured: true,
-    is_bestseller: false,
-    is_new_arrival: false,
-    position: 10,
-    status: "active",
-    size_advice:
-      "Part of a co-ord set — size up slightly for a tailored blazer-and-trouser look with room to layer. Waistband is structured with no stretch. We recommend ordering both pieces in the same size.",
-    shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "wide-leg-pants",
-    colors: [{"Navy", "#1B2A6B"}]
-  },
-
-  # ── Skirts ────────────────────────────────────────────────────────────────
-  %{
-    name: "Denim Maxi Skirt",
-    slug: "denim-maxi-skirt",
-    description:
-      "Voluminous mid-wash denim maxi skirt with a drawstring elasticated waist and sweeping panelled silhouette. Styled with a knotted graphic tee and a red crossbody for a relaxed street-style vibe.",
-    base_price: 3_500,
-    image: "/images/products/denim-maxi-skirt-front.jpg",
-    badge_label: "Bestseller",
-    badge_color: "red",
-    is_featured: true,
-    is_bestseller: true,
-    is_new_arrival: false,
     position: 11,
     status: "active",
     size_advice:
-      "Elasticated drawstring waist means this fits a range of sizes. Runs true to size. Maxi length sits at the ankle — ideal for heights 5'3\" and above. Pair with heels or flats.",
+      "Requires a USB-C port with DisplayPort Alt Mode — standard on modern laptops. Dual 4K output needs a Thunderbolt host.",
     shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "skirts",
-    colors: [{"Mid-Wash Denim", "#7BA4C7"}, {"Dark Denim", "#2C4F7C"}]
+      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). 12-month warranty. Sealed returns within 7 days. WhatsApp 0796 770 862.",
+    collection_slug: "computing",
+    sizes: ["Standard"],
+    colors: [{"Space Grey", "#6E6E73"}]
   },
   %{
-    name: "Burgundy Pleated Maxi Skirt",
-    slug: "burgundy-pleated-maxi-skirt",
+    name: "Laptop Cooling Stand",
+    slug: "laptop-cooling-stand",
     description:
-      "Dramatic floor-length burgundy pleated maxi skirt with a front split for ease of movement. Styled with a white logo shirt tucked behind a wide leather belt and paired with black knee boots and a structured satchel.",
-    base_price: 3_800,
-    image: "/images/products/burgundy-pleated-maxi-skirt.jpg",
-    badge_label: "Featured",
-    badge_color: "blue",
-    is_featured: true,
+      "Aluminium riser with two silent fans and six height settings, lifting your screen to eye level while keeping airflow under the chassis. Fits 12 to 17-inch laptops.",
+    base_price: 2_900,
+    sku: "CNB-CMP-3005",
+    image: unsplash_photo.("1496181133206-80ce9b88a853"),
+    badge_label: nil,
+    badge_color: nil,
+    is_featured: false,
     is_bestseller: false,
     is_new_arrival: false,
     position: 12,
     status: "active",
     size_advice:
-      "Runs true to size with a structured waistband — measure your waist carefully. Full-length with a front split for ease of movement. Best for heights 5'4\" and above. Size up if unsure.",
+      "Fits 12-inch to 17-inch laptops. Powered over USB from the laptop itself — no wall adapter.",
     shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "skirts",
-    colors: [{"Burgundy", "#800020"}, {"Black", "#1A1A1A"}]
+      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). 12-month warranty. Sealed returns within 7 days. WhatsApp 0796 770 862.",
+    collection_slug: "computing",
+    sizes: ["Standard"],
+    colors: [{"Silver", "#C0C0C0"}, {"Black", "#1A1A1A"}]
   },
 
-  # ── Jumpsuits ─────────────────────────────────────────────────────────────
+  # ── Phones & Accessories ──
   %{
-    name: "Sage Linen Jumpsuit",
-    slug: "sage-linen-jumpsuit",
+    name: "Power Bank 20,000mAh",
+    slug: "power-bank-20000mah",
     description:
-      "Effortless sage-green linen jumpsuit with frilled shoulders, an elasticated drawstring waist and wide-leg trousers. A one-piece wonder that looks polished with minimal accessories.",
-    base_price: 4_000,
-    image: "/images/products/sage-linen-jumpsuit.jpg",
-    badge_label: "Featured",
-    badge_color: "blue",
+      "20,000mAh power bank with 22.5W fast charging over USB-C PD, two USB-A outputs and a digital battery readout. Roughly four full phone charges per fill.",
+    base_price: 4_200,
+    compare_at_price: 5_200,
+    sku: "CNB-PHN-4001",
+    image: unsplash_photo.("1609592806596-b43bada2f2eb"),
+    badge_label: "Bestseller",
+    badge_color: "red",
     is_featured: true,
-    is_bestseller: false,
+    is_bestseller: true,
     is_new_arrival: false,
     position: 13,
     status: "active",
     size_advice:
-      "Runs true to size. Drawstring waist is fully adjustable. For petite heights (under 5'3\"), the leg length may be slightly long — easy to hem. Model is 5'6\" wearing size M. Measure bust and waist.",
+      "Airline-safe at 74Wh, so it's fine in carry-on. Recharges fully in about 5 hours with a 20W adapter.",
     shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "jumpsuits",
-    colors: [{"Sage Green", "#8FAF7E"}, {"Blush", "#F5C4C4"}]
+      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). 12-month warranty. Sealed returns within 7 days. WhatsApp 0796 770 862.",
+    collection_slug: "phones-accessories",
+    sizes: ["Standard"],
+    colors: [{"Black", "#1A1A1A"}, {"White", "#F5F5F5"}]
   },
-
-  # ── Tops & Knits ──────────────────────────────────────────────────────────
   %{
-    name: "Grey Layered Knit Top",
-    slug: "grey-layered-knit-top",
+    name: "GaN Fast Charger 65W",
+    slug: "gan-fast-charger-65w",
     description:
-      "Unique layered knit-over-shirt top in grey — a knitted sweater with button front detail sits over a woven shirt hem, creating a relaxed two-in-one look. Pairs effortlessly with shorts or jeans.",
-    base_price: 2_500,
-    image: "/images/products/grey-layered-knit-set-front.jpg",
-    badge_label: nil,
-    badge_color: nil,
+      "Compact 65W GaN charger with two USB-C ports and one USB-A, enough to run a laptop and phone together. Half the size of the brick that came in the box.",
+    base_price: 3_100,
+    sku: "CNB-PHN-4002",
+    image: unsplash_photo.("1583863788434-e58a36330cf0"),
+    badge_label: "New",
+    badge_color: "green",
     is_featured: false,
     is_bestseller: false,
-    is_new_arrival: false,
+    is_new_arrival: true,
     position: 14,
     status: "active",
     size_advice:
-      "Runs true to size. The layered knit-over-shirt effect is built into the design — no separate styling needed. Measure your bust for the best fit. Relaxed drop-shoulder cut.",
+      "UK three-pin plug as standard. Using all three ports at once splits the 65W between them.",
     shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "tops-and-knits",
-    colors: [{"Grey", "#9CA3AF"}, {"Black", "#1A1A1A"}]
+      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). 18-month warranty. Sealed returns within 7 days. WhatsApp 0796 770 862.",
+    collection_slug: "phones-accessories",
+    sizes: ["Standard"],
+    colors: [{"White", "#F5F5F5"}, {"Black", "#1A1A1A"}]
   },
   %{
-    name: "Black Layered Knit Top",
-    slug: "black-layered-knit-top",
+    name: "Tempered Glass Screen Protector",
+    slug: "tempered-glass-protector",
     description:
-      "Edgy black version of the layered knit-over-shirt top with contrast button detailing. Styled with a quilted black crossbody bag for a sleek, put-together look.",
-    base_price: 2_500,
-    image: "/images/products/black-grey-layered-knit-set.jpg",
+      "Two-pack of 9H tempered glass protectors with an oleophobic coating that resists fingerprints. Alignment frame and cleaning kit included for a bubble-free fit.",
+    base_price: 900,
+    sku: "CNB-PHN-4003",
+    image: unsplash_photo.("1511707171634-5f897ff02aa9"),
     badge_label: nil,
     badge_color: nil,
     is_featured: false,
@@ -391,140 +433,89 @@ products = [
     position: 15,
     status: "active",
     size_advice:
-      "Runs true to size. Same relaxed drop-shoulder construction as the grey version. Measure your bust for the best fit. The contrast button detailing is fixed — no adjustments needed.",
+      "Tell us your exact phone model on WhatsApp when ordering and we'll match the cut before dispatch.",
     shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "tops-and-knits",
-    colors: [{"Black", "#1A1A1A"}, {"Charcoal", "#374151"}]
+      "Nairobi delivery KES 200 (1–2 days). Countrywide KES 400 (2–4 days). Replacement if it cracks during fitting. WhatsApp 0796 770 862.",
+    collection_slug: "phones-accessories",
+    sizes: ["Standard"],
+    colors: [{"Clear", "#E8ECF8"}]
   },
+
+  # ── Gaming & VR ──
   %{
-    name: "Navy Structured Vest Top",
-    slug: "navy-structured-vest-top",
+    name: "Virtual Reality (VR) Headset",
+    slug: "vr-headset",
     description:
-      "Sharp navy structured vest top with mixed pearl and black button closures and a split hem. Tailored and modern — great over wide-leg jeans or as part of a smart-casual ensemble.",
-    base_price: 2_200,
-    image: "/images/products/navy-vest-wide-leg-jeans.jpg",
-    badge_label: "New",
-    badge_color: "green",
-    is_featured: false,
-    is_bestseller: false,
+      "Standalone VR headset with dual 2K lenses, 6DoF inside-out tracking and a 110-degree field of view. Adjustable head strap and two motion controllers in the box.",
+    base_price: 28_000,
+    compare_at_price: 34_000,
+    sku: "CNB-GAM-5001",
+    image: unsplash_photo.("1622979135225-d2ba269cf1ac"),
+    badge_label: "On Sale",
+    badge_color: "blue",
+    is_featured: true,
+    is_bestseller: true,
     is_new_arrival: true,
     position: 16,
     status: "active",
     size_advice:
-      "Structured cut runs slightly small — size up if between sizes. Best worn tucked into high-waisted bottoms. Measure your bust for the button fit. The split hem adds length in the back.",
+      "Adjustable strap fits most head sizes and the lens spacing moves to match your eyes. Glasses up to 145mm wide fit inside the spacer.",
     shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "tops-and-knits",
-    colors: [{"Navy", "#1B2A6B"}, {"Black", "#1A1A1A"}]
+      "Nairobi delivery KES 300–500 (1–2 days). Countrywide KES 800–1,200 (2–4 days). 12-month warranty. Sealed returns within 7 days. WhatsApp 0796 770 862.",
+    collection_slug: "gaming-vr",
+    sizes: ["128GB", "256GB"],
+    colors: [{"White", "#F5F5F5"}, {"Black", "#1A1A1A"}]
   },
   %{
-    name: "Red Knit Cardigan",
-    slug: "red-knit-cardigan",
+    name: "Wireless Game Controller",
+    slug: "wireless-game-controller",
     description:
-      "Classic cropped red knit cardigan with jewelled buttons and a layered white collared shirt underneath. A timeless preppy-chic piece that transitions from casual to smart effortlessly.",
-    base_price: 2_800,
-    image: "/images/products/red-cardigan-black-wide-leg.jpg",
-    badge_label: "Bestseller",
-    badge_color: "red",
-    is_featured: true,
-    is_bestseller: true,
-    is_new_arrival: false,
+      "Bluetooth controller with hall-effect sticks that won't drift, dual rumble motors and 20 hours of play per charge. Works with PC, Android, iOS and Switch.",
+    base_price: 5_400,
+    sku: "CNB-GAM-5002",
+    image: unsplash_photo.("1592840496694-26d035b52b48"),
+    badge_label: nil,
+    badge_color: nil,
+    is_featured: false,
+    is_bestseller: false,
+    is_new_arrival: true,
     position: 17,
     status: "active",
     size_advice:
-      "Cropped fit runs true to size. Pearl jewelled buttons — measure your bust for the best closure. Pairs best with high-waisted trousers or skirts. Knit fabric has a gentle natural stretch.",
+      "Standard full-size layout. Includes a USB-C cable so you can play wired with zero latency.",
     shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "tops-and-knits",
-    colors: [{"Red", "#CC2936"}, {"Black", "#1A1A1A"}]
-  },
-  %{
-    name: "Navy Pinstripe Blazer",
-    slug: "navy-pinstripe-blazer",
-    description:
-      "Cropped navy pinstripe co-ord blazer with short sleeves and a relaxed open-front silhouette. Wear as a set with the matching wide-leg trousers or layer over a crop top.",
-    base_price: 3_500,
-    image: "/images/products/navy-pinstripe-blazer-set.jpg",
-    badge_label: "Featured",
-    badge_color: "blue",
-    is_featured: true,
-    is_bestseller: false,
-    is_new_arrival: false,
-    position: 18,
-    status: "active",
-    size_advice:
-      "Relaxed open-front blazer runs slightly oversized. Size down if you prefer a more fitted look. Great as part of the pinstripe co-ord set or layered solo. Measure your shoulders for the best fit.",
-    shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "tops-and-knits",
-    colors: [{"Navy", "#1B2A6B"}, {"Black", "#1A1A1A"}]
-  },
-  %{
-    name: "White Puff-Sleeve Crop Shirt",
-    slug: "white-puff-sleeve-crop-shirt",
-    description:
-      "Crisp white cropped shirt with voluminous puff sleeves and a gathered elastic hem. Pairs perfectly with high-waisted trousers for a polished yet playful look.",
-    base_price: 2_000,
-    image: "/images/products/olive-wide-leg-pants-white-crop.jpg",
-    badge_label: nil,
-    badge_color: nil,
-    is_featured: false,
-    is_bestseller: false,
-    is_new_arrival: false,
-    position: 19,
-    status: "active",
-    size_advice:
-      "Runs true to size. Puff sleeves are structured and fixed. Measure your bust — the elastic hem gives flexibility around the waist. Cropped length sits above the high waist for a flattering look.",
-    shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "tops-and-knits",
-    colors: [{"White", "#F5F5F5"}, {"Blush", "#F5C4C4"}]
-  },
-  %{
-    name: "Floral Bandeau Crop Top",
-    slug: "floral-bandeau-crop-top",
-    description:
-      "Delicate black and white floral print bandeau crop top with a single shoulder strap. A versatile summer staple that looks stunning with wide-leg palazzo pants.",
-    base_price: 1_500,
-    image: "/images/products/black-wide-leg-pants-floral-top.jpg",
-    badge_label: nil,
-    badge_color: nil,
-    is_featured: false,
-    is_bestseller: false,
-    is_new_arrival: false,
-    position: 20,
-    status: "active",
-    size_advice:
-      "Runs true to size with a light stretch. Measure your bust for the best fit. The single adjustable shoulder strap gives flexibility. A versatile summer staple — pairs with anything high-waisted.",
-    shipping_returns:
-      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). Same-day available before 12 PM. Exchanges within 48 hours — unworn, tags on. WhatsApp 0796 770 862.",
-    collection_slug: "tops-and-knits",
-    colors: [{"Black/White", "#1A1A1A"}, {"Beige", "#D4B896"}]
+      "Nairobi delivery KES 200–300 (1–2 days). Countrywide KES 400–600 (2–4 days). 12-month warranty. Sealed returns within 7 days. WhatsApp 0796 770 862.",
+    collection_slug: "gaming-vr",
+    sizes: ["Standard"],
+    colors: [{"Black", "#1A1A1A"}, {"White", "#F5F5F5"}]
   }
 ]
 
-sizes = ["XS", "S", "M", "L", "XL"]
+default_sizes = ["Standard"]
 
 inserted_products =
   Enum.map(products, fn attrs ->
     {collection_slug, attrs} = Map.pop(attrs, :collection_slug)
     {colors, attrs} = Map.pop(attrs, :colors)
+    {sizes, attrs} = Map.pop(attrs, :sizes, default_sizes)
     collection = get_collection.(collection_slug)
     attrs = Map.put(attrs, :collection_id, collection.id)
 
-    # Give every product a stable SKU, and put roughly every third one on sale
-    # with a compare-at price ~25% above the live price.
     position = attrs[:position] || 1
 
+    # Fill in a SKU when the product didn't declare one, and put roughly every
+    # third un-priced product on sale at ~25% above the live price. Explicit
+    # :sku / :compare_at_price values always win.
     attrs =
       attrs
-      |> Map.put(:sku, "CNB" <> String.pad_leading(to_string(position * 7 + 1000), 5, "0"))
+      |> Map.put_new_lazy(:sku, fn ->
+        "CNB" <> String.pad_leading(to_string(position * 7 + 1000), 5, "0")
+      end)
       |> then(fn a ->
-        if rem(position, 3) == 1 do
-          Map.put(a, :compare_at_price, round(a.base_price * 1.25 / 100) * 100)
-        else
+        if Map.has_key?(a, :compare_at_price) or rem(position, 3) != 1 do
           a
+        else
+          Map.put(a, :compare_at_price, round(a.base_price * 1.25 / 100) * 100)
         end
       end)
 
@@ -532,6 +523,24 @@ inserted_products =
       %Product{}
       |> Product.changeset(attrs)
       |> Repo.insert()
+
+    # Seed the hero photo into the product gallery as well, so product detail
+    # pages and catalog cards use the same Unsplash image.
+    gallery = [attrs.image]
+
+    gallery
+    |> Enum.with_index(1)
+    |> Enum.each(fn {image, idx} ->
+      {:ok, _} =
+        %Clicknbuy.ProductImages.ProductImage{}
+        |> Clicknbuy.ProductImages.ProductImage.changeset(%{
+          product_id: product.id,
+          image: image,
+          # position is a :string column, so Ecto won't cast an integer here
+          position: to_string(idx)
+        })
+        |> Repo.insert()
+    end)
 
     # Insert one variant per colour × size combination
     Enum.each(colors, fn {color_name, color_hex} ->
@@ -556,10 +565,12 @@ get_product = fn slug ->
   Enum.find(inserted_products, &(&1.slug == slug))
 end
 
-variant_count = length(inserted_products) * length(sizes) * 2
+variant_count = Repo.aggregate(ProductVariant, :count)
+image_count = Repo.aggregate(Clicknbuy.ProductImages.ProductImage, :count)
 
 IO.puts(
-  "✅  Seeded #{length(inserted_collections)} collections, #{length(inserted_products)} products, ~#{variant_count} variants."
+  "✅  Seeded #{length(inserted_collections)} collections, #{length(inserted_products)} products, " <>
+    "#{variant_count} variants, #{image_count} images."
 )
 
 # ─── Bundle ───────────────────────────────────────────────────────────────────
@@ -567,19 +578,19 @@ IO.puts(
 {:ok, bundle} =
   %Clicknbuy.Bundles.Bundle{}
   |> Clicknbuy.Bundles.Bundle.changeset(%{
-    title: "The ClicknBuy Starter Bundle",
+    title: "The ClicknBuy Work-From-Home Bundle",
     description:
-      "Our curated starter bundle — everything you need to build a versatile, head-turning wardrobe. Includes our bestselling Black Wide-Leg Palazzo Pants, the Burgundy Pleated Maxi Skirt, the Red Knit Cardigan and the Denim Maxi Skirt. Mix, match and own every room.",
-    image: "/images/products/black-wide-leg-pants-floral-top.jpg",
+      "Everything you need for a productive desk, bought together and priced better. Pairs our 27-inch 4K monitor with the RGB mechanical keyboard, the wireless optical mouse and the USB-C docking station — one cable to your laptop and you're running.",
+    image: unsplash_photo.("1527443224154-c4a3942d3acf"),
     is_active: true
   })
   |> Repo.insert()
 
 bundle_item_slugs = [
-  "black-wide-leg-palazzo-pants",
-  "burgundy-pleated-maxi-skirt",
-  "red-knit-cardigan",
-  "denim-maxi-skirt"
+  "4k-uhd-monitor-27",
+  "rgb-mechanical-keyboard",
+  "wireless-optical-mouse",
+  "usb-c-docking-station"
 ]
 
 Enum.each(bundle_item_slugs, fn slug ->
@@ -600,44 +611,44 @@ IO.puts("✅  Seeded 1 bundle with #{length(bundle_item_slugs)} items.")
 
 testimonials = [
   %{
-    name: "Amina W.",
+    name: "Brian K.",
     position: 1,
-    image: "/images/people/woman1.jpg",
+    image: "/images/people/avatars/bk.svg",
     body:
-      "I ordered the Red & Denim Co-ord Set and I'm obsessed! The quality is incredible — the fabric feels premium and the fit is perfect. Got so many compliments on my first wear. Will definitely be ordering again!",
+      "The Airbuds Pro punch well above their price. Noise cancellation genuinely works on a matatu commute and the case lasts me the whole week. Ordered at 11am, had them by evening.",
     rating: 5,
     is_active: true,
-    product_slug: "red-denim-coord-set"
+    product_slug: "wireless-airbuds-pro"
   },
   %{
-    name: "Cynthia O.",
+    name: "Sharon M.",
     position: 2,
-    image: "/images/people/woman2.jpg",
+    image: "/images/people/avatars/sm.svg",
     body:
-      "The Denim Maxi Skirt is everything I wanted. Beautifully structured, the waist fits perfectly and the length is just right. I styled it with a simple white tee and got so many compliments.",
+      "I use the Smart Watch Series 5 for morning runs and the heart-rate tracking matches my gym equipment closely. Battery really does go a week. The 41mm size was the right call for my wrist.",
     rating: 5,
     is_active: true,
-    product_slug: "denim-maxi-skirt"
+    product_slug: "smart-watch-series-5"
   },
   %{
-    name: "Grace M.",
+    name: "James O.",
     position: 3,
-    image: "/images/people/woman3.jpg",
+    image: "/images/people/avatars/jo.svg",
     body:
-      "The Sage Linen Jumpsuit is my new favourite piece. Light, breathable and so flattering. I wore it to a garden party and everyone kept asking where I got it from. ClicknBuy never disappoints!",
+      "Bought the 27-inch 4K monitor for design work and the colour accuracy is excellent straight out of the box. It arrived properly boxed and padded, which I did not take for granted.",
     rating: 5,
     is_active: true,
-    product_slug: "sage-linen-jumpsuit"
+    product_slug: "4k-uhd-monitor-27"
   },
   %{
-    name: "Fatuma K.",
+    name: "Peter W.",
     position: 4,
-    image: "/images/people/woman4.jpg",
+    image: "/images/people/avatars/pw.svg",
     body:
-      "Bought the Black Wide-Leg Palazzo Pants and they are absolutely stunning. The pleating is chef's kiss. Delivery was fast and the packaging was so elegant. This is my go-to shop now.",
+      "The mechanical keyboard feels superb and the hot-swap switches meant I could change to quieter ones for the office without buying a new board. Great value for the price.",
     rating: 5,
     is_active: true,
-    product_slug: "black-wide-leg-palazzo-pants"
+    product_slug: "rgb-mechanical-keyboard"
   }
 ]
 
@@ -674,7 +685,7 @@ info_pages = [
 
     - Screenshot or share the product you love from our Instagram or website.
     - Send us a message on **WhatsApp: 0796 770 862**.
-    - Let us know your **size**, preferred **colour**, and **delivery location**.
+    - Let us know the **model or capacity**, preferred **colour**, and **delivery location**.
     - We'll confirm availability and send you the total including delivery.
     - Make payment via **M-Pesa Till No. 5894819**.
     - Send us the M-Pesa confirmation message.
@@ -698,45 +709,55 @@ info_pages = [
     """
   },
   %{
-    slug: "size-guide",
-    title: "Size Guide",
-    icon: "📐",
+    slug: "warranty-support",
+    title: "Warranty & Support",
+    icon: "🛡️",
     position: 2,
     meta_description:
-      "Find your perfect fit with the ClicknBuy size guide — measurements for tops, bottoms, dresses, and coord sets.",
+      "ClicknBuy warranty and support — cover periods, what's included and how to make a claim.",
     content: """
-    ## Finding Your Perfect Fit
+    ## Warranty & Support
 
-    All our garments are made with Kenyan bodies in mind. We recommend taking your measurements before ordering.
+    Every item we sell is covered against manufacturing defects. Here's what that means in practice.
 
-    ### How to Measure Yourself
+    ### Cover Periods
 
-    - **Bust** — Measure around the fullest part of your chest, keeping the tape parallel to the floor.
-    - **Waist** — Measure around your natural waistline, the narrowest part of your torso.
-    - **Hips** — Measure around the fullest part of your hips, about 20 cm below your waist.
-    - **Length** — Measure from the top of your shoulder to wherever you'd like the garment to end.
+    - **Audio, wearables and accessories** — 12 months
+    - **Monitors and computing hardware** — 24 months, including dead-pixel cover
+    - **Chargers and power banks** — 18 months
+    - **Cables, screen protectors and consumables** — 3 months
 
-    ### Women's Size Chart
+    ### What's Covered
 
-    ### Tops & Dresses
+    - Faults present from new, or that appear in normal use
+    - Battery capacity dropping below 70% within the warranty period
+    - Dead or stuck pixels on monitors, per the manufacturer threshold
+    - Ports, buttons and switches failing under normal use
 
-    - **XS** — Bust 80–84 cm | Waist 60–64 cm | Hips 86–90 cm
-    - **S** — Bust 84–88 cm | Waist 64–68 cm | Hips 90–94 cm
-    - **M** — Bust 88–94 cm | Waist 68–74 cm | Hips 94–100 cm
-    - **L** — Bust 94–100 cm | Waist 74–80 cm | Hips 100–106 cm
-    - **XL** — Bust 100–106 cm | Waist 80–86 cm | Hips 106–112 cm
-    - **XXL** — Bust 106–114 cm | Waist 86–94 cm | Hips 112–120 cm
+    ### What's Not Covered
 
-    ### Coord Sets & Bottoms
+    - Physical damage, drops, crushing or bent connectors
+    - Liquid damage beyond the item's stated IP rating
+    - Damage from unstable mains power — we strongly recommend a surge protector
+    - Software issues, or devices opened by an unauthorised repairer
 
-    - **S** — Waist 64–68 cm | Hips 90–96 cm
-    - **M** — Waist 68–74 cm | Hips 96–102 cm
-    - **L** — Waist 74–80 cm | Hips 102–108 cm
-    - **XL** — Waist 80–86 cm | Hips 108–114 cm
+    ### How to Make a Claim
 
-    ## Not Sure About Your Size?
+    - Message us on **WhatsApp: 0796 770 862** with your order reference.
+    - Send a short video or photos showing the fault.
+    - We respond within 24 hours with next steps.
+    - If the fault is confirmed, we repair, replace or refund — your choice where stock allows.
 
-    Every product page includes specific measurements. You can also **WhatsApp us** with your measurements and we'll recommend the best fit for you.
+    ### Before You Claim
+
+    A surprising number of faults are fixable in minutes. Try a different cable and wall
+    adapter, a different port, and a full power cycle. If the device pairs over Bluetooth,
+    remove it from your phone's saved devices and pair again. Still faulty? Message us.
+
+    ## Need a Hand Choosing?
+
+    Not sure which capacity, size or model fits your setup? Message us on
+    **WhatsApp: 0796 770 862** and we'll talk it through before you buy.
     """
   },
   %{
@@ -786,23 +807,24 @@ info_pages = [
     icon: "🔄",
     position: 4,
     meta_description:
-      "ClicknBuy returns and exchanges policy — we want you to love every piece.",
+      "ClicknBuy returns and exchanges policy — sealed returns, faulty-item cover and how to start a claim.",
     content: """
     ## Returns & Exchanges
 
-    We want you to love every piece from ClicknBuy. If something isn't right, here's what you can do.
+    We want you to be happy with your purchase. If something isn't right, here's what you can do.
 
     ### Our Policy
 
-    - We accept **exchange requests** within **48 hours** of receiving your order.
-    - Items must be **unworn, unwashed, and in original condition** with tags intact.
-    - **Sale items** are final sale and cannot be exchanged or returned.
+    - **Change of mind** — 7 days from delivery, provided the item is **unopened and still sealed**.
+    - **Faulty on arrival** — 7 days from delivery, opened is fine. We cover return delivery.
+    - Once a sealed item is opened it can only be returned if it is faulty, since we cannot resell it as new.
+    - Keep the box, manuals and all included cables — returns need the complete package.
 
     ### Valid Reasons for Exchange
 
-    - Wrong size sent (our error)
-    - Wrong item sent (our error)
-    - Item has a manufacturing defect
+    - Wrong model, capacity or colour sent (our error)
+    - Item dead on arrival or faulty within the warranty period
+    - Item damaged in transit — tell us within 24 hours of delivery
 
     ### How to Request an Exchange
 
@@ -811,11 +833,11 @@ info_pages = [
     - Our team will review and respond within 24 hours.
     - If approved, we'll arrange collection and dispatch the replacement.
 
-    ### Exchanges — Size or Style
+    ### Exchanges — Different Model or Capacity
 
-    - If you'd like to exchange for a different size or style (your preference), this is subject to stock availability.
-    - The customer is responsible for return delivery costs in this case.
-    - Any price difference will be charged or refunded accordingly.
+    - Swapping for a different model, capacity or colour is subject to stock availability.
+    - Where the swap is your preference rather than our error, return delivery is on you.
+    - Any price difference is charged or refunded accordingly.
 
     ### Refunds
 

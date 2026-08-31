@@ -33,7 +33,7 @@ defmodule ClicknbuyWeb.TestimonialLive.Show do
     <div class="mb-8 flex items-center justify-between">
       <div class="flex items-center gap-4">
         <.link navigate={~p"/admin/testimonials"}>
-          <button class="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 text-gray-400 transition hover:border-gray-300 hover:text-gray-700">
+          <button class="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 text-gray-500 transition hover:border-gray-300 hover:text-gray-700">
             <svg
               class="h-5 w-5"
               viewBox="0 0 24 24"
@@ -46,8 +46,8 @@ defmodule ClicknbuyWeb.TestimonialLive.Show do
           </button>
         </.link>
         <div>
-          <p class="text-xs font-semibold uppercase tracking-widest text-gray-400">Testimonials</p>
-          <h1 class="mt-0.5 text-2xl font-bold text-gray-900">{@testimonial.name}</h1>
+          <p class="text-xs font-semibold uppercase tracking-widest text-gray-500">Testimonials</p>
+          <h1 class="mt-0.5 text-2xl font-bold text-ink">{@testimonial.name}</h1>
         </div>
       </div>
 
@@ -64,7 +64,7 @@ defmodule ClicknbuyWeb.TestimonialLive.Show do
 
     <%!-- Testimonial card --%>
     <div class="mx-auto max-w-2xl">
-      <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white">
+      <div class="overflow-hidden rounded-lg border border-gray-200 bg-white">
         <%!-- Status bar --%>
         <div class="flex items-center justify-between border-b border-gray-100 px-6 py-4">
           <span class={[
@@ -80,7 +80,7 @@ defmodule ClicknbuyWeb.TestimonialLive.Show do
             ]} />
             {if @testimonial.is_active, do: "Active", else: "Inactive"}
           </span>
-          <span class="text-xs text-gray-400">Position {@testimonial.position}</span>
+          <span class="text-xs text-gray-500">Position {@testimonial.position}</span>
         </div>
 
         <%!-- Body --%>
@@ -120,20 +120,20 @@ defmodule ClicknbuyWeb.TestimonialLive.Show do
               class="h-14 w-14 rounded-full border border-gray-200 object-cover object-top shadow-sm"
             />
           <% else %>
-            <div class="flex h-14 w-14 items-center justify-center rounded-full bg-gray-100 text-xl font-bold text-gray-400">
+            <div class="flex h-14 w-14 items-center justify-center rounded-full bg-gray-100 text-xl font-bold text-gray-500">
               {String.first(@testimonial.name || "?")}
             </div>
           <% end %>
           <div>
-            <p class="text-base font-semibold text-gray-900">{@testimonial.name}</p>
-            <p class="text-sm text-gray-400">Verified Customer</p>
+            <p class="text-base font-semibold text-ink">{@testimonial.name}</p>
+            <p class="text-sm text-gray-500">Verified Customer</p>
           </div>
         </div>
 
         <%!-- Linked product --%>
         <%= if @testimonial.product do %>
           <div class="border-t border-gray-100 px-8 py-5">
-            <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-gray-400">
+            <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-gray-500">
               Linked Product
             </p>
             <.link
@@ -152,14 +152,14 @@ defmodule ClicknbuyWeb.TestimonialLive.Show do
                 </div>
               <% end %>
               <div class="min-w-0 flex-1">
-                <p class="font-semibold text-gray-900">{@testimonial.product.name}</p>
-                <p class="text-sm text-gray-400">{@testimonial.product.slug}</p>
+                <p class="font-semibold text-ink">{@testimonial.product.name}</p>
+                <p class="text-sm text-gray-500">{@testimonial.product.slug}</p>
               </div>
               <span class="text-sm font-semibold text-gray-700">
                 Ksh {@testimonial.product.base_price}
               </span>
               <svg
-                class="h-4 w-4 flex-shrink-0 text-gray-400"
+                class="h-4 w-4 flex-shrink-0 text-gray-500"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"

@@ -7,8 +7,7 @@ defmodule ClicknbuyWeb.UserRegistrationLive do
   def render(assigns) do
     ~H"""
     <div id="auth-page" class="page-typography min-h-screen flex flex-col bg-white">
-      <.promo_bar />
-      <.navbar collections={[]} />
+      <.store_chrome current_user={nil} collections={[]} />
 
       <main class="flex-1">
         <section class="bg-[#f5f5f3] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -53,7 +52,7 @@ defmodule ClicknbuyWeb.UserRegistrationLive do
         </section>
       </main>
 
-      <.footer />
+      <.store_footer collections={[]} />
     </div>
     """
   end

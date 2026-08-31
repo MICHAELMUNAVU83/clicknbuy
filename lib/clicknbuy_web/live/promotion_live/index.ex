@@ -1,6 +1,8 @@
 defmodule ClicknbuyWeb.PromotionLive.Index do
   use ClicknbuyWeb, :admin_live_view
 
+  alias ClicknbuyWeb.AdminTheme
+
   alias Clicknbuy.Promotions
   alias Clicknbuy.Promotions.PromoCode
 
@@ -194,16 +196,7 @@ defmodule ClicknbuyWeb.PromotionLive.Index do
   defp format_date(nil), do: "—"
   defp format_date(dt), do: Calendar.strftime(dt, "%d %b %Y")
 
-  defp status_badge(order) do
-    case order.status do
-      "paid"       -> "bg-[#C8001F]/10 text-[#C8001F]"
-      "processing" -> "bg-pink-50 text-pink-700"
-      "shipped"    -> "bg-indigo-50 text-indigo-600"
-      "delivered"  -> "bg-green-50 text-green-700"
-      "cancelled"  -> "bg-gray-100 text-gray-500"
-      _            -> "bg-gray-100 text-gray-500"
-    end
-  end
+  defp status_badge(order), do: AdminTheme.status_pill(order.status)
 
   defp item_count(items) when is_list(items) do
     Enum.reduce(items, 0, fn i, acc -> acc + (i["quantity"] || 1) end)
@@ -216,17 +209,17 @@ defmodule ClicknbuyWeb.PromotionLive.Index do
     <div class="space-y-6">
 
       <!-- ── Page banner ── -->
-      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#C8001F] to-[#8b0014] px-7 py-6 text-white shadow-md">
+      <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 to-ink px-7 py-6 text-white shadow-md">
         <div class="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-white/5"></div>
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p class="text-xs font-medium uppercase tracking-widest text-red-200">Store</p>
-            <h1 class="mt-0.5 font-serif text-2xl font-bold">Promo Codes</h1>
-            <p class="mt-1 text-xs text-red-200">{length(@promo_codes)} codes · track influencer-driven sales</p>
+            <p class="text-xs font-medium uppercase tracking-widest text-brand-200">Store</p>
+            <h1 class="mt-0.5 font-heading-brand text-2xl font-bold">Promo Codes</h1>
+            <p class="mt-1 text-xs text-brand-200">{length(@promo_codes)} codes · track influencer-driven sales</p>
           </div>
           <button
             phx-click="new_promo"
-            class="flex-shrink-0 flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-[#C8001F] shadow-sm transition hover:bg-red-50"
+            class="flex-shrink-0 flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-brand shadow-sm transition hover:bg-red-50"
           >
             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -238,12 +231,12 @@ defmodule ClicknbuyWeb.PromotionLive.Index do
 
       <!-- ── Create / Edit Form ── -->
       <%= if @show_form do %>
-        <div class="overflow-hidden rounded-3xl border border-[#C8001F]/20 bg-white shadow-sm">
+        <div class="overflow-hidden rounded-xl border border-brand/20 bg-white shadow-sm">
           <div class="flex items-center justify-between border-b border-gray-100 px-6 py-5">
-            <h2 class="font-serif text-base font-semibold text-gray-900">
+            <h2 class="font-heading-brand text-base font-semibold text-ink">
               {if @editing, do: "Edit Promo Code", else: "Create New Promo Code"}
             </h2>
-            <button phx-click="cancel_form" class="rounded-lg p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-700">
+            <button phx-click="cancel_form" class="rounded-lg p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
               </svg>
@@ -262,32 +255,32 @@ defmodule ClicknbuyWeb.PromotionLive.Index do
           <form phx-submit="save_promo" phx-change="update_form" class="grid gap-5 px-6 py-5 sm:grid-cols-2 lg:grid-cols-3">
             <!-- Code -->
             <div>
-              <label class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-gray-400">Promo Code *</label>
+              <label class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-gray-500">Promo Code *</label>
               <input
                 type="text"
                 name="code"
                 value={@form["code"]}
                 placeholder="GRACE20"
-                class="w-full rounded-xl border border-gray-200 px-3.5 py-2.5 font-mono text-sm uppercase tracking-widest placeholder-gray-300 transition focus:border-[#C8001F]/50 focus:outline-none focus:ring-2 focus:ring-[#C8001F]/10"
+                class="w-full rounded-xl border border-gray-200 px-3.5 py-2.5 font-mono text-sm uppercase tracking-widest placeholder-gray-300 transition focus:border-brand/50 focus:outline-none focus:ring-2 focus:ring-brand/10"
               />
-              <p class="mt-1 text-[10px] text-gray-400">Letters, numbers, hyphens only. Auto-uppercased.</p>
+              <p class="mt-1 text-[10px] text-gray-500">Letters, numbers, hyphens only. Auto-uppercased.</p>
             </div>
 
             <!-- Influencer name -->
             <div>
-              <label class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-gray-400">Influencer / Creator</label>
+              <label class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-gray-500">Influencer / Creator</label>
               <input
                 type="text"
                 name="influencer_name"
                 value={@form["influencer_name"]}
                 placeholder="Grace Njeri"
-                class="w-full rounded-xl border border-gray-200 px-3.5 py-2.5 text-sm placeholder-gray-300 transition focus:border-[#C8001F]/50 focus:outline-none focus:ring-2 focus:ring-[#C8001F]/10"
+                class="w-full rounded-xl border border-gray-200 px-3.5 py-2.5 text-sm placeholder-gray-300 transition focus:border-brand/50 focus:outline-none focus:ring-2 focus:ring-brand/10"
               />
             </div>
 
             <!-- Discount % -->
             <div>
-              <label class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-gray-400">Discount % *</label>
+              <label class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-gray-500">Discount % *</label>
               <div class="relative">
                 <input
                   type="number"
@@ -296,48 +289,48 @@ defmodule ClicknbuyWeb.PromotionLive.Index do
                   min="1"
                   max="100"
                   placeholder="10"
-                  class="w-full rounded-xl border border-gray-200 px-3.5 py-2.5 pr-8 text-sm placeholder-gray-300 transition focus:border-[#C8001F]/50 focus:outline-none focus:ring-2 focus:ring-[#C8001F]/10"
+                  class="w-full rounded-xl border border-gray-200 px-3.5 py-2.5 pr-8 text-sm placeholder-gray-300 transition focus:border-brand/50 focus:outline-none focus:ring-2 focus:ring-brand/10"
                 />
-                <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-400">%</span>
+                <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm font-bold text-gray-500">%</span>
               </div>
             </div>
 
             <!-- Description -->
             <div>
-              <label class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-gray-400">Description</label>
+              <label class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-gray-500">Description</label>
               <input
                 type="text"
                 name="description"
                 value={@form["description"]}
                 placeholder="Summer sale for Grace's followers"
-                class="w-full rounded-xl border border-gray-200 px-3.5 py-2.5 text-sm placeholder-gray-300 transition focus:border-[#C8001F]/50 focus:outline-none focus:ring-2 focus:ring-[#C8001F]/10"
+                class="w-full rounded-xl border border-gray-200 px-3.5 py-2.5 text-sm placeholder-gray-300 transition focus:border-brand/50 focus:outline-none focus:ring-2 focus:ring-brand/10"
               />
             </div>
 
             <!-- Max uses -->
             <div>
-              <label class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-gray-400">Max Uses</label>
+              <label class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-gray-500">Max Uses</label>
               <input
                 type="number"
                 name="max_uses"
                 value={@form["max_uses"]}
                 min="1"
                 placeholder="Unlimited"
-                class="w-full rounded-xl border border-gray-200 px-3.5 py-2.5 text-sm placeholder-gray-300 transition focus:border-[#C8001F]/50 focus:outline-none focus:ring-2 focus:ring-[#C8001F]/10"
+                class="w-full rounded-xl border border-gray-200 px-3.5 py-2.5 text-sm placeholder-gray-300 transition focus:border-brand/50 focus:outline-none focus:ring-2 focus:ring-brand/10"
               />
-              <p class="mt-1 text-[10px] text-gray-400">Leave empty for unlimited uses.</p>
+              <p class="mt-1 text-[10px] text-gray-500">Leave empty for unlimited uses.</p>
             </div>
 
             <!-- Expires at -->
             <div>
-              <label class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-gray-400">Expires At</label>
+              <label class="mb-1.5 block text-xs font-semibold uppercase tracking-widest text-gray-500">Expires At</label>
               <input
                 type="datetime-local"
                 name="expires_at"
                 value={@form["expires_at"]}
-                class="w-full rounded-xl border border-gray-200 px-3.5 py-2.5 text-sm text-gray-700 transition focus:border-[#C8001F]/50 focus:outline-none focus:ring-2 focus:ring-[#C8001F]/10"
+                class="w-full rounded-xl border border-gray-200 px-3.5 py-2.5 text-sm text-gray-700 transition focus:border-brand/50 focus:outline-none focus:ring-2 focus:ring-brand/10"
               />
-              <p class="mt-1 text-[10px] text-gray-400">Leave empty for no expiry.</p>
+              <p class="mt-1 text-[10px] text-gray-500">Leave empty for no expiry.</p>
             </div>
 
             <!-- Active toggle -->
@@ -349,7 +342,7 @@ defmodule ClicknbuyWeb.PromotionLive.Index do
                 value="true"
                 checked={@form["is_active"] == "true"}
                 id="is_active_check"
-                class="h-4 w-4 rounded accent-[#C8001F]"
+                class="h-4 w-4 rounded accent-brand"
               />
               <label for="is_active_check" class="text-sm font-medium text-gray-700">Active (usable at checkout)</label>
             </div>
@@ -358,7 +351,7 @@ defmodule ClicknbuyWeb.PromotionLive.Index do
             <div class="flex items-center gap-3 sm:col-span-2 lg:col-span-3">
               <button
                 type="submit"
-                class="rounded-xl bg-[#C8001F] px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-[#a8001a]"
+                class="rounded-xl bg-brand px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-700"
               >
                 {if @editing, do: "Save Changes", else: "Create Promo Code"}
               </button>
@@ -371,50 +364,50 @@ defmodule ClicknbuyWeb.PromotionLive.Index do
       <% end %>
 
       <!-- ── Promo Codes Table ── -->
-      <div class="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm">
+      <div class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
         <div class="border-b border-gray-100 px-6 py-5">
-          <h2 class="font-serif text-base font-semibold text-gray-900">All Promo Codes</h2>
+          <h2 class="font-heading-brand text-base font-semibold text-ink">All Promo Codes</h2>
         </div>
 
         <%= if @promo_codes == [] do %>
           <div class="flex flex-col items-center py-16 text-center">
             <span class="text-5xl">🏷️</span>
             <p class="mt-4 text-sm font-medium text-gray-500">No promo codes yet</p>
-            <p class="mt-1 text-xs text-gray-400">Create your first code for an influencer campaign.</p>
+            <p class="mt-1 text-xs text-gray-500">Create your first code for an influencer campaign.</p>
           </div>
         <% else %>
           <div class="overflow-x-auto">
             <table class="w-full">
               <thead>
                 <tr class="border-b border-gray-100 bg-gray-50/80">
-                  <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">Code</th>
-                  <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">Influencer</th>
-                  <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">Discount</th>
-                  <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">Uses</th>
-                  <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">Status</th>
-                  <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">Expires</th>
-                  <th class="px-5 py-3.5 text-right text-[11px] font-semibold uppercase tracking-wider text-gray-400">Actions</th>
+                  <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">Code</th>
+                  <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">Influencer</th>
+                  <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">Discount</th>
+                  <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">Uses</th>
+                  <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">Status</th>
+                  <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">Expires</th>
+                  <th class="px-5 py-3.5 text-right text-[11px] font-semibold uppercase tracking-wider text-gray-500">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <%= for promo <- @promo_codes do %>
-                  <tr class="group border-b border-gray-100 transition-colors last:border-0 hover:bg-[#C8001F]/3">
+                  <tr class="group border-b border-gray-100 transition-colors last:border-0 hover:bg-brand/5">
                     <!-- Code -->
                     <td class="px-5 py-3.5">
                       <div class="flex items-center gap-2.5">
-                        <span class="rounded-lg bg-[#C8001F]/10 px-2.5 py-1 font-mono text-sm font-bold tracking-widest text-[#C8001F]">
+                        <span class="rounded-lg bg-brand/10 px-2.5 py-1 font-mono text-sm font-bold tracking-widest text-brand">
                           {promo.code}
                         </span>
                       </div>
                       <%= if promo.description not in [nil, ""] do %>
-                        <p class="mt-0.5 text-[11px] text-gray-400">{promo.description}</p>
+                        <p class="mt-0.5 text-[11px] text-gray-500">{promo.description}</p>
                       <% end %>
                     </td>
 
                     <!-- Influencer -->
                     <td class="px-5 py-3.5">
                       <%= if promo.influencer_name not in [nil, ""] do %>
-                        <span class="text-sm font-medium text-gray-800">{promo.influencer_name}</span>
+                        <span class="text-sm font-medium text-ink-700">{promo.influencer_name}</span>
                       <% else %>
                         <span class="text-xs text-gray-300">—</span>
                       <% end %>
@@ -432,7 +425,7 @@ defmodule ClicknbuyWeb.PromotionLive.Index do
                       <button
                         phx-click="view_orders"
                         phx-value-code={promo.code}
-                        class="group/btn flex items-center gap-1.5 rounded-lg bg-gray-100 px-2.5 py-1 text-xs font-semibold text-gray-700 transition hover:bg-[#C8001F]/10 hover:text-[#C8001F]"
+                        class="group/btn flex items-center gap-1.5 rounded-lg bg-gray-100 px-2.5 py-1 text-xs font-semibold text-gray-700 transition hover:bg-brand/10 hover:text-brand"
                         title="View orders for this code"
                       >
                         <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -464,7 +457,7 @@ defmodule ClicknbuyWeb.PromotionLive.Index do
 
                     <!-- Expires -->
                     <td class="px-5 py-3.5">
-                      <span class="text-xs text-gray-400">{format_date(promo.expires_at)}</span>
+                      <span class="text-xs text-gray-500">{format_date(promo.expires_at)}</span>
                     </td>
 
                     <!-- Actions -->
@@ -473,7 +466,7 @@ defmodule ClicknbuyWeb.PromotionLive.Index do
                         <button
                           phx-click="edit_promo"
                           phx-value-id={promo.id}
-                          class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-400 transition hover:border-[#C8001F]/30 hover:text-[#C8001F]"
+                          class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-500 transition hover:border-brand/30 hover:text-brand"
                           title="Edit"
                         >
                           <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -484,7 +477,7 @@ defmodule ClicknbuyWeb.PromotionLive.Index do
                           phx-click="delete_promo"
                           phx-value-id={promo.id}
                           data-confirm={"Delete code #{promo.code}? This cannot be undone."}
-                          class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-400 transition hover:border-red-200 hover:bg-red-50 hover:text-red-500"
+                          class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-500 transition hover:border-red-200 hover:bg-red-50 hover:text-red-500"
                           title="Delete"
                         >
                           <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -503,19 +496,19 @@ defmodule ClicknbuyWeb.PromotionLive.Index do
 
       <!-- ── Orders panel (slide-in) ── -->
       <%= if @selected_code do %>
-        <div class="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm">
+        <div class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
           <div class="flex items-center justify-between border-b border-gray-100 px-6 py-5">
             <div>
-              <h2 class="font-serif text-base font-semibold text-gray-900">
+              <h2 class="font-heading-brand text-base font-semibold text-ink">
                 Orders using
-                <span class="ml-1.5 font-mono text-[#C8001F]">{@selected_code}</span>
+                <span class="ml-1.5 font-mono text-brand">{@selected_code}</span>
               </h2>
-              <p class="mt-0.5 text-xs text-gray-400">
+              <p class="mt-0.5 text-xs text-gray-500">
                 {length(@selected_orders)} orders ·
                 KES {fmt(@selected_revenue)} total revenue (paid+)
               </p>
             </div>
-            <button phx-click="close_orders" class="rounded-lg p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-700">
+            <button phx-click="close_orders" class="rounded-lg p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
               </svg>
@@ -523,21 +516,21 @@ defmodule ClicknbuyWeb.PromotionLive.Index do
           </div>
 
           <%= if @selected_orders == [] do %>
-            <div class="py-12 text-center text-sm text-gray-400">No orders yet for this code.</div>
+            <div class="py-12 text-center text-sm text-gray-500">No orders yet for this code.</div>
           <% else %>
             <div class="divide-y divide-gray-50">
               <%= for order <- @selected_orders do %>
                 <.link navigate={"/admin/orders/#{order.id}"}
-                  class="flex items-center gap-4 px-6 py-4 transition hover:bg-[#C8001F]/3">
-                  <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[#C8001F]/10 text-xs font-bold text-[#C8001F]">
+                  class="flex items-center gap-4 px-6 py-4 transition hover:bg-brand/5">
+                  <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-brand/10 text-xs font-bold text-brand">
                     {order.name |> String.split() |> Enum.take(2) |> Enum.map(&String.first/1) |> Enum.join()}
                   </div>
                   <div class="min-w-0 flex-1">
-                    <p class="truncate text-sm font-semibold text-gray-900">{order.name}</p>
-                    <p class="truncate font-mono text-[10px] text-gray-400">{order.reference}</p>
+                    <p class="truncate text-sm font-semibold text-ink">{order.name}</p>
+                    <p class="truncate font-mono text-[10px] text-gray-500">{order.reference}</p>
                   </div>
                   <div class="text-right">
-                    <p class="text-sm font-bold text-gray-900">KES {fmt(order.total_amount)}</p>
+                    <p class="text-sm font-bold text-ink">KES {fmt(order.total_amount)}</p>
                     <%= if order.discount_amount > 0 do %>
                       <p class="text-[10px] font-medium text-green-600">-KES {fmt(order.discount_amount)}</p>
                     <% end %>
@@ -548,7 +541,7 @@ defmodule ClicknbuyWeb.PromotionLive.Index do
                   ]}>
                     {order.status}
                   </span>
-                  <span class="text-xs text-gray-400 flex-shrink-0">{format_date(order.inserted_at)}</span>
+                  <span class="text-xs text-gray-500 flex-shrink-0">{format_date(order.inserted_at)}</span>
                 </.link>
               <% end %>
             </div>

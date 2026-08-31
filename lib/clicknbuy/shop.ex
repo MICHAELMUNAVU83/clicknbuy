@@ -73,9 +73,41 @@ defmodule Clicknbuy.Shop do
     |> enrich_products_for_display()
   end
 
+  @doc """
+  Case-insensitive product search over name and description, used by the
+  storefront header search box. Blank terms return an empty list.
+  """
+  def search_products(term) when is_binary(term) do
+    case String.trim(term) do
+      "" ->
+        []
+
+      trimmed ->
+        pattern = "%" <> escape_like(trimmed) <> "%"
+
+        from(p in Product,
+          where:
+            p.status == "active" and
+              (ilike(p.name, ^pattern) or ilike(p.description, ^pattern)),
+          order_by: [asc: p.position]
+        )
+        |> Repo.all()
+        |> enrich_products_for_display()
+    end
+  end
+
+  def search_products(_), do: []
+
+  # Keeps user-typed % and _ from acting as LIKE wildcards.
+  defp escape_like(term) do
+    term
+    |> String.replace("\\", "\\\\")
+    |> String.replace("%", "\\%")
+    |> String.replace("_", "\\_")
+  end
+
   @doc "Returns products marked as new_arrival."
-  def list_new_arrivals do
-    from(p in Product,
+  def list_new_arrivals do    from(p in Product,
       where: p.is_new_arrival == true and p.status == "active",
       order_by: p.position
     )

@@ -1,0 +1,14 @@
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="900" height="900" role="img" aria-label="Laptop Cooling Stand">
+          <rect width="900" height="900" fill="#ffffff"/>
+          <rect x="46" y="46" width="808" height="808" rx="28" fill="#F5F7FF"/>
+          <g transform="rotate(-14 450 450) scale(0.92) translate(39 39)">
+<rect x="120" y="196" width="660" height="404" rx="22" fill="#122554"/>
+<rect x="152" y="228" width="596" height="340" rx="10" fill="#2F32CE" opacity="0.75"/>
+<rect x="404" y="600" width="92" height="86" fill="#122554"/>
+<rect x="292" y="686" width="316" height="34" rx="17" fill="#122554"/>
+          </g>
+          <text x="450" y="828" text-anchor="middle" font-family="Poppins, DM Sans, sans-serif"
+                font-size="30" font-weight="700" fill="#122554">Laptop Cooling Stand</text>
+          <text x="450" y="106" text-anchor="middle" font-family="Poppins, DM Sans, sans-serif"
+                font-size="19" font-weight="700" letter-spacing="3" fill="#DB4A44">CLICKNBUY</text>
+        </svg>

@@ -1,6 +1,5 @@
 defmodule ClicknbuyWeb.CheckoutLive.Index do
   use ClicknbuyWeb, :live_view
-  import ClicknbuyWeb.HomeComponents
 
   alias Clicknbuy.Orders
   alias Clicknbuy.Paystack
@@ -11,6 +10,7 @@ defmodule ClicknbuyWeb.CheckoutLive.Index do
     {:ok,
      socket
      |> assign(:page_title, "Checkout | ClicknBuy")
+     |> assign(:nav_collections, Clicknbuy.Shop.list_collections_for_display())
      |> assign(:cart_items, [])
      |> assign(:cart_loaded, false)
      |> assign(:submitting, false)
@@ -164,7 +164,7 @@ defmodule ClicknbuyWeb.CheckoutLive.Index do
   def render(assigns) do
     ~H"""
     <div id="checkout-page" class="min-h-screen bg-[#f9f9f7]" phx-hook="CartSync">
-      <.navbar cart_items={@cart_items} collections={[]} />
+      <.store_chrome current_user={@current_user} collections={@nav_collections} />
 
       <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <!-- Header -->
@@ -453,7 +453,7 @@ defmodule ClicknbuyWeb.CheckoutLive.Index do
         </div>
       </div>
 
-      <.footer />
+      <.store_footer collections={@nav_collections} />
     </div>
     """
   end

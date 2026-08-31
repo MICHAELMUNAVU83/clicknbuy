@@ -1,4 +1,4 @@
-<div class="flex h-screen overflow-hidden">
+<div class="flex h-screen overflow-hidden bg-surface text-ink">
   <.admin_sidebar
     current_path={@current_path}
     current_user={Map.get(assigns, :current_user)}
@@ -17,7 +17,7 @@
       )
     }
   />
-  <main class="flex-1 p-4 overflow-y-auto">
+  <main class="flex-1 overflow-y-auto bg-surface p-4 lg:p-6">
     {@inner_content}
   </main>
 </div>

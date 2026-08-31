@@ -1,6 +1,5 @@
 defmodule ClicknbuyWeb.SuccessLive.Index do
   use ClicknbuyWeb, :live_view
-  import ClicknbuyWeb.HomeComponents
   require Logger
 
   alias Clicknbuy.Orders
@@ -10,6 +9,7 @@ defmodule ClicknbuyWeb.SuccessLive.Index do
   @impl true
   def mount(params, _session, socket) do
     reference = Map.get(params, "reference", "")
+    socket = assign(socket, :nav_collections, Clicknbuy.Shop.list_collections_for_display())
 
     if reference == "" do
       {:ok,
@@ -88,8 +88,8 @@ defmodule ClicknbuyWeb.SuccessLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
-    <div id="success-page" class="min-h-screen bg-white" phx-hook="CartHook">
-      <.navbar cart_items={[]} />
+    <div id="success-page" class="min-h-screen bg-surface">
+      <.store_chrome current_user={@current_user} collections={@nav_collections} />
 
       <div class="mx-auto max-w-2xl px-4 py-20 text-center sm:px-6">
         <%= case @status do %>
@@ -229,7 +229,7 @@ defmodule ClicknbuyWeb.SuccessLive.Index do
         <% end %>
       </div>
 
-      <.footer />
+      <.store_footer collections={@nav_collections} />
     </div>
     """
   end

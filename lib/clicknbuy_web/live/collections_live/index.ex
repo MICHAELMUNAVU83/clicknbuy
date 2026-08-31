@@ -14,34 +14,86 @@ defmodule ClicknbuyWeb.CollectionsLive.Index do
   end
 
   @impl true
+  def handle_params(params, _uri, socket) do
+    query = params |> Map.get("q", "") |> to_string() |> String.trim()
+
+    {:noreply,
+     socket
+     |> assign(:query, query)
+     |> assign(:results, Shop.search_products(query))
+     |> assign(
+       :page_title,
+       if(query == "", do: "All Collections — ClicknBuy", else: "Search: #{query} — ClicknBuy")
+     )}
+  end
+
+  @impl true
+  def handle_event("subscribe_newsletter", _params, socket) do
+    {:noreply, put_flash(socket, :info, "Thanks for subscribing! Watch your inbox for new deals.")}
+  end
+
+  @impl true
   def render(assigns) do
     ~H"""
-    <div class="min-h-screen bg-white">
-      <.navbar collections={@collections} />
+    <div class="min-h-screen bg-surface">
+      <.store_chrome current_user={@current_user} collections={@collections} active="Shop" />
+
+      <.breadcrumb crumbs={
+        if @query == "",
+          do: [%{label: "Home", href: "/"}, %{label: "Shop"}],
+          else: [
+            %{label: "Home", href: "/"},
+            %{label: "Shop", href: "/collections"},
+            %{label: "Search: #{@query}"}
+          ]
+      } />
+
+      <%= if @query != "" do %>
+        <%!-- Search results --%>
+        <section class="px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+          <div class="mx-auto max-w-[1500px]">
+            <h1 class="font-heading-brand text-2xl font-extrabold text-ink sm:text-3xl lg:text-4xl">
+              Results for "{@query}"
+            </h1>
+            <p class="mt-3 text-sm text-gray-500">
+              {length(@results)} product{if length(@results) == 1, do: "", else: "s"} found.
+            </p>
+
+            <%= if @results == [] do %>
+              <div class="mt-10 border border-gray-100 bg-white px-6 py-20 text-center">
+                <p class="font-heading-brand text-lg font-bold text-ink">Nothing matched that search</p>
+                <p class="mx-auto mt-2 max-w-md text-sm text-gray-500">
+                  Try a shorter or more general term, or browse the collections below.
+                </p>
+                <.link
+                  navigate="/collections"
+                  class="mt-7 inline-flex items-center gap-2.5 rounded bg-accent px-6 py-3 text-sm font-bold text-white transition hover:bg-accent-600"
+                >
+                  Browse all collections
+                </.link>
+              </div>
+            <% else %>
+              <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                <%= for product <- @results do %>
+                  <.product_card product={product} context="search" />
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </section>
+      <% else %>
 
       <%!-- Hero strip --%>
-      <div class="bg-[#f5f5f3]">
-        <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <a
-            href="/"
-            class="inline-flex items-center gap-1 text-xs font-medium text-gray-400 hover:text-gray-700 transition mb-6"
-          >
-            <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-            Home
-          </a>
-          <p class="text-xs font-semibold uppercase tracking-widest text-[#C8001F]">
-            Fashion's Gallery
+      <div class="bg-white">
+        <div class="mx-auto max-w-[1500px] px-4 py-12 sm:px-6 lg:px-8">
+          <p class="text-xs font-bold uppercase tracking-widest text-accent">
+            Browse the store
           </p>
-          <h1 class="mt-2 text-4xl font-bold text-gray-900 sm:text-5xl">All Collections</h1>
+          <h1 class="mt-2 font-heading-brand text-3xl font-extrabold text-ink sm:text-4xl lg:text-5xl">
+            All Collections
+          </h1>
           <p class="mt-3 text-sm text-gray-500">
-            {length(@collections)} curated collections — find your style.
+            {length(@collections)} collections — find what you're looking for.
           </p>
         </div>
       </div>
@@ -102,14 +154,16 @@ defmodule ClicknbuyWeb.CollectionsLive.Index do
 
         <%= if @collections == [] do %>
           <div class="flex flex-col items-center justify-center py-24 text-center">
-            <span class="text-6xl">🛍️</span>
-            <p class="mt-4 text-lg font-semibold text-gray-700">No collections yet</p>
-            <p class="mt-1 text-sm text-gray-400">Check back soon — new styles drop monthly.</p>
+            <p class="mt-4 font-heading-brand text-lg font-bold text-ink">No collections yet</p>
+            <p class="mt-1 text-sm text-gray-400">Check back soon — new stock lands monthly.</p>
           </div>
         <% end %>
       </div>
+      <% end %>
 
-      <.footer />
+      <.newsletter />
+      <.store_footer collections={@collections} />
+      <.floating_cart_cta />
     </div>
     """
   end

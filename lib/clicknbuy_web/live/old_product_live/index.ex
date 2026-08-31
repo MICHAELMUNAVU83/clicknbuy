@@ -3,8 +3,6 @@ defmodule ClicknbuyWeb.OldProductLive.Index do
 
   alias Clicknbuy.Shop
   alias Clicknbuy.Chat
-  import ClicknbuyWeb.ProductComponents
-  import ClicknbuyWeb.HomeComponents
 
   @impl true
   def mount(%{"slug" => slug}, _session, socket) do
@@ -26,8 +24,6 @@ defmodule ClicknbuyWeb.OldProductLive.Index do
       selected_color_id = selected_color && selected_color.id
       selected_size_id = selected_size && selected_size.name
 
-      hero_images = Shop.list_hero_images(6)
-
       {:ok,
        socket
        |> assign(:page_title, product.name)
@@ -43,7 +39,7 @@ defmodule ClicknbuyWeb.OldProductLive.Index do
        |> assign(:quantity, 1)
        |> assign(:main_image_index, 0)
        |> assign(:accordion_open, nil)
-       |> assign(:contact_images, Enum.shuffle(hero_images))
+       |> assign(:info_tab, "description")
        |> assign(:nav_collections, Shop.list_collections_for_display())
        # Chat assigns
        |> assign(:visitor_id, visitor_id)
@@ -85,6 +81,17 @@ defmodule ClicknbuyWeb.OldProductLive.Index do
     current = socket.assigns.accordion_open
     next = if current == section, do: nil, else: section
     {:noreply, assign(socket, :accordion_open, next)}
+  end
+
+  @impl true
+  def handle_event("select_info_tab", %{"tab" => tab}, socket) do
+    tab = if tab in ["description", "additional"], do: tab, else: "description"
+    {:noreply, assign(socket, :info_tab, tab)}
+  end
+
+  @impl true
+  def handle_event("subscribe_newsletter", _params, socket) do
+    {:noreply, put_flash(socket, :info, "Thanks for subscribing! Watch your inbox for new deals.")}
   end
 
   @impl true
@@ -247,19 +254,34 @@ defmodule ClicknbuyWeb.OldProductLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
-    <div id="product-page" class="page-typography min-h-screen bg-white">
-      <.navbar collections={@nav_collections} />
-      <.product_detail
+    <div id="product-page" class="min-h-screen bg-surface">
+      <.store_chrome current_user={@current_user} collections={@nav_collections} active="Shop" />
+
+      <.breadcrumb crumbs={[
+        %{label: "Home", href: "/"},
+        %{label: "Shop", href: "/collections"},
+        %{label: @product.name}
+      ]} />
+
+      <.product_showcase
         product={@product}
         main_image_index={@main_image_index}
         selected_color_id={@selected_color_id}
         selected_size_id={@selected_size_id}
         quantity={@quantity}
       />
-      <.product_accordions accordion_open={@accordion_open} product={@product} />
-      <.related_products_section products={@related_products} />
-      <.contact_section contact_images={@contact_images} />
-      <.footer />
+
+      <.product_info_tabs product={@product} active_tab={@info_tab} />
+
+      <.product_section
+        id="related"
+        title="Related Products"
+        products={@related_products}
+        view_all_href="/collections"
+      />
+
+      <.newsletter />
+      <.store_footer collections={@nav_collections} />
 
       <%!-- ── Floating Chat Widget ── --%>
       <div id="chat-widget" phx-hook="ChatPersist" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">

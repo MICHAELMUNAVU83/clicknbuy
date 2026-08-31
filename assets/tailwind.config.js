@@ -56,6 +56,11 @@ module.exports = {
           800: "#122554",
           900: "#0b1838",
         },
+        // Very light indigo-tinted page background
+        surface: {
+          DEFAULT: "#F5F7FF",
+          200: "#EEF1FC",
+        },
       },
       fontFamily: {
         script:  ["Dancing Script", "cursive"],

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="SM">
+  <circle cx="100" cy="100" r="100" fill="#DB4A44"/>
+  <text x="100" y="100" text-anchor="middle" dominant-baseline="central"
+        font-family="Poppins, DM Sans, sans-serif" font-size="76" font-weight="700"
+        fill="#ffffff" letter-spacing="2">SM</text>
+</svg>

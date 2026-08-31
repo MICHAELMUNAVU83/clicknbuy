@@ -1,0 +1,14 @@
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="900" height="900" role="img" aria-label="Power Bank 20,000mAh">
+          <rect width="900" height="900" fill="#ffffff"/>
+          <rect x="46" y="46" width="808" height="808" rx="28" fill="#F5F7FF"/>
+          <g transform="rotate(-14 450 450) scale(0.92) translate(39 39)">
+<rect x="300" y="120" width="300" height="660" rx="52" fill="#122554"/>
+<rect x="330" y="164" width="240" height="560" rx="28" fill="#2F32CE" opacity="0.75"/>
+<rect x="408" y="138" width="84" height="14" rx="7" fill="#E8ECF8"/>
+<circle cx="450" cy="754" r="16" fill="#E8ECF8"/>
+          </g>
+          <text x="450" y="828" text-anchor="middle" font-family="Poppins, DM Sans, sans-serif"
+                font-size="30" font-weight="700" fill="#122554">Power Bank 20,000mAh</text>
+          <text x="450" y="106" text-anchor="middle" font-family="Poppins, DM Sans, sans-serif"
+                font-size="19" font-weight="700" letter-spacing="3" fill="#DB4A44">CLICKNBUY</text>
+        </svg>

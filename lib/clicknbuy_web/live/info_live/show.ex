@@ -28,7 +28,7 @@ defmodule ClicknbuyWeb.InfoLive.Show do
   def render(assigns) do
     ~H"""
     <div class="page-typography min-h-screen bg-white">
-      <.navbar collections={@nav_collections} />
+      <.store_chrome current_user={@current_user} collections={@nav_collections} />
 
       <%!-- Hero banner --%>
       <div class="bg-gradient-to-r from-[#C8001F] to-red-800 px-4 py-14 sm:px-6 lg:px-8">
@@ -108,7 +108,7 @@ defmodule ClicknbuyWeb.InfoLive.Show do
         </div>
       </div>
 
-      <.footer />
+      <.store_footer collections={@nav_collections} />
     </div>
     """
   end

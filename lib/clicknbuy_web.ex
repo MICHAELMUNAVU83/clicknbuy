@@ -103,6 +103,9 @@ defmodule ClicknbuyWeb do
       import ClicknbuyWeb.CategoryComponents
       import ClicknbuyWeb.SidebarComponents
       import ClicknbuyWeb.ProductComponents
+      # Storefront chrome + catalog blocks
+      import ClicknbuyWeb.StoreComponents
+      import ClicknbuyWeb.CatalogComponents
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
 

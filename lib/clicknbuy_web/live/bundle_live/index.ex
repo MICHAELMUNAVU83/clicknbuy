@@ -52,15 +52,15 @@ defmodule ClicknbuyWeb.BundleLive.Index do
   def render(assigns) do
     ~H"""
     <%!-- Page Header --%>
-    <div class="relative mb-6 overflow-hidden rounded-3xl bg-gradient-to-r from-[#C8001F] to-[#8b0014] px-7 py-6 text-white shadow-md">
+    <div class="relative mb-6 overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 to-ink px-7 py-6 text-white shadow-md">
       <div class="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-white/5"></div>
       <div class="flex items-center justify-between">
         <div>
-          <p class="text-xs font-medium uppercase tracking-widest text-red-200">Catalogue</p>
-          <h1 class="mt-0.5 font-serif text-2xl font-bold">Bundles</h1>
+          <p class="text-xs font-medium uppercase tracking-widest text-brand-200">Catalogue</p>
+          <h1 class="mt-0.5 font-heading-brand text-2xl font-bold">Bundles</h1>
         </div>
         <.link patch={~p"/admin/bundles/new"}>
-          <button class="flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-[#C8001F] transition hover:bg-red-50 shadow-sm">
+          <button class="flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-brand transition hover:bg-red-50 shadow-sm">
             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
             </svg>
@@ -71,25 +71,25 @@ defmodule ClicknbuyWeb.BundleLive.Index do
     </div>
 
     <%!-- Table card --%>
-    <div class="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm">
+    <div class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
       <div class="border-b border-gray-100 px-5 py-4">
-        <p class="font-serif text-sm font-semibold text-gray-700">All Bundles</p>
+        <p class="font-heading-brand text-sm font-semibold text-gray-700">All Bundles</p>
       </div>
 
       <div class="overflow-x-auto">
         <table class="w-full">
           <thead>
             <tr class="border-b border-gray-100 bg-gray-50">
-              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">
                 Bundle
               </th>
-              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">
                 Description
               </th>
-              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">
                 Status
               </th>
-              <th class="px-5 py-3 text-right text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+              <th class="px-5 py-3 text-right text-[11px] font-semibold uppercase tracking-wider text-gray-500">
                 Actions
               </th>
             </tr>
@@ -115,7 +115,7 @@ defmodule ClicknbuyWeb.BundleLive.Index do
                       🎁
                     </div>
                   <% end %>
-                  <span class="text-sm font-semibold text-gray-900">{bundle.title}</span>
+                  <span class="text-sm font-semibold text-ink">{bundle.title}</span>
                 </.link>
               </td>
 
@@ -145,7 +145,7 @@ defmodule ClicknbuyWeb.BundleLive.Index do
               <td class="px-5 py-3.5">
                 <div class="flex items-center justify-end gap-1 opacity-0 transition-opacity group-hover:opacity-100">
                   <.link navigate={~p"/admin/bundles/#{bundle}"}>
-                    <button class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-400 transition hover:border-gray-300 hover:text-gray-700">
+                    <button class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-500 transition hover:border-gray-300 hover:text-gray-700">
                       <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                         <circle cx="12" cy="12" r="3" />
@@ -154,7 +154,7 @@ defmodule ClicknbuyWeb.BundleLive.Index do
                   </.link>
 
                   <.link patch={~p"/admin/bundles/#{bundle}/edit"}>
-                    <button class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-400 transition hover:border-gray-300 hover:text-gray-700">
+                    <button class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-500 transition hover:border-gray-300 hover:text-gray-700">
                       <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
@@ -165,7 +165,7 @@ defmodule ClicknbuyWeb.BundleLive.Index do
                   <button
                     phx-click={JS.push("delete", value: %{id: bundle.id}) |> hide("##{id}")}
                     data-confirm="Are you sure you want to delete this bundle?"
-                    class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-400 transition hover:border-red-200 hover:bg-red-50 hover:text-red-500"
+                    class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-500 transition hover:border-red-200 hover:bg-red-50 hover:text-red-500"
                   >
                     <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <polyline points="3 6 5 6 21 6" />
@@ -186,11 +186,11 @@ defmodule ClicknbuyWeb.BundleLive.Index do
         :if={Enum.empty?(@streams.bundles.inserts)}
         class="flex flex-col items-center justify-center py-20 text-center"
       >
-        <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gray-100 text-3xl">
+        <div class="flex h-14 w-14 items-center justify-center rounded-lg bg-gray-100 text-3xl">
           🎁
         </div>
         <p class="mt-4 text-sm font-semibold text-gray-700">No bundles yet</p>
-        <p class="mt-1 text-sm text-gray-400">Create your first bundle to get started.</p>
+        <p class="mt-1 text-sm text-gray-500">Create your first bundle to get started.</p>
         <.link patch={~p"/admin/bundles/new"} class="mt-6">
           <button class="rounded-lg bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-gray-700">
             New Bundle

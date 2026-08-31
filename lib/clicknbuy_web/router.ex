@@ -20,15 +20,22 @@ defmodule ClicknbuyWeb.Router do
   scope "/", ClicknbuyWeb do
     pipe_through :browser
 
-    live "/", HomeLive.Index, :index
-    live "/collections", CollectionsLive.Index, :index
-    live "/collections/:slug", CategoryLive.Index, :index
-    live "/products/:slug", OldProductLive.Index, :index
-    live "/cart", CartLive.Index, :index
-    live "/checkout", CheckoutLive.Index, :index
-    live "/success", SuccessLive.Index, :index
-    live "/info/:slug", InfoLive.Show, :show
-    live "/bundles/:id", BundleShowLive.Index, :index
+    # Public storefront. `mount_current_user` makes @current_user available to the
+    # shared header so it can show "Account" vs "Login".
+    live_session :storefront,
+      on_mount: [{ClicknbuyWeb.UserAuth, :mount_current_user}] do
+      live "/", HomeLive.Index, :index
+      live "/about", AboutLive.Index, :index
+      live "/contact", ContactLive.Index, :index
+      live "/collections", CollectionsLive.Index, :index
+      live "/collections/:slug", CategoryLive.Index, :index
+      live "/products/:slug", OldProductLive.Index, :index
+      live "/cart", CartLive.Index, :index
+      live "/checkout", CheckoutLive.Index, :index
+      live "/success", SuccessLive.Index, :index
+      live "/info/:slug", InfoLive.Show, :show
+      live "/bundles/:id", BundleShowLive.Index, :index
+    end
 
     live_session :admin,
       on_mount: [{ClicknbuyWeb.UserAuth, :require_admin}] do

@@ -114,7 +114,7 @@ defmodule ClicknbuyWeb.BundleLive.Show do
     <div class="mb-8 flex items-center justify-between">
       <div class="flex items-center gap-4">
         <.link navigate={~p"/admin/bundles"}>
-          <button class="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 text-gray-400 transition hover:border-gray-300 hover:text-gray-700">
+          <button class="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 text-gray-500 transition hover:border-gray-300 hover:text-gray-700">
             <svg
               class="h-5 w-5"
               viewBox="0 0 24 24"
@@ -127,8 +127,8 @@ defmodule ClicknbuyWeb.BundleLive.Show do
           </button>
         </.link>
         <div>
-          <p class="text-xs font-semibold uppercase tracking-widest text-gray-400">Catalogue</p>
-          <h1 class="mt-0.5 text-3xl font-bold text-gray-900">{@bundle.title}</h1>
+          <p class="text-xs font-semibold uppercase tracking-widest text-gray-500">Catalogue</p>
+          <h1 class="mt-0.5 text-3xl font-bold text-ink">{@bundle.title}</h1>
         </div>
       </div>
 
@@ -144,7 +144,7 @@ defmodule ClicknbuyWeb.BundleLive.Show do
     </div>
 
     <%!-- Bundle summary card --%>
-    <div class="mb-8 overflow-hidden rounded-2xl border border-gray-200 bg-white">
+    <div class="mb-8 overflow-hidden rounded-lg border border-gray-200 bg-white">
       <div class="flex gap-8 p-8">
         <%!-- Image --%>
         <div class="flex-shrink-0">
@@ -152,10 +152,10 @@ defmodule ClicknbuyWeb.BundleLive.Show do
             <img
               src={@bundle.image}
               alt={@bundle.title}
-              class="h-48 w-48 rounded-2xl border border-gray-200 object-cover object-top shadow-sm"
+              class="h-48 w-48 rounded-lg border border-gray-200 object-cover object-top shadow-sm"
             />
           <% else %>
-            <div class="flex h-48 w-48 items-center justify-center rounded-2xl border border-gray-200 bg-gray-50 text-6xl">
+            <div class="flex h-48 w-48 items-center justify-center rounded-lg border border-gray-200 bg-gray-50 text-6xl">
               🎁
             </div>
           <% end %>
@@ -164,7 +164,7 @@ defmodule ClicknbuyWeb.BundleLive.Show do
         <%!-- Details --%>
         <div class="min-w-0 flex-1 py-1">
           <div class="flex flex-wrap items-start justify-between gap-3">
-            <h2 class="text-2xl font-bold text-gray-900">{@bundle.title}</h2>
+            <h2 class="text-2xl font-bold text-ink">{@bundle.title}</h2>
 
             <span class={[
               "inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold",
@@ -184,17 +184,17 @@ defmodule ClicknbuyWeb.BundleLive.Show do
           <p class="mt-4 text-base text-gray-600">{@bundle.description}</p>
 
           <div class="mt-6">
-            <p class="text-xs font-semibold uppercase tracking-widest text-gray-400">
+            <p class="text-xs font-semibold uppercase tracking-widest text-gray-500">
               Items in Bundle
             </p>
-            <p class="mt-1 text-2xl font-bold text-gray-900">{length(@bundle_items)}</p>
+            <p class="mt-1 text-2xl font-bold text-ink">{length(@bundle_items)}</p>
           </div>
         </div>
       </div>
     </div>
 
     <%!-- Bundle items panel --%>
-    <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white">
+    <div class="overflow-hidden rounded-lg border border-gray-200 bg-white">
       <div class="flex items-center justify-between border-b border-gray-100 px-6 py-5">
         <p class="text-base font-semibold text-gray-700">
           Bundle Items
@@ -209,7 +209,7 @@ defmodule ClicknbuyWeb.BundleLive.Show do
             "flex items-center gap-2 rounded-xl border px-4 py-2 text-sm font-semibold transition",
             if(@show_item_form,
               do: "border-gray-300 bg-gray-100 text-gray-700",
-              else: "border-gray-200 text-gray-600 hover:border-gray-300 hover:text-gray-900"
+              else: "border-gray-200 text-gray-600 hover:border-gray-300 hover:text-ink"
             )
           ]}
         >
@@ -242,7 +242,7 @@ defmodule ClicknbuyWeb.BundleLive.Show do
       <%!-- Add item form --%>
       <%= if @show_item_form do %>
         <div class="border-b border-gray-100 bg-gray-50 px-6 py-6">
-          <p class="mb-4 text-xs font-semibold uppercase tracking-widest text-gray-400">
+          <p class="mb-4 text-xs font-semibold uppercase tracking-widest text-gray-500">
             Add Product to Bundle
           </p>
 
@@ -255,7 +255,7 @@ defmodule ClicknbuyWeb.BundleLive.Show do
                 <select
                   name="bundle_item[product_id]"
                   class={[
-                    "w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm text-gray-900 transition focus:outline-none focus:ring-0",
+                    "w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm text-ink transition focus:outline-none focus:ring-0",
                     if(@item_error,
                       do: "border-red-300 focus:border-red-400",
                       else: "border-gray-200 focus:border-gray-400"
@@ -297,11 +297,11 @@ defmodule ClicknbuyWeb.BundleLive.Show do
       <%!-- Items list --%>
       <%= if Enum.empty?(@bundle_items) do %>
         <div class="flex flex-col items-center justify-center py-20 text-center">
-          <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-100 text-3xl">
+          <div class="flex h-16 w-16 items-center justify-center rounded-lg bg-gray-100 text-3xl">
             🎁
           </div>
           <p class="mt-4 text-base font-semibold text-gray-700">No products in this bundle</p>
-          <p class="mt-1.5 text-sm text-gray-400">
+          <p class="mt-1.5 text-sm text-gray-500">
             Use the "Add Product" button above to build this bundle.
           </p>
         </div>
@@ -310,16 +310,16 @@ defmodule ClicknbuyWeb.BundleLive.Show do
           <table class="w-full">
             <thead>
               <tr class="border-b border-gray-100 bg-gray-50">
-                <th class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-400">
+                <th class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
                   Product
                 </th>
-                <th class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-400">
+                <th class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
                   Price
                 </th>
-                <th class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-400">
+                <th class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
                   Status
                 </th>
-                <th class="px-6 py-3.5 text-right text-xs font-semibold uppercase tracking-wider text-gray-400">
+                <th class="px-6 py-3.5 text-right text-xs font-semibold uppercase tracking-wider text-gray-500">
                 </th>
               </tr>
             </thead>
@@ -346,15 +346,15 @@ defmodule ClicknbuyWeb.BundleLive.Show do
                       </div>
                     <% end %>
                     <div>
-                      <p class="text-sm font-semibold text-gray-900">{item.product.name}</p>
-                      <p class="text-xs text-gray-400">{item.product.slug}</p>
+                      <p class="text-sm font-semibold text-ink">{item.product.name}</p>
+                      <p class="text-xs text-gray-500">{item.product.slug}</p>
                     </div>
                   </.link>
                 </td>
 
                 <%!-- Price --%>
                 <td class="px-6 py-4">
-                  <span class="text-sm font-semibold text-gray-900">
+                  <span class="text-sm font-semibold text-ink">
                     Ksh {item.product.base_price}
                   </span>
                 </td>
@@ -385,7 +385,7 @@ defmodule ClicknbuyWeb.BundleLive.Show do
                     phx-click="delete_item"
                     phx-value-id={item.id}
                     data-confirm="Remove this product from the bundle?"
-                    class="ml-auto flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-400 opacity-0 transition group-hover:opacity-100 hover:border-red-200 hover:bg-red-50 hover:text-red-500"
+                    class="ml-auto flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-500 opacity-0 transition group-hover:opacity-100 hover:border-red-200 hover:bg-red-50 hover:text-red-500"
                   >
                     <svg
                       class="h-3.5 w-3.5"

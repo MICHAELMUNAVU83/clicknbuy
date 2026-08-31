@@ -16,7 +16,6 @@ defmodule ClicknbuyWeb.CategoryLive.Index do
       product_types = Shop.list_collections_for_display()
       products = Shop.list_products_for_collection_display(category.id)
       popular = Shop.list_popular_products_for_display(3)
-      hero_images = Shop.list_hero_images(6)
 
       {:ok,
        socket
@@ -29,9 +28,13 @@ defmodule ClicknbuyWeb.CategoryLive.Index do
        |> assign(:sort, "best_selling")
        |> assign(:products, products)
        |> assign(:popular_products, popular)
-       |> assign(:contact_images, Enum.shuffle(hero_images))
        |> assign(:filters_open, false)}
     end
+  end
+
+  @impl true
+  def handle_event("subscribe_newsletter", _params, socket) do
+    {:noreply, put_flash(socket, :info, "Thanks for subscribing! Watch your inbox for new deals.")}
   end
 
   @impl true
@@ -87,8 +90,7 @@ defmodule ClicknbuyWeb.CategoryLive.Index do
   def render(assigns) do
     ~H"""
     <div id="category-page" class="page-typography min-h-screen bg-white" phx-hook="HomeReveal">
-      <.promo_bar />
-      <.navbar collections={@product_types} />
+      <.store_chrome current_user={@current_user} collections={@product_types} active="Shop" />
       <.category_hero category={@category} />
       <.category_main
         product_types={@product_types}
@@ -99,11 +101,10 @@ defmodule ClicknbuyWeb.CategoryLive.Index do
         popular_products={@popular_products}
         filters_open={@filters_open}
       />
-      <.features />
       <.countdown />
       <.best_sellers bestsellers={@bestsellers} />
-      <.contact_section contact_images={@contact_images} />
-      <.footer />
+      <.newsletter />
+      <.store_footer collections={@product_types} />
     </div>
     """
   end

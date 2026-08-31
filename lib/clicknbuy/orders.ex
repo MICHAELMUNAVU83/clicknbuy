@@ -18,8 +18,11 @@ defmodule Clicknbuy.Orders do
         if order.promo_code not in [nil, ""] do
           Task.start(fn -> Clicknbuy.Promotions.record_usage(order.promo_code) end)
         end
+
         result
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -95,35 +98,63 @@ defmodule Clicknbuy.Orders do
 
   @doc """
   Deducts stock from `product_variants` for each line item in the order.
-  Matches variants by product_id + color_name + size.
+  Matches variants by product_id and any selected colour/size. Quick-add cart
+  items do not carry variant options, so those use the product's first variant.
   """
   def deduct_stock_for_order(%Order{items: items}) when is_list(items) do
     Enum.each(items, fn item ->
       product_id = item["id"]
       color_name = item["color"]
       size = item["size"]
-      qty = item["quantity"] || 1
+      qty = parse_quantity(item["quantity"])
 
-      # Find all variants matching this product + colour + size
-      from(pv in ProductVariant,
-        where:
-          pv.product_id == ^product_id and
-            pv.color_name == ^color_name and
-            pv.size == ^size
-      )
-      |> Repo.all()
-      |> Enum.each(fn pv ->
-        current = pv.stock_quantity |> parse_stock()
-        new_qty = max(0, current - qty) |> Integer.to_string()
+      if product_id do
+        ProductVariant
+        |> where([pv], pv.product_id == ^product_id)
+        |> maybe_match_variant(:color_name, color_name)
+        |> maybe_match_variant(:size, size)
+        |> order_by([pv], asc: pv.id)
+        |> limit(1)
+        |> lock("FOR UPDATE")
+        |> Repo.one()
+        |> case do
+          nil ->
+            :ok
 
-        pv
-        |> ProductVariant.changeset(%{stock_quantity: new_qty})
-        |> Repo.update()
-      end)
+          pv ->
+            current = pv.stock_quantity |> parse_stock()
+            new_qty = max(0, current - qty) |> Integer.to_string()
+
+            pv
+            |> ProductVariant.changeset(%{stock_quantity: new_qty})
+            |> Repo.update()
+        end
+      end
     end)
   end
 
   def deduct_stock_for_order(_), do: :ok
+
+  defp maybe_match_variant(query, _field, value) when value in [nil, ""], do: query
+
+  defp maybe_match_variant(query, :color_name, value) do
+    where(query, [pv], pv.color_name == ^value)
+  end
+
+  defp maybe_match_variant(query, :size, value) do
+    where(query, [pv], pv.size == ^value)
+  end
+
+  defp parse_quantity(quantity) when is_integer(quantity) and quantity > 0, do: quantity
+
+  defp parse_quantity(quantity) when is_binary(quantity) do
+    case Integer.parse(quantity) do
+      {parsed, _} when parsed > 0 -> parsed
+      _ -> 1
+    end
+  end
+
+  defp parse_quantity(_), do: 1
 
   defp parse_stock(nil), do: 0
   defp parse_stock(""), do: 0

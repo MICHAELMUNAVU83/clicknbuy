@@ -1,6 +1,8 @@
 defmodule ClicknbuyWeb.CustomerLive.Index do
   use ClicknbuyWeb, :admin_live_view
 
+  alias ClicknbuyWeb.AdminTheme
+
   alias Clicknbuy.Customers
   alias Clicknbuy.Orders
 
@@ -39,17 +41,7 @@ defmodule ClicknbuyWeb.CustomerLive.Index do
 
   defp initials(_), do: "?"
 
-  defp avatar_color(email) when is_binary(email) do
-    colors = [
-      "bg-violet-500", "bg-blue-500", "bg-green-500", "bg-amber-500",
-      "bg-rose-500", "bg-indigo-500", "bg-teal-500", "bg-orange-500"
-    ]
-
-    idx = :erlang.phash2(email, length(colors))
-    Enum.at(colors, idx)
-  end
-
-  defp avatar_color(_), do: "bg-gray-400"
+  defp avatar_color(email), do: AdminTheme.avatar_color(email)
 
   defp format_date(dt) do
     Calendar.strftime(dt, "%d %b %Y")
@@ -61,13 +53,13 @@ defmodule ClicknbuyWeb.CustomerLive.Index do
     <div class="space-y-6">
 
       <!-- ── Page banner ── -->
-      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#C8001F] to-[#8b0014] px-7 py-6 text-white shadow-md">
+      <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 to-ink px-7 py-6 text-white shadow-md">
         <div class="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-white/5"></div>
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p class="text-xs font-medium uppercase tracking-widest text-red-200">People</p>
-            <h1 class="mt-0.5 font-serif text-2xl font-bold">Customers</h1>
-            <p class="mt-1 text-xs text-red-200">{length(@customers)} unique buyers</p>
+            <p class="text-xs font-medium uppercase tracking-widest text-brand-200">People</p>
+            <h1 class="mt-0.5 font-heading-brand text-2xl font-bold">Customers</h1>
+            <p class="mt-1 text-xs text-brand-200">{length(@customers)} unique buyers</p>
           </div>
           <div class="relative flex-shrink-0">
             <svg class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,28 +86,28 @@ defmodule ClicknbuyWeb.CustomerLive.Index do
 
       <!-- Customer table -->
       <%= if @customers == [] do %>
-        <div class="flex flex-col items-center justify-center rounded-3xl border border-gray-100 bg-white py-24 text-center shadow-sm">
+        <div class="flex flex-col items-center justify-center rounded-xl border border-gray-100 bg-white py-24 text-center shadow-sm">
           <span class="text-5xl">👥</span>
           <p class="mt-4 text-sm font-medium text-gray-500">No customers yet</p>
-          <p class="mt-1 text-xs text-gray-400">Customers appear once an order is marked as paid.</p>
+          <p class="mt-1 text-xs text-gray-500">Customers appear once an order is marked as paid.</p>
         </div>
       <% else %>
-        <div class="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm">
+        <div class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
           <table class="w-full">
             <thead>
               <tr class="border-b border-gray-100 bg-gray-50/80">
-                <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">Customer</th>
-                <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">Contact</th>
-                <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">Orders</th>
-                <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">Total Spent</th>
-                <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">Since</th>
+                <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">Customer</th>
+                <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">Contact</th>
+                <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">Orders</th>
+                <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">Total Spent</th>
+                <th class="px-5 py-3.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">Since</th>
                 <th class="px-5 py-3.5"></th>
               </tr>
             </thead>
             <tbody>
               <%= for customer <- @customers do %>
                 <tr
-                  class="group border-b border-gray-100 transition-colors last:border-0 hover:bg-[#C8001F]/3 cursor-pointer"
+                  class="group border-b border-gray-100 transition-colors last:border-0 hover:bg-brand/5 cursor-pointer"
                   phx-click={JS.navigate("/admin/customers/#{customer.id}")}
                 >
                   <td class="px-5 py-3.5">
@@ -123,28 +115,28 @@ defmodule ClicknbuyWeb.CustomerLive.Index do
                       <div class={["flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold text-white shadow-sm", avatar_color(customer.email)]}>
                         {initials(customer.name)}
                       </div>
-                      <p class="text-sm font-semibold text-gray-900">{customer.name}</p>
+                      <p class="text-sm font-semibold text-ink">{customer.name}</p>
                     </div>
                   </td>
                   <td class="px-5 py-3.5">
                     <p class="text-sm text-gray-700">{customer.email}</p>
                     <%= if customer.phone not in [nil, ""] do %>
-                      <p class="text-xs text-gray-400">{customer.phone}</p>
+                      <p class="text-xs text-gray-500">{customer.phone}</p>
                     <% end %>
                   </td>
                   <td class="px-5 py-3.5">
-                    <span class="inline-flex items-center gap-1 rounded-full bg-[#C8001F]/10 px-2.5 py-1 text-xs font-semibold text-[#C8001F]">
+                    <span class="inline-flex items-center gap-1 rounded-full bg-brand/10 px-2.5 py-1 text-xs font-semibold text-brand">
                       {customer.order_count} {if customer.order_count == 1, do: "order", else: "orders"}
                     </span>
                   </td>
                   <td class="px-5 py-3.5">
-                    <span class="text-sm font-bold text-gray-900">KES {fmt(customer.total_spent)}</span>
+                    <span class="text-sm font-bold text-ink">KES {fmt(customer.total_spent)}</span>
                   </td>
                   <td class="px-5 py-3.5">
-                    <span class="text-xs text-gray-400">{format_date(customer.inserted_at)}</span>
+                    <span class="text-xs text-gray-500">{format_date(customer.inserted_at)}</span>
                   </td>
                   <td class="px-5 py-3.5 text-right">
-                    <span class="text-gray-300 transition group-hover:text-[#C8001F]">
+                    <span class="text-gray-300 transition group-hover:text-brand">
                       <svg class="inline h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                       </svg>

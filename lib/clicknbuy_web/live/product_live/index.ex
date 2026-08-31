@@ -54,15 +54,15 @@ defmodule ClicknbuyWeb.ProductLive.Index do
   def render(assigns) do
     ~H"""
     <%!-- Page Header --%>
-    <div class="relative mb-6 overflow-hidden rounded-3xl bg-gradient-to-r from-[#C8001F] to-[#8b0014] px-7 py-6 text-white shadow-md">
+    <div class="relative mb-6 overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 to-ink px-7 py-6 text-white shadow-md">
       <div class="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-white/5"></div>
       <div class="flex items-center justify-between">
         <div>
-          <p class="text-xs font-medium uppercase tracking-widest text-red-200">Catalogue</p>
-          <h1 class="mt-0.5 font-serif text-2xl font-bold">Products</h1>
+          <p class="text-xs font-medium uppercase tracking-widest text-brand-200">Catalogue</p>
+          <h1 class="mt-0.5 font-heading-brand text-2xl font-bold">Products</h1>
         </div>
         <.link patch={~p"/admin/products/new"}>
-          <button class="flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-[#C8001F] transition hover:bg-red-50 shadow-sm">
+          <button class="flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-brand transition hover:bg-red-50 shadow-sm">
             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
             </svg>
@@ -73,34 +73,34 @@ defmodule ClicknbuyWeb.ProductLive.Index do
     </div>
 
     <%!-- Table Card --%>
-    <div class="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm">
+    <div class="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
       <div class="border-b border-gray-100 px-5 py-4">
-        <p class="font-serif text-sm font-semibold text-gray-700">All Products</p>
+        <p class="font-heading-brand text-sm font-semibold text-gray-700">All Products</p>
       </div>
 
       <div class="overflow-x-auto">
         <table class="w-full">
           <thead>
             <tr class="border-b border-gray-100 bg-gray-50/80">
-              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">
                 Product
               </th>
-              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">
                 Price
               </th>
-              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">
                 Badge
               </th>
-              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">
                 Tags
               </th>
-              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">
                 Status
               </th>
-              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+              <th class="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500">
                 Pos
               </th>
-              <th class="px-5 py-3 text-right text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+              <th class="px-5 py-3 text-right text-[11px] font-semibold uppercase tracking-wider text-gray-500">
                 Actions
               </th>
             </tr>
@@ -127,15 +127,15 @@ defmodule ClicknbuyWeb.ProductLive.Index do
                     <% end %>
                   </div>
                   <div>
-                    <p class="text-sm font-semibold text-gray-900">{product.name}</p>
-                    <p class="text-xs text-gray-400">{product.slug}</p>
+                    <p class="text-sm font-semibold text-ink">{product.name}</p>
+                    <p class="text-xs text-gray-500">{product.slug}</p>
                   </div>
                 </.link>
               </td>
 
               <%!-- Price --%>
               <td class="px-5 py-3.5">
-                <span class="text-sm font-semibold text-gray-900">
+                <span class="text-sm font-semibold text-ink">
                   Ksh {product.base_price}
                 </span>
               </td>
@@ -158,17 +158,17 @@ defmodule ClicknbuyWeb.ProductLive.Index do
               <td class="px-5 py-3.5">
                 <div class="flex flex-wrap gap-1">
                   <%= if product.is_featured do %>
-                    <span class="rounded-full bg-purple-50 px-2 py-0.5 text-[10px] font-semibold text-purple-600">
+                    <span class="rounded-full bg-brand-50 px-2 py-0.5 text-[10px] font-semibold text-brand-700">
                       Featured
                     </span>
                   <% end %>
                   <%= if product.is_bestseller do %>
-                    <span class="rounded-full bg-amber-50 px-2 py-0.5 text-[10px] font-semibold text-amber-600">
+                    <span class="rounded-full bg-accent-50 px-2 py-0.5 text-[10px] font-semibold text-accent-700">
                       Bestseller
                     </span>
                   <% end %>
                   <%= if product.is_new_arrival do %>
-                    <span class="rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-semibold text-blue-600">
+                    <span class="rounded-full bg-ink-100 px-2 py-0.5 text-[10px] font-semibold text-ink">
                       New
                     </span>
                   <% end %>
@@ -208,7 +208,7 @@ defmodule ClicknbuyWeb.ProductLive.Index do
               <td class="px-5 py-3.5">
                 <div class="flex items-center justify-end gap-1 opacity-0 transition-opacity group-hover:opacity-100">
                   <.link navigate={~p"/admin/products/#{product}"}>
-                    <button class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-400 transition hover:border-gray-300 hover:text-gray-700">
+                    <button class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-500 transition hover:border-gray-300 hover:text-gray-700">
                       <svg
                         class="h-3.5 w-3.5"
                         viewBox="0 0 24 24"
@@ -223,7 +223,7 @@ defmodule ClicknbuyWeb.ProductLive.Index do
                   </.link>
 
                   <.link patch={~p"/admin/products/#{product}/edit"}>
-                    <button class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-400 transition hover:border-gray-300 hover:text-gray-700">
+                    <button class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-500 transition hover:border-gray-300 hover:text-gray-700">
                       <svg
                         class="h-3.5 w-3.5"
                         viewBox="0 0 24 24"
@@ -240,7 +240,7 @@ defmodule ClicknbuyWeb.ProductLive.Index do
                   <button
                     phx-click={JS.push("delete", value: %{id: product.id}) |> hide("##{id}")}
                     data-confirm="Are you sure you want to delete this product?"
-                    class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-400 transition hover:border-red-200 hover:bg-red-50 hover:text-red-500"
+                    class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-500 transition hover:border-red-200 hover:bg-red-50 hover:text-red-500"
                   >
                     <svg
                       class="h-3.5 w-3.5"
@@ -267,9 +267,9 @@ defmodule ClicknbuyWeb.ProductLive.Index do
         :if={Enum.empty?(@streams.products.inserts)}
         class="flex flex-col items-center justify-center py-20 text-center"
       >
-        <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gray-100">
+        <div class="flex h-14 w-14 items-center justify-center rounded-lg bg-gray-100">
           <svg
-            class="h-6 w-6 text-gray-400"
+            class="h-6 w-6 text-gray-500"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -284,9 +284,9 @@ defmodule ClicknbuyWeb.ProductLive.Index do
           </svg>
         </div>
         <p class="mt-4 text-sm font-semibold text-gray-700">No products yet</p>
-        <p class="mt-1 text-sm text-gray-400">Add your first product to get started.</p>
+        <p class="mt-1 text-sm text-gray-500">Add your first product to get started.</p>
         <.link patch={~p"/admin/products/new"} class="mt-6">
-          <button class="rounded-xl bg-[#C8001F] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#a8001a]">
+          <button class="rounded-xl bg-brand px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-700">
             New Product
           </button>
         </.link>

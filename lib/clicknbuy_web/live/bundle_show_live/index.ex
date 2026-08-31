@@ -338,7 +338,7 @@ defmodule ClicknbuyWeb.BundleShowLive.Index do
         </div>
       </div>
 
-      <.footer />
+      <.store_footer collections={[]} />
     </div>
     """
   end

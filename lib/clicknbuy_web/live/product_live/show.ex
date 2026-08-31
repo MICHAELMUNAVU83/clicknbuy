@@ -235,7 +235,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
     <div class="mb-8 flex items-center justify-between">
       <div class="flex items-center gap-4">
         <.link navigate={~p"/admin/products"}>
-          <button class="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 text-gray-400 transition hover:border-gray-300 hover:text-gray-700">
+          <button class="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 text-gray-500 transition hover:border-gray-300 hover:text-gray-700">
             <svg
               class="h-5 w-5"
               viewBox="0 0 24 24"
@@ -248,8 +248,8 @@ defmodule ClicknbuyWeb.ProductLive.Show do
           </button>
         </.link>
         <div>
-          <p class="text-xs font-semibold uppercase tracking-widest text-gray-400">Catalogue</p>
-          <h1 class="mt-0.5 text-3xl font-bold text-gray-900">{@product.name}</h1>
+          <p class="text-xs font-semibold uppercase tracking-widest text-gray-500">Catalogue</p>
+          <h1 class="mt-0.5 text-3xl font-bold text-ink">{@product.name}</h1>
         </div>
       </div>
 
@@ -265,7 +265,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
     </div>
 
     <%!-- Top summary card --%>
-    <div class="mb-8 overflow-hidden rounded-2xl border border-gray-200 bg-white">
+    <div class="mb-8 overflow-hidden rounded-lg border border-gray-200 bg-white">
       <div class="flex gap-8 p-8">
         <%!-- Hero image --%>
         <div class="flex-shrink-0">
@@ -273,10 +273,10 @@ defmodule ClicknbuyWeb.ProductLive.Show do
             <img
               src={@product.image}
               alt={@product.name}
-              class="h-52 w-52 rounded-2xl border border-gray-200 object-cover object-top shadow-sm"
+              class="h-52 w-52 rounded-lg border border-gray-200 object-cover object-top shadow-sm"
             />
           <% else %>
-            <div class="flex h-52 w-52 items-center justify-center rounded-2xl border border-gray-200 bg-gray-50 text-6xl">
+            <div class="flex h-52 w-52 items-center justify-center rounded-lg border border-gray-200 bg-gray-50 text-6xl">
               👗
             </div>
           <% end %>
@@ -287,7 +287,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
           <div class="flex flex-wrap items-start justify-between gap-3">
             <div>
               <div class="flex items-center gap-3">
-                <h2 class="text-2xl font-bold text-gray-900">{@product.name}</h2>
+                <h2 class="text-2xl font-bold text-ink">{@product.name}</h2>
                 <%= if @product.badge_label not in [nil, ""] do %>
                   <span
                     class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold"
@@ -297,7 +297,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
                   </span>
                 <% end %>
               </div>
-              <code class="mt-1 block text-sm text-gray-400">/products/{@product.slug}</code>
+              <code class="mt-1 block text-sm text-gray-500">/products/{@product.slug}</code>
             </div>
 
             <span class={[
@@ -321,7 +321,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
           <p class="mt-4 text-base text-gray-600">{@product.description}</p>
 
           <div class="mt-6 flex flex-wrap items-center gap-5 text-base">
-            <span class="text-xl font-bold text-gray-900">Ksh {@product.base_price}</span>
+            <span class="text-xl font-bold text-ink">Ksh {@product.base_price}</span>
 
             <%= if @collection do %>
               <span class="flex items-center gap-1.5 text-gray-500">
@@ -340,7 +340,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
               </span>
             <% end %>
 
-            <span class="text-gray-400 text-sm">Position {@product.position}</span>
+            <span class="text-gray-500 text-sm">Position {@product.position}</span>
 
             <.link
               navigate="/admin/orders"
@@ -359,17 +359,17 @@ defmodule ClicknbuyWeb.ProductLive.Show do
 
             <div class="flex gap-2">
               <%= if @product.is_featured do %>
-                <span class="rounded-full bg-purple-50 px-3 py-1 text-xs font-semibold text-purple-600">
+                <span class="rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700">
                   Featured
                 </span>
               <% end %>
               <%= if @product.is_bestseller do %>
-                <span class="rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-600">
+                <span class="rounded-full bg-accent-50 px-3 py-1 text-xs font-semibold text-accent-700">
                   Bestseller
                 </span>
               <% end %>
               <%= if @product.is_new_arrival do %>
-                <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600">
+                <span class="rounded-full bg-ink-100 px-3 py-1 text-xs font-semibold text-ink">
                   New Arrival
                 </span>
               <% end %>
@@ -380,7 +380,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
     </div>
 
     <%!-- Images panel (full width) --%>
-    <div class="mb-6 overflow-hidden rounded-2xl border border-gray-200 bg-white">
+    <div class="mb-6 overflow-hidden rounded-lg border border-gray-200 bg-white">
       <div class="flex items-center justify-between border-b border-gray-100 px-6 py-5">
         <p class="text-base font-semibold text-gray-700">
           Images
@@ -406,7 +406,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
                   phx-click="delete_image"
                   phx-value-id={image.id}
                   data-confirm="Remove this image?"
-                  class="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-400 opacity-0 shadow-sm transition group-hover:opacity-100 hover:border-red-200 hover:bg-red-50 hover:text-red-500"
+                  class="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 opacity-0 shadow-sm transition group-hover:opacity-100 hover:border-red-200 hover:bg-red-50 hover:text-red-500"
                 >
                   <svg
                     class="h-3.5 w-3.5"
@@ -445,7 +445,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
                   type="button"
                   phx-click="cancel_image_upload"
                   phx-value-ref={entry.ref}
-                  class="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-400 shadow-sm transition hover:border-red-200 hover:bg-red-50 hover:text-red-500"
+                  class="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 shadow-sm transition hover:border-red-200 hover:bg-red-50 hover:text-red-500"
                 >
                   <svg
                     class="h-3.5 w-3.5"
@@ -493,9 +493,9 @@ defmodule ClicknbuyWeb.ProductLive.Show do
 
         <%= if Enum.empty?(@images) and Enum.empty?(@uploads.product_image.entries) do %>
           <div class="flex flex-col items-center justify-center py-16 text-center">
-            <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-100">
+            <div class="flex h-16 w-16 items-center justify-center rounded-lg bg-gray-100">
               <svg
-                class="h-7 w-7 text-gray-400"
+                class="h-7 w-7 text-gray-500"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -507,14 +507,14 @@ defmodule ClicknbuyWeb.ProductLive.Show do
               </svg>
             </div>
             <p class="mt-4 text-base font-semibold text-gray-700">No images yet</p>
-            <p class="mt-1.5 text-sm text-gray-400">Select images using the file picker above.</p>
+            <p class="mt-1.5 text-sm text-gray-500">Select images using the file picker above.</p>
           </div>
         <% end %>
       </div>
     </div>
 
     <%!-- Variants panel (full width) --%>
-    <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white">
+    <div class="overflow-hidden rounded-lg border border-gray-200 bg-white">
       <div class="flex items-center justify-between border-b border-gray-100 px-6 py-5">
         <p class="text-base font-semibold text-gray-700">
           Variants
@@ -529,7 +529,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
             "flex items-center gap-2 rounded-xl border px-4 py-2 text-sm font-semibold transition",
             if(@show_variant_form,
               do: "border-gray-300 bg-gray-100 text-gray-700",
-              else: "border-gray-200 text-gray-600 hover:border-gray-300 hover:text-gray-900"
+              else: "border-gray-200 text-gray-600 hover:border-gray-300 hover:text-ink"
             )
           ]}
         >
@@ -562,7 +562,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
       <%!-- Inline add-variant form --%>
       <%= if @show_variant_form do %>
         <div class="border-b border-gray-100 bg-gray-50 px-6 py-6">
-          <p class="mb-4 text-xs font-semibold uppercase tracking-widest text-gray-400">
+          <p class="mb-4 text-xs font-semibold uppercase tracking-widest text-gray-500">
             New Variant
           </p>
           <.form
@@ -581,7 +581,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
                   value={@variant_form[:color_name].value}
                   id={@variant_form[:color_name].id}
                   placeholder="e.g. Midnight Black"
-                  class="w-full rounded-xl border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 placeholder-gray-400 transition focus:border-gray-400 focus:outline-none"
+                  class="w-full rounded-xl border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-ink placeholder-gray-400 transition focus:border-gray-400 focus:outline-none"
                 />
                 <.error :for={msg <- Enum.map(@variant_form[:color_name].errors, &translate_error/1)}>
                   {msg}
@@ -624,7 +624,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
                   value={@variant_form[:size].value}
                   id={@variant_form[:size].id}
                   placeholder="e.g. S, M, L, XL"
-                  class="w-full rounded-xl border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 placeholder-gray-400 transition focus:border-gray-400 focus:outline-none"
+                  class="w-full rounded-xl border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-ink placeholder-gray-400 transition focus:border-gray-400 focus:outline-none"
                 />
                 <.error :for={msg <- Enum.map(@variant_form[:size].errors, &translate_error/1)}>
                   {msg}
@@ -640,7 +640,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
                   value={@variant_form[:stock_quantity].value}
                   id={@variant_form[:stock_quantity].id}
                   placeholder="e.g. 50"
-                  class="w-full rounded-xl border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 placeholder-gray-400 transition focus:border-gray-400 focus:outline-none"
+                  class="w-full rounded-xl border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-ink placeholder-gray-400 transition focus:border-gray-400 focus:outline-none"
                 />
                 <.error :for={
                   msg <- Enum.map(@variant_form[:stock_quantity].errors, &translate_error/1)
@@ -665,9 +665,9 @@ defmodule ClicknbuyWeb.ProductLive.Show do
 
       <%!-- Inline edit-variant form --%>
       <%= if @editing_variant_id do %>
-        <div class="border-b border-gray-100 bg-amber-50 px-6 py-6">
+        <div class="border-b border-gray-100 bg-brand-50 px-6 py-6">
           <div class="mb-4 flex items-center justify-between">
-            <p class="text-xs font-semibold uppercase tracking-widest text-gray-400">
+            <p class="text-xs font-semibold uppercase tracking-widest text-gray-500">
               Edit Variant
             </p>
             <button
@@ -703,7 +703,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
                   value={@edit_variant_form[:color_name].value}
                   id={@edit_variant_form[:color_name].id}
                   placeholder="e.g. Midnight Black"
-                  class="w-full rounded-xl border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 placeholder-gray-400 transition focus:border-gray-400 focus:outline-none"
+                  class="w-full rounded-xl border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-ink placeholder-gray-400 transition focus:border-gray-400 focus:outline-none"
                 />
                 <.error :for={
                   msg <- Enum.map(@edit_variant_form[:color_name].errors, &translate_error/1)
@@ -750,7 +750,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
                   value={@edit_variant_form[:size].value}
                   id={@edit_variant_form[:size].id}
                   placeholder="e.g. S, M, L, XL"
-                  class="w-full rounded-xl border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 placeholder-gray-400 transition focus:border-gray-400 focus:outline-none"
+                  class="w-full rounded-xl border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-ink placeholder-gray-400 transition focus:border-gray-400 focus:outline-none"
                 />
                 <.error :for={
                   msg <- Enum.map(@edit_variant_form[:size].errors, &translate_error/1)
@@ -768,7 +768,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
                   value={@edit_variant_form[:stock_quantity].value}
                   id={@edit_variant_form[:stock_quantity].id}
                   placeholder="e.g. 50"
-                  class="w-full rounded-xl border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 placeholder-gray-400 transition focus:border-gray-400 focus:outline-none"
+                  class="w-full rounded-xl border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-ink placeholder-gray-400 transition focus:border-gray-400 focus:outline-none"
                 />
                 <.error :for={
                   msg <- Enum.map(@edit_variant_form[:stock_quantity].errors, &translate_error/1)
@@ -795,9 +795,9 @@ defmodule ClicknbuyWeb.ProductLive.Show do
       <div>
         <%= if Enum.empty?(@variants) do %>
           <div class="flex flex-col items-center justify-center py-16 text-center">
-            <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-100">
+            <div class="flex h-16 w-16 items-center justify-center rounded-lg bg-gray-100">
               <svg
-                class="h-7 w-7 text-gray-400"
+                class="h-7 w-7 text-gray-500"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -809,7 +809,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
               </svg>
             </div>
             <p class="mt-4 text-base font-semibold text-gray-700">No variants yet</p>
-            <p class="mt-1.5 text-sm text-gray-400">
+            <p class="mt-1.5 text-sm text-gray-500">
               Add size and colour variants using the button above.
             </p>
           </div>
@@ -817,16 +817,16 @@ defmodule ClicknbuyWeb.ProductLive.Show do
           <table class="w-full">
             <thead>
               <tr class="border-b border-gray-100 bg-gray-50">
-                <th class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-400">
+                <th class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
                   Color
                 </th>
-                <th class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-400">
+                <th class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
                   Size
                 </th>
-                <th class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-400">
+                <th class="px-6 py-3.5 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
                   Stock
                 </th>
-                <th class="px-6 py-3.5 text-right text-xs font-semibold uppercase tracking-wider text-gray-400">
+                <th class="px-6 py-3.5 text-right text-xs font-semibold uppercase tracking-wider text-gray-500">
                 </th>
               </tr>
             </thead>
@@ -835,7 +835,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
                 :for={variant <- @variants}
                 class={[
                   "group border-b border-gray-100 last:border-0 hover:bg-gray-50",
-                  if(@editing_variant_id == variant.id, do: "bg-amber-50 hover:bg-amber-50")
+                  if(@editing_variant_id == variant.id, do: "bg-brand-50 hover:bg-brand-50")
                 ]}
               >
                 <td class="px-6 py-4">
@@ -844,8 +844,8 @@ defmodule ClicknbuyWeb.ProductLive.Show do
                       class="h-6 w-6 flex-shrink-0 rounded-full border border-gray-200 shadow-sm"
                       style={"background-color: #{variant.color_hex}"}
                     />
-                    <span class="text-sm font-medium text-gray-800">{variant.color_name}</span>
-                    <span class="font-mono text-xs text-gray-400">{variant.color_hex}</span>
+                    <span class="text-sm font-medium text-ink-700">{variant.color_name}</span>
+                    <span class="font-mono text-xs text-gray-500">{variant.color_hex}</span>
                   </div>
                 </td>
                 <td class="px-6 py-4">
@@ -864,9 +864,9 @@ defmodule ClicknbuyWeb.ProductLive.Show do
                       phx-click="edit_variant"
                       phx-value-id={variant.id}
                       class={[
-                        "flex h-8 w-8 items-center justify-center rounded-lg border text-gray-400 transition",
+                        "flex h-8 w-8 items-center justify-center rounded-lg border text-gray-500 transition",
                         if(@editing_variant_id == variant.id,
-                          do: "border-amber-300 bg-amber-100 text-amber-600",
+                          do: "border-brand-300 bg-brand-100 text-brand-700",
                           else:
                             "border-gray-200 opacity-0 group-hover:opacity-100 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
                         )
@@ -887,7 +887,7 @@ defmodule ClicknbuyWeb.ProductLive.Show do
                       phx-click="delete_variant"
                       phx-value-id={variant.id}
                       data-confirm="Delete this variant?"
-                      class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-400 opacity-0 transition group-hover:opacity-100 hover:border-red-200 hover:bg-red-50 hover:text-red-500"
+                      class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-500 opacity-0 transition group-hover:opacity-100 hover:border-red-200 hover:bg-red-50 hover:text-red-500"
                     >
                       <svg
                         class="h-3.5 w-3.5"

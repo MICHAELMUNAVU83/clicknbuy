@@ -183,14 +183,14 @@ defmodule ClicknbuyWeb.HelpLive.Index do
       <%!-- Header --%>
       <div class="border-b border-gray-100 bg-white px-6 py-5">
         <div class="flex items-center gap-3">
-          <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#C8001F]/10">
-            <svg class="h-5 w-5 text-[#C8001F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand/10">
+            <svg class="h-5 w-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                 d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
           <div>
-            <h1 class="text-lg font-semibold text-gray-900">Admin Help & Reference</h1>
+            <h1 class="text-lg font-semibold text-ink">Admin Help & Reference</h1>
             <p class="text-sm text-gray-500">A guide to every section of the admin panel</p>
           </div>
         </div>
@@ -199,7 +199,7 @@ defmodule ClicknbuyWeb.HelpLive.Index do
       <div class="flex flex-1 overflow-hidden">
         <%!-- Section nav --%>
         <nav class="hidden w-56 shrink-0 border-r border-gray-100 bg-gray-50/50 py-4 lg:block">
-          <p class="px-4 pb-2 text-[10px] font-semibold uppercase tracking-widest text-gray-400">
+          <p class="px-4 pb-2 text-[10px] font-semibold uppercase tracking-widest text-gray-500">
             Sections
           </p>
           <%= for section <- @sections do %>
@@ -209,8 +209,8 @@ defmodule ClicknbuyWeb.HelpLive.Index do
               class={[
                 "flex w-full items-center gap-2.5 px-4 py-2.5 text-left text-sm font-medium transition",
                 if(@active_section == section.id,
-                  do: "bg-white text-[#C8001F] shadow-sm border-r-2 border-[#C8001F]",
-                  else: "text-gray-600 hover:bg-white hover:text-gray-900"
+                  do: "bg-white text-brand shadow-sm border-r-2 border-brand",
+                  else: "text-gray-600 hover:bg-white hover:text-ink"
                 )
               ]}
             >
@@ -237,7 +237,7 @@ defmodule ClicknbuyWeb.HelpLive.Index do
                   class={[
                     "rounded-full border px-3 py-1 text-xs font-medium transition",
                     if(@active_section == section.id,
-                      do: "border-[#C8001F] bg-[#C8001F] text-white",
+                      do: "border-brand bg-brand text-white",
                       else: "border-gray-200 text-gray-600 hover:border-gray-400"
                     )
                   ]}
@@ -253,17 +253,17 @@ defmodule ClicknbuyWeb.HelpLive.Index do
             <div class="max-w-2xl">
               <%!-- Section header --%>
               <div class="mb-6 flex items-start gap-4">
-                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#C8001F]/10">
-                  <svg class="h-6 w-6 text-[#C8001F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand/10">
+                  <svg class="h-6 w-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <%= Phoenix.HTML.raw(section.icon) %>
                   </svg>
                 </div>
                 <div>
-                  <h2 class="text-2xl font-bold text-gray-900">{section.title}</h2>
+                  <h2 class="text-2xl font-bold text-ink">{section.title}</h2>
                   <p class="mt-1 text-sm text-gray-500">{section.summary}</p>
                   <a
                     href={section.path}
-                    class="mt-2 inline-flex items-center gap-1 text-xs font-medium text-[#C8001F] hover:underline"
+                    class="mt-2 inline-flex items-center gap-1 text-xs font-medium text-brand hover:underline"
                   >
                     Go to {section.title}
                     <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -277,7 +277,7 @@ defmodule ClicknbuyWeb.HelpLive.Index do
               <div class="space-y-3">
                 <%= for {term, desc} <- section.items do %>
                   <div class="rounded-xl border border-gray-100 bg-white p-4 shadow-sm">
-                    <p class="mb-1 text-sm font-semibold text-gray-900">{term}</p>
+                    <p class="mb-1 text-sm font-semibold text-ink">{term}</p>
                     <p class="text-sm leading-relaxed text-gray-600">{desc}</p>
                   </div>
                 <% end %>

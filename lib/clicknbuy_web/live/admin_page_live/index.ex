@@ -82,7 +82,7 @@ defmodule ClicknbuyWeb.AdminPageLive.Index do
   defp icon_for(slug) do
     case slug do
       "how-to-order"        -> "🛍️"
-      "size-guide"          -> "📐"
+      "warranty-support"    -> "🛡️"
       "shipping-delivery"   -> "🚚"
       "returns-exchanges"   -> "🔄"
       _                     -> "📄"
@@ -96,7 +96,7 @@ defmodule ClicknbuyWeb.AdminPageLive.Index do
       <%!-- Page header --%>
       <div class="mb-8 flex items-center justify-between">
         <div>
-          <h1 class="text-2xl font-bold text-gray-900">Info Pages</h1>
+          <h1 class="text-2xl font-bold text-ink">Info Pages</h1>
           <p class="mt-1 text-sm text-gray-500">
             Manage customer-facing pages shown in the footer
           </p>
@@ -104,7 +104,7 @@ defmodule ClicknbuyWeb.AdminPageLive.Index do
         <a
           href="/info/how-to-order"
           target="_blank"
-          class="flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-600 shadow-sm transition hover:border-[#C8001F]/40 hover:text-[#C8001F]"
+          class="flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-600 shadow-sm transition hover:border-brand/40 hover:text-brand"
         >
           <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -118,16 +118,16 @@ defmodule ClicknbuyWeb.AdminPageLive.Index do
         <%!-- Edit form --%>
         <%= if @form do %>
           <% page = @form.data %>
-          <div class="mb-8 overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
+          <div class="mb-8 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
             <div class="flex items-center justify-between border-b border-gray-100 px-6 py-4">
               <div class="flex items-center gap-2">
                 <span class="text-lg">{icon_for(page.slug)}</span>
-                <h2 class="text-base font-semibold text-gray-900">Editing: {page.title}</h2>
+                <h2 class="text-base font-semibold text-ink">Editing: {page.title}</h2>
               </div>
               <button
                 type="button"
                 phx-click="cancel"
-                class="rounded-lg p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition"
+                class="rounded-lg p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-600 transition"
               >
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -149,13 +149,13 @@ defmodule ClicknbuyWeb.AdminPageLive.Index do
                     field={@form[:title]}
                     type="text"
                     placeholder="e.g. How to Order"
-                    class="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:border-[#C8001F]/60 focus:outline-none focus:ring-1 focus:ring-[#C8001F]/30"
+                    class="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:border-brand/60 focus:outline-none focus:ring-1 focus:ring-brand/30"
                   />
                 </div>
                 <div>
                   <label class="mb-1.5 block text-sm font-semibold text-gray-700">
                     URL Slug
-                    <span class="ml-1 text-xs font-normal text-gray-400">(cannot change)</span>
+                    <span class="ml-1 text-xs font-normal text-gray-500">(cannot change)</span>
                   </label>
                   <div class="flex items-center rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-500">
                     /info/<strong class="text-gray-700">{page.slug}</strong>
@@ -166,13 +166,13 @@ defmodule ClicknbuyWeb.AdminPageLive.Index do
               <div>
                 <label class="mb-1.5 block text-sm font-semibold text-gray-700">
                   Meta Description
-                  <span class="ml-1 text-xs font-normal text-gray-400">(max 160 chars — used by Google)</span>
+                  <span class="ml-1 text-xs font-normal text-gray-500">(max 160 chars — used by Google)</span>
                 </label>
                 <.input
                   field={@form[:meta_description]}
                   type="text"
                   placeholder="Short description for search engines"
-                  class="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:border-[#C8001F]/60 focus:outline-none focus:ring-1 focus:ring-[#C8001F]/30"
+                  class="w-full rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:border-brand/60 focus:outline-none focus:ring-1 focus:ring-brand/30"
                 />
               </div>
 
@@ -180,7 +180,7 @@ defmodule ClicknbuyWeb.AdminPageLive.Index do
                 <label class="mb-1.5 block text-sm font-semibold text-gray-700">
                   Page Content
                 </label>
-                <p class="mb-2 text-xs text-gray-400">
+                <p class="mb-2 text-xs text-gray-500">
                   Supports simple formatting: <code class="rounded bg-gray-100 px-1">## Heading</code>,
                   <code class="rounded bg-gray-100 px-1">### Sub-heading</code>,
                   <code class="rounded bg-gray-100 px-1">**bold**</code>,
@@ -191,14 +191,14 @@ defmodule ClicknbuyWeb.AdminPageLive.Index do
                   type="textarea"
                   rows="18"
                   placeholder="Write your page content here..."
-                  class="w-full rounded-xl border border-gray-300 px-4 py-3 font-mono text-sm leading-relaxed focus:border-[#C8001F]/60 focus:outline-none focus:ring-1 focus:ring-[#C8001F]/30"
+                  class="w-full rounded-xl border border-gray-300 px-4 py-3 font-mono text-sm leading-relaxed focus:border-brand/60 focus:outline-none focus:ring-1 focus:ring-brand/30"
                 />
               </div>
 
               <div class="flex items-center gap-3 pt-2">
                 <button
                   type="submit"
-                  class="rounded-xl bg-[#C8001F] px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--brand-primary-dark)]"
+                  class="rounded-xl bg-brand px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--brand-primary-dark)]"
                 >
                   Save Page
                 </button>
@@ -212,7 +212,7 @@ defmodule ClicknbuyWeb.AdminPageLive.Index do
                 <a
                   href={"/info/#{page.slug}"}
                   target="_blank"
-                  class="ml-auto text-sm text-[#C8001F] hover:underline"
+                  class="ml-auto text-sm text-brand hover:underline"
                 >
                   Preview →
                 </a>
@@ -222,9 +222,9 @@ defmodule ClicknbuyWeb.AdminPageLive.Index do
         <% end %>
 
         <%!-- Pages list --%>
-        <div class="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
+        <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
           <div class="flex items-center justify-between border-b border-gray-100 px-6 py-4">
-            <h2 class="text-base font-semibold text-gray-900">
+            <h2 class="text-base font-semibold text-ink">
               All Pages
               <span class="ml-2 rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600">
                 {length(@pages)}
@@ -240,13 +240,13 @@ defmodule ClicknbuyWeb.AdminPageLive.Index do
           <% else %>
             <div class="divide-y divide-gray-100">
               <%= for page <- @pages do %>
-                <div class={"flex items-start gap-4 px-6 py-5 transition hover:bg-gray-50 #{if @editing_id == page.id, do: "bg-[#C8001F]/3"}"}>
-                  <div class="mt-0.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-gray-100 text-xl">
+                <div class={"flex items-start gap-4 px-6 py-5 transition hover:bg-gray-50 #{if @editing_id == page.id, do: "bg-brand/5"}"}>
+                  <div class="mt-0.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gray-100 text-xl">
                     {icon_for(page.slug)}
                   </div>
                   <div class="min-w-0 flex-1">
                     <div class="flex flex-wrap items-center gap-2">
-                      <span class="text-sm font-semibold text-gray-900">{page.title}</span>
+                      <span class="text-sm font-semibold text-ink">{page.title}</span>
                       <span class="rounded-full bg-gray-100 px-2 py-0.5 font-mono text-[11px] text-gray-500">
                         /info/{page.slug}
                       </span>
@@ -256,7 +256,7 @@ defmodule ClicknbuyWeb.AdminPageLive.Index do
                         <span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-medium text-gray-500">Draft</span>
                       <% end %>
                     </div>
-                    <p class="mt-0.5 truncate text-xs text-gray-400">
+                    <p class="mt-0.5 truncate text-xs text-gray-500">
                       <%= if page.content && page.content != "" do %>
                         {String.slice(page.content, 0, 100)}<%= if String.length(page.content || "") > 100, do: "…" %>
                       <% else %>
@@ -277,14 +277,14 @@ defmodule ClicknbuyWeb.AdminPageLive.Index do
                       type="button"
                       phx-click="edit"
                       phx-value-id={page.id}
-                      class="rounded-lg border border-[#C8001F]/30 bg-[#C8001F]/5 px-3 py-1.5 text-xs font-medium text-[#C8001F] transition hover:bg-[#C8001F] hover:text-white"
+                      class="rounded-lg border border-brand/30 bg-brand/5 px-3 py-1.5 text-xs font-medium text-brand transition hover:bg-brand hover:text-white"
                     >
                       Edit
                     </button>
                     <a
                       href={"/info/#{page.slug}"}
                       target="_blank"
-                      class="rounded-lg border border-gray-200 p-1.5 text-gray-400 transition hover:border-gray-400 hover:text-gray-700"
+                      class="rounded-lg border border-gray-200 p-1.5 text-gray-500 transition hover:border-gray-400 hover:text-gray-700"
                     >
                       <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />

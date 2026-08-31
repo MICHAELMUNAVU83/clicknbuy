@@ -36,6 +36,7 @@ import CartSync from "./hooks/cart_sync.js";
 import ChartHook from "./hooks/chart_hook.js";
 import AddBundleToCart from "./hooks/add_bundle_to_cart.js";
 import AddSingleToCart from "./hooks/add_single_to_cart.js";
+import "./store_chrome.js";
 // Safe CSRF token (avoid throwing if meta tag is missing)
 const csrfMeta = document.querySelector("meta[name='csrf-token']");
 const csrfToken = csrfMeta ? csrfMeta.getAttribute("content") : "";

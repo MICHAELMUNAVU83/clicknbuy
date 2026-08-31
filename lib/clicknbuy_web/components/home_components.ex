@@ -1924,8 +1924,8 @@ defmodule ClicknbuyWeb.HomeComponents do
                 </a>
               </li>
               <li>
-                <a href="/info/size-guide" class="text-gray-400 transition hover:text-white">
-                  📐 Size Guide
+                <a href="/info/warranty-support" class="text-gray-400 transition hover:text-white">
+                  🛡️ Warranty &amp; Support
                 </a>
               </li>
               <li>

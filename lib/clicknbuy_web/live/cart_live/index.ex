@@ -1,6 +1,5 @@
 defmodule ClicknbuyWeb.CartLive.Index do
   use ClicknbuyWeb, :live_view
-  import ClicknbuyWeb.HomeComponents
 
   alias Clicknbuy.ProductVariants
 
@@ -9,6 +8,7 @@ defmodule ClicknbuyWeb.CartLive.Index do
     {:ok,
      socket
      |> assign(:page_title, "Your Cart | ClicknBuy")
+     |> assign(:nav_collections, Clicknbuy.Shop.list_collections_for_display())
      |> assign(:cart_items, [])
      |> assign(:cart_loaded, false)
      |> assign(:variants_by_product, %{})}
@@ -90,7 +90,7 @@ defmodule ClicknbuyWeb.CartLive.Index do
   def render(assigns) do
     ~H"""
     <div id="cart-page" class="min-h-screen bg-white" phx-hook="CartSync">
-      <.navbar cart_items={@cart_items} collections={[]} />
+      <.store_chrome current_user={@current_user} collections={@nav_collections} />
 
       <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <h1 class="mb-8 text-3xl font-bold text-gray-900">Your Cart</h1>
@@ -317,7 +317,7 @@ defmodule ClicknbuyWeb.CartLive.Index do
         <% end %>
       </div>
 
-      <.footer />
+      <.store_footer collections={@nav_collections} />
     </div>
     """
   end

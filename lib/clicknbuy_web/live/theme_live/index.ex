@@ -96,7 +96,7 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
       <%!-- Header --%>
       <div class="mb-8 flex items-start justify-between">
         <div>
-          <h1 class="text-2xl font-bold text-gray-900">Theme & Branding</h1>
+          <h1 class="text-2xl font-bold text-ink">Theme & Branding</h1>
           <p class="mt-1 text-sm text-gray-500">
             Customise colors, fonts and site identity. Changes apply immediately after saving.
           </p>
@@ -104,7 +104,7 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
         <a
           href="/"
           target="_blank"
-          class="flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-600 shadow-sm transition hover:border-[#C8001F]/40 hover:text-[#C8001F]"
+          class="flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-600 shadow-sm transition hover:border-brand/40 hover:text-brand"
         >
           <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -120,7 +120,7 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
             type="button"
             phx-click="switch_tab"
             phx-value-tab={id}
-            class={"rounded-lg px-4 py-2 text-sm font-medium transition #{if @active_tab == id, do: "bg-white shadow-sm text-gray-900", else: "text-gray-500 hover:text-gray-700"}"}
+            class={"rounded-lg px-4 py-2 text-sm font-medium transition #{if @active_tab == id, do: "bg-white shadow-sm text-ink", else: "text-gray-500 hover:text-gray-700"}"}
           >
             {icon} {label}
           </button>
@@ -130,10 +130,10 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
       <.form for={@form} phx-change="validate" phx-submit="save">
         <%!-- ── Brand Identity ── --%>
         <div class={if @active_tab == "brand", do: "block", else: "hidden"}>
-          <div class="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
+          <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
             <div class="border-b border-gray-100 px-6 py-4">
-              <h2 class="text-base font-semibold text-gray-900">Brand Identity</h2>
-              <p class="mt-0.5 text-xs text-gray-400">Site name, tagline and logo shown across the storefront.</p>
+              <h2 class="text-base font-semibold text-ink">Brand Identity</h2>
+              <p class="mt-0.5 text-xs text-gray-500">Site name, tagline and logo shown across the storefront.</p>
             </div>
             <div class="space-y-5 p-6">
               <div class="grid gap-5 sm:grid-cols-2">
@@ -173,20 +173,20 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
               </div>
 
               <%!-- Live preview card --%>
-              <div class="rounded-2xl border border-gray-100 bg-gray-50 p-5">
-                <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-gray-400">Preview</p>
+              <div class="rounded-lg border border-gray-100 bg-gray-50 p-5">
+                <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Preview</p>
                 <div class="flex items-center gap-3">
                   <div class="h-10 w-10 overflow-hidden rounded-full bg-gray-200">
                     <%= if @settings.logo_url && @settings.logo_url != "" do %>
                       <img src={@settings.logo_url} class="h-full w-full object-cover" alt="" />
                     <% else %>
-                      <div class="flex h-full w-full items-center justify-center text-lg font-bold text-gray-400">
+                      <div class="flex h-full w-full items-center justify-center text-lg font-bold text-gray-500">
                         {String.first(@settings.site_name || "K")}
                       </div>
                     <% end %>
                   </div>
                   <div>
-                    <p class="font-bold text-gray-900">{@settings.site_name}</p>
+                    <p class="font-bold text-ink">{@settings.site_name}</p>
                     <p class="text-xs text-gray-500">{@settings.site_tagline}</p>
                   </div>
                 </div>
@@ -197,10 +197,10 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
 
         <%!-- ── Colors ── --%>
         <div class={if @active_tab == "colors", do: "block", else: "hidden"}>
-          <div class="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
+          <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
             <div class="border-b border-gray-100 px-6 py-4">
-              <h2 class="text-base font-semibold text-gray-900">Colors</h2>
-              <p class="mt-0.5 text-xs text-gray-400">
+              <h2 class="text-base font-semibold text-ink">Colors</h2>
+              <p class="mt-0.5 text-xs text-gray-500">
                 The primary color drives structural areas (top bar, hero panels, badges). The accent color drives
                 calls to action — Buy Now, Add to Cart and prices.
               </p>
@@ -228,7 +228,7 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
                       placeholder="#2F32CE"
                       phx-debounce="300"
                     />
-                    <p class="mt-1 text-xs text-gray-400">Type a hex color or use the picker / presets below.</p>
+                    <p class="mt-1 text-xs text-gray-500">Type a hex color or use the picker / presets below.</p>
                   </div>
                 </div>
               </div>
@@ -252,14 +252,14 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
                       placeholder="#DB4A44"
                       phx-debounce="300"
                     />
-                    <p class="mt-1 text-xs text-gray-400">Used for Buy Now / Add to Cart buttons and prices.</p>
+                    <p class="mt-1 text-xs text-gray-500">Used for Buy Now / Add to Cart buttons and prices.</p>
                   </div>
                 </div>
               </div>
 
               <%!-- Preset palettes — each fires pick_color via phx-click --%>
-              <div class="rounded-2xl border border-gray-100 bg-gray-50 p-5">
-                <p class="mb-4 text-xs font-semibold uppercase tracking-widest text-gray-400">
+              <div class="rounded-lg border border-gray-100 bg-gray-50 p-5">
+                <p class="mb-4 text-xs font-semibold uppercase tracking-widest text-gray-500">
                   Primary Presets
                 </p>
                 <div class="flex flex-wrap gap-3">
@@ -291,7 +291,7 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
                   <% end %>
                 </div>
 
-                <p class="mb-4 mt-6 text-xs font-semibold uppercase tracking-widest text-gray-400">
+                <p class="mb-4 mt-6 text-xs font-semibold uppercase tracking-widest text-gray-500">
                   Accent Presets
                 </p>
                 <div class="flex flex-wrap gap-3">
@@ -322,8 +322,8 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
               </div>
 
               <%!-- Live preview — updates instantly on every pick --%>
-              <div class="rounded-2xl border border-gray-100 bg-gray-50 p-5">
-                <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-gray-400">Preview</p>
+              <div class="rounded-lg border border-gray-100 bg-gray-50 p-5">
+                <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Preview</p>
                 <div class="flex flex-wrap items-center gap-3">
                   <button
                     type="button"
@@ -356,10 +356,10 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
 
         <%!-- ── Typography ── --%>
         <div class={if @active_tab == "fonts", do: "block", else: "hidden"}>
-          <div class="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
+          <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
             <div class="border-b border-gray-100 px-6 py-4">
-              <h2 class="text-base font-semibold text-gray-900">Typography</h2>
-              <p class="mt-0.5 text-xs text-gray-400">Choose Google Fonts for body text, headings and your brand script.</p>
+              <h2 class="text-base font-semibold text-ink">Typography</h2>
+              <p class="mt-0.5 text-xs text-gray-500">Choose Google Fonts for body text, headings and your brand script.</p>
             </div>
             <div class="space-y-6 p-6">
               <%!-- Body font --%>
@@ -368,17 +368,17 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
                 <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                   <%= for font <- font_options().body do %>
                     <label
-                      class={"flex cursor-pointer items-center gap-3 rounded-xl border-2 p-3 transition #{if Phoenix.HTML.Form.input_value(@form, :font_body) == font, do: "border-[#C8001F] bg-[#C8001F]/5", else: "border-gray-200 hover:border-gray-300"}"}
+                      class={"flex cursor-pointer items-center gap-3 rounded-xl border-2 p-3 transition #{if Phoenix.HTML.Form.input_value(@form, :font_body) == font, do: "border-brand bg-brand/5", else: "border-gray-200 hover:border-gray-300"}"}
                     >
                       <input
                         type="radio"
                         name="settings[font_body]"
                         value={font}
                         checked={Phoenix.HTML.Form.input_value(@form, :font_body) == font}
-                        class="h-4 w-4 accent-[#C8001F]"
+                        class="h-4 w-4 accent-brand"
                       />
                       <div>
-                        <p class="text-sm font-semibold text-gray-800">{font}</p>
+                        <p class="text-sm font-semibold text-ink-700">{font}</p>
                         <p class="text-xs text-gray-500" style={"font-family: '#{font}', sans-serif;"}>
                           The quick brown fox
                         </p>
@@ -394,17 +394,17 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
                 <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                   <%= for font <- font_options().heading do %>
                     <label
-                      class={"flex cursor-pointer items-center gap-3 rounded-xl border-2 p-3 transition #{if Phoenix.HTML.Form.input_value(@form, :font_heading) == font, do: "border-[#C8001F] bg-[#C8001F]/5", else: "border-gray-200 hover:border-gray-300"}"}
+                      class={"flex cursor-pointer items-center gap-3 rounded-xl border-2 p-3 transition #{if Phoenix.HTML.Form.input_value(@form, :font_heading) == font, do: "border-brand bg-brand/5", else: "border-gray-200 hover:border-gray-300"}"}
                     >
                       <input
                         type="radio"
                         name="settings[font_heading]"
                         value={font}
                         checked={Phoenix.HTML.Form.input_value(@form, :font_heading) == font}
-                        class="h-4 w-4 accent-[#C8001F]"
+                        class="h-4 w-4 accent-brand"
                       />
                       <div>
-                        <p class="text-sm font-semibold text-gray-800">{font}</p>
+                        <p class="text-sm font-semibold text-ink-700">{font}</p>
                         <p class="text-base text-gray-600" style={"font-family: '#{font}', serif;"}>
                           Heading Style
                         </p>
@@ -420,17 +420,17 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
                 <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
                   <%= for font <- font_options().script do %>
                     <label
-                      class={"flex cursor-pointer items-center gap-3 rounded-xl border-2 p-3 transition #{if Phoenix.HTML.Form.input_value(@form, :font_script) == font, do: "border-[#C8001F] bg-[#C8001F]/5", else: "border-gray-200 hover:border-gray-300"}"}
+                      class={"flex cursor-pointer items-center gap-3 rounded-xl border-2 p-3 transition #{if Phoenix.HTML.Form.input_value(@form, :font_script) == font, do: "border-brand bg-brand/5", else: "border-gray-200 hover:border-gray-300"}"}
                     >
                       <input
                         type="radio"
                         name="settings[font_script]"
                         value={font}
                         checked={Phoenix.HTML.Form.input_value(@form, :font_script) == font}
-                        class="h-4 w-4 accent-[#C8001F]"
+                        class="h-4 w-4 accent-brand"
                       />
                       <div>
-                        <p class="text-sm font-semibold text-gray-800">{font}</p>
+                        <p class="text-sm font-semibold text-ink-700">{font}</p>
                         <p class="text-lg" style={"font-family: '#{font}', cursive;"}>
                           ClicknBuy
                         </p>
@@ -450,10 +450,10 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
 
         <%!-- ── Contact & Social ── --%>
         <div class={if @active_tab == "contact", do: "block", else: "hidden"}>
-          <div class="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
+          <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
             <div class="border-b border-gray-100 px-6 py-4">
-              <h2 class="text-base font-semibold text-gray-900">Contact & Social</h2>
-              <p class="mt-0.5 text-xs text-gray-400">These appear in the footer and contact sections.</p>
+              <h2 class="text-base font-semibold text-ink">Contact & Social</h2>
+              <p class="mt-0.5 text-xs text-gray-500">These appear in the footer and contact sections.</p>
             </div>
             <div class="space-y-5 p-6">
               <div class="grid gap-5 sm:grid-cols-2">
@@ -487,10 +487,10 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
         </div>
 
         <%!-- Save bar — always visible --%>
-        <div class="mt-6 flex items-center gap-4 rounded-2xl border border-gray-200 bg-white px-6 py-4 shadow-sm">
+        <div class="mt-6 flex items-center gap-4 rounded-lg border border-gray-200 bg-white px-6 py-4 shadow-sm">
           <button
             type="submit"
-            class="rounded-xl bg-[#C8001F] px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--brand-primary-dark)]"
+            class="rounded-xl bg-brand px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--brand-primary-dark)]"
           >
             Save Changes
           </button>
@@ -502,7 +502,7 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
               Saved!
             </span>
           <% end %>
-          <p class="ml-auto text-xs text-gray-400">
+          <p class="ml-auto text-xs text-gray-500">
             Changes take effect on the next page load for visitors.
           </p>
         </div>
