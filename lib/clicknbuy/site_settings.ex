@@ -9,14 +9,14 @@ defmodule Clicknbuy.SiteSettings do
   alias Clicknbuy.SiteSettings.Setting
 
   @defaults %Setting{
-    site_name: "ClicknBuy",
+    site_name: "Click N Buy",
     site_tagline: "Shop Smart, Buy Fast",
     primary_color: "#2F32CE",
     accent_color: "#DB4A44",
     font_heading: "Poppins",
     font_body: "DM Sans",
     font_script: "Dancing Script",
-    logo_url: nil,
+    logo_url: "/images/click-n-buy-logo.png",
     instagram_url: nil,
     whatsapp_number: nil,
     support_email: nil

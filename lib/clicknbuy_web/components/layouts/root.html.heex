@@ -5,59 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
 
+    <% settings = Clicknbuy.SiteSettings.get() %>
+    <% site_name = "Click N Buy" %>
+    <% site_url = Clicknbuy.AppConfig.site_url() %>
+    <% canonical_url = assigns[:canonical_url] || site_url %>
+    <% seo_image_path = assigns[:og_image] || settings.logo_url || "/images/click-n-buy-logo.png" %>
+    <% seo_image = if String.starts_with?(seo_image_path, ["http://", "https://"]), do: seo_image_path, else: site_url <> seo_image_path %>
+    <% seo_title = assigns[:page_title] || "Shop Smart, Buy Fast" %>
+    <% seo_description = assigns[:meta_description] || "Shop electronics, gadgets and everyday essentials at Click N Buy, with competitive prices, fast delivery across Kenya and secure payment." %>
+
     <%!-- Page title --%>
-    <.live_title default="ClicknBuy | Shop Smart, Buy Fast" suffix=" | ClicknBuy">
+    <.live_title default="Click N Buy | Shop Smart, Buy Fast" suffix=" | Click N Buy">
       {assigns[:page_title]}
     </.live_title>
 
     <%!-- Primary SEO --%>
     <meta
       name="description"
-      content={assigns[:meta_description] || "ClicknBuy — Shop Smart, Buy Fast. Electronics, gadgets and everyday essentials at competitive prices, with fast delivery and secure payment."}
+      content={seo_description}
     />
-    <meta name="keywords" content="ClicknBuy, online shopping Kenya, electronics Kenya, gadgets, headphones, smart watches, Nairobi ecommerce" />
-    <meta name="author" content="ClicknBuy" />
+    <meta name="keywords" content="Click N Buy, online shopping Kenya, electronics Kenya, gadgets, headphones, smart watches, Nairobi ecommerce" />
+    <meta name="author" content={site_name} />
     <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical_url} />
 
     <%!-- Open Graph (Facebook / WhatsApp previews) --%>
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="ClicknBuy" />
+    <meta property="og:site_name" content={site_name} />
     <meta
       property="og:title"
-      content={assigns[:page_title] || "ClicknBuy | Shop Smart, Buy Fast"}
+      content={"#{seo_title} | #{site_name}"}
     />
     <meta
       property="og:description"
-      content={assigns[:meta_description] || "Electronics, gadgets and everyday essentials at competitive prices, with fast delivery and secure payment."}
+      content={seo_description}
     />
     <meta
       property="og:image"
-      content={assigns[:og_image] || "/images/clicknbuy-logo.png"}
+      content={seo_image}
     />
-    <meta property="og:url" content={assigns[:canonical_url] || "https://clicknbuy.com"} />
+    <meta property="og:image:alt" content="Click N Buy logo" />
+    <meta property="og:url" content={canonical_url} />
 
     <%!-- Twitter / X Card --%>
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@clicknbuy" />
     <meta
       name="twitter:title"
-      content={assigns[:page_title] || "ClicknBuy | Shop Smart, Buy Fast"}
+      content={"#{seo_title} | #{site_name}"}
     />
     <meta
       name="twitter:description"
-      content={assigns[:meta_description] || "Electronics, gadgets and everyday essentials — fast delivery, secure payment."}
+      content={seo_description}
     />
     <meta
       name="twitter:image"
-      content={assigns[:og_image] || "/images/clicknbuy-logo.png"}
+      content={seo_image}
     />
+    <meta name="twitter:image:alt" content="Click N Buy logo" />
 
     <%!-- Favicon --%>
-    <link rel="icon" type="image/png" href="/images/clicknbuy-logo.png" />
-    <link rel="apple-touch-icon" href="/images/clicknbuy-logo.png" />
+    <link rel="icon" type="image/png" href="/images/click-n-buy-logo.png" />
+    <link rel="apple-touch-icon" href="/images/click-n-buy-logo.png" />
 
     <%!-- Fonts & Styles --%>
-    <% settings = Clicknbuy.SiteSettings.get() %>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

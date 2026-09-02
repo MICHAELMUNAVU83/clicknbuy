@@ -19,7 +19,7 @@ config :clicknbuy, Clicknbuy.Repo,
 # Binding to loopback ipv4 address prevents access from other machines.
 config :clicknbuy, ClicknbuyWeb.Endpoint,
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [port: 7151],
+  http: [port: 7251],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
