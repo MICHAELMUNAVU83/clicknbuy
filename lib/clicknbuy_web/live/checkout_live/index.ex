@@ -9,7 +9,7 @@ defmodule ClicknbuyWeb.CheckoutLive.Index do
   def mount(_params, _session, socket) do
     {:ok,
      socket
-     |> assign(:page_title, "Checkout | ClicknBuy")
+     |> assign(:page_title, "Checkout")
      |> assign(:nav_collections, Clicknbuy.Shop.list_collections_for_display())
      |> assign(:cart_items, [])
      |> assign(:cart_loaded, false)

@@ -257,7 +257,7 @@ defmodule ClicknbuyWeb.DashboardLive.Index do
           <div>
             <p class="text-sm font-medium text-brand-200">{greeting()}, welcome back ✨</p>
             <h1 class="mt-1 font-heading-brand text-3xl font-bold tracking-tight">
-              ClicknBuy
+              Click N Buy
             </h1>
             <p class="mt-2 text-sm text-brand-200 max-w-xs">
               Here's what's happening in your store today. Fashion .

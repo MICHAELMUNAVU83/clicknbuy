@@ -9,7 +9,7 @@ defmodule ClicknbuyWeb.CollectionsLive.Index do
 
     {:ok,
      socket
-     |> assign(:page_title, "All Collections — ClicknBuy")
+     |> assign(:page_title, "All Collections")
      |> assign(:collections, collections)}
   end
 
@@ -23,7 +23,7 @@ defmodule ClicknbuyWeb.CollectionsLive.Index do
      |> assign(:results, Shop.search_products(query))
      |> assign(
        :page_title,
-       if(query == "", do: "All Collections — ClicknBuy", else: "Search: #{query} — ClicknBuy")
+       if(query == "", do: "All Collections", else: "Search: #{query}")
      )}
   end
 

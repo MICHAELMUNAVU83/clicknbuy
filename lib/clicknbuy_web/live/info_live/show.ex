@@ -34,7 +34,7 @@ defmodule ClicknbuyWeb.InfoLive.Show do
       <div class="bg-gradient-to-r from-[#C8001F] to-red-800 px-4 py-14 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-3xl text-center">
           <p class="text-sm font-semibold uppercase tracking-widest text-red-200">
-            ClicknBuy
+            Click N Buy
           </p>
           <h1 class="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
             {@page.title}

@@ -578,7 +578,7 @@ IO.puts(
 {:ok, bundle} =
   %Clicknbuy.Bundles.Bundle{}
   |> Clicknbuy.Bundles.Bundle.changeset(%{
-    title: "The ClicknBuy Work-From-Home Bundle",
+    title: "The Click N Buy Work-From-Home Bundle",
     description:
       "Everything you need for a productive desk, bought together and priced better. Pairs our 27-inch 4K monitor with the RGB mechanical keyboard, the wireless optical mouse and the USB-C docking station — one cable to your laptop and you're running.",
     image: unsplash_photo.("1527443224154-c4a3942d3acf"),
@@ -675,11 +675,11 @@ info_pages = [
     icon: "🛍️",
     position: 1,
     meta_description:
-      "Step-by-step guide on how to place an order at ClicknBuy — shop online or via WhatsApp.",
+      "Step-by-step guide on how to place an order at Click N Buy — shop online or via WhatsApp.",
     content: """
     ## How to Place Your Order
 
-    Ordering from ClicknBuy is simple and straightforward. Here's how:
+    Ordering from Click N Buy is simple and straightforward. Here's how:
 
     ### Option 1 — Order via WhatsApp (Recommended)
 
@@ -700,7 +700,7 @@ info_pages = [
 
     ## Payment Methods
 
-    - **M-Pesa Till No. 5894819** (ClicknBuy)
+    - **M-Pesa Till No. 5894819** (Click N Buy)
     - Bank transfer (available on request)
 
     ## Need Help?
@@ -714,7 +714,7 @@ info_pages = [
     icon: "🛡️",
     position: 2,
     meta_description:
-      "ClicknBuy warranty and support — cover periods, what's included and how to make a claim.",
+      "Click N Buy warranty and support — cover periods, what's included and how to make a claim.",
     content: """
     ## Warranty & Support
 
@@ -766,11 +766,11 @@ info_pages = [
     icon: "🚚",
     position: 3,
     meta_description:
-      "ClicknBuy shipping and delivery information — Nairobi same-day delivery and countrywide shipping across Kenya.",
+      "Click N Buy shipping and delivery information — Nairobi same-day delivery and countrywide shipping across Kenya.",
     content: """
     ## Shipping & Delivery
 
-    We deliver across Kenya! Here's everything you need to know about getting your ClicknBuy order to your door.
+    We deliver across Kenya! Here's everything you need to know about getting your Click N Buy order to your door.
 
     ### Nairobi Deliveries
 
@@ -793,7 +793,7 @@ info_pages = [
     ### Important Notes
 
     - Delivery timelines exclude weekends and public holidays.
-    - ClicknBuy is not responsible for delays caused by third-party courier services once the parcel is dispatched.
+    - Click N Buy is not responsible for delays caused by third-party courier services once the parcel is dispatched.
     - Please ensure your **delivery address and phone number** are accurate when ordering.
 
     ## Questions?
@@ -807,7 +807,7 @@ info_pages = [
     icon: "🔄",
     position: 4,
     meta_description:
-      "ClicknBuy returns and exchanges policy — sealed returns, faulty-item cover and how to start a claim.",
+      "Click N Buy returns and exchanges policy — sealed returns, faulty-item cover and how to start a claim.",
     content: """
     ## Returns & Exchanges
 

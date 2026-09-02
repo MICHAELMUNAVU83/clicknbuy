@@ -144,7 +144,7 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
                   <.input
                     field={@form[:site_name]}
                     type="text"
-                    placeholder="e.g. ClicknBuy"
+                    placeholder="e.g. Click N Buy"
                   />
                 </div>
                 <div>
@@ -162,7 +162,7 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
                 <.input
                   field={@form[:logo_url]}
                   type="text"
-                  placeholder="/images/clicknbuy-logo.png or https://..."
+                  placeholder="/images/click-n-buy-logo.png or https://..."
                 />
                 <%= if @settings.logo_url && @settings.logo_url != "" do %>
                   <div class="mt-3 flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
@@ -432,7 +432,7 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
                       <div>
                         <p class="text-sm font-semibold text-ink-700">{font}</p>
                         <p class="text-lg" style={"font-family: '#{font}', cursive;"}>
-                          ClicknBuy
+                          Click N Buy
                         </p>
                       </div>
                     </label>

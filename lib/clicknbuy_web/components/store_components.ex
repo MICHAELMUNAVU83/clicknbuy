@@ -1,6 +1,6 @@
 defmodule ClicknbuyWeb.StoreComponents do
   @moduledoc """
-  Storefront chrome for the ClicknBuy shop: the indigo utility bar, the search
+  Storefront chrome for the Click N Buy shop: the indigo utility bar, the search
   header, the category navigation strip, the newsletter block and the footer.
 
   These are the pieces that appear on every customer-facing page. Page-specific
@@ -56,7 +56,7 @@ defmodule ClicknbuyWeb.StoreComponents do
         <div class="hidden items-center gap-3 lg:flex">
           <span class="h-4 w-px bg-white/30"></span>
           <p>
-            ClicknBuy is one of Kenya's fastest-growing stores.
+            Click N Buy is one of Kenya's fastest-growing stores.
             <.link navigate="/collections" class="font-semibold underline decoration-white/60 underline-offset-2 hover:decoration-white">
               Show all products
             </.link>

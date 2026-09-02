@@ -41,9 +41,9 @@ defmodule ClicknbuyWeb.HomeComponents do
       <%!-- Panel header --%>
       <div class="flex items-center justify-between border-b border-gray-100 px-5 py-4">
         <a href="/" class="flex items-center gap-2.5">
-          <img src="/images/clicknbuy-logo.png" alt="ClicknBuy" class="h-8 w-8 rounded-full object-cover" />
+          <img src="/images/click-n-buy-logo.png" alt="Click N Buy" class="h-8 w-8 rounded-full object-contain" />
           <span class="brand-logo text-2xl text-gray-900">
-            ClicknBuy<span class="text-[#C8001F]">.</span>
+            Click N Buy<span class="text-[#C8001F]">.</span>
           </span>
         </a>
         <button
@@ -337,12 +337,12 @@ defmodule ClicknbuyWeb.HomeComponents do
         <%!-- Logo --%>
         <a href="/" class="flex items-center gap-2.5">
           <img
-            src="/images/clicknbuy-logo.png"
-            alt="ClicknBuy"
+            src="/images/click-n-buy-logo.png"
+            alt="Click N Buy"
             class="h-9 w-9 rounded-full object-cover object-top shadow-sm ring-1 ring-black/5"
           />
           <span class="brand-logo text-2xl text-gray-900 sm:text-3xl">
-            ClicknBuy<span class="text-[#C8001F]">.</span>
+            Click N Buy<span class="text-[#C8001F]">.</span>
           </span>
         </a>
 
@@ -629,10 +629,10 @@ defmodule ClicknbuyWeb.HomeComponents do
           <div class="pointer-events-none absolute inset-0 flex items-center overflow-hidden opacity-[0.04]">
             <div class="animate-marquee-slow flex whitespace-nowrap">
               <span class="mx-4 text-[280px] font-bold uppercase leading-none tracking-tight xl:text-[350px]">
-                ClicknBuy
+                Click N Buy
               </span>
               <span class="mx-4 text-[280px] font-bold uppercase leading-none tracking-tight xl:text-[350px]">
-                ClicknBuy
+                Click N Buy
               </span>
             </div>
           </div>
@@ -1765,13 +1765,13 @@ defmodule ClicknbuyWeb.HomeComponents do
         <div class="mx-auto flex max-w-7xl flex-col items-center gap-3 sm:flex-row sm:items-center sm:justify-between">
           <a href="/" class="flex items-center gap-3">
             <img
-              src="/images/clicknbuy-logo.png"
-              alt="ClicknBuy"
+              src="/images/click-n-buy-logo.png"
+              alt="Click N Buy"
               class="h-10 w-10 rounded-full object-cover object-top ring-2 ring-[#C8001F]"
             />
             <div>
               <span class="brand-logo text-3xl text-white">
-                ClicknBuy<span class="text-[#C8001F]">.</span>
+                Click N Buy<span class="text-[#C8001F]">.</span>
               </span>
               <p class="text-[10px] uppercase tracking-widest text-gray-500">
                 Everyday Fashion, Effortlessly You
@@ -1940,7 +1940,7 @@ defmodule ClicknbuyWeb.HomeComponents do
               </li>
               <li>
                 <a
-                  href="https://wa.me/254796770862?text=Hi%20ClicknBuy%2C%20I%20want%20to%20track%20my%20order"
+                  href="https://wa.me/254796770862?text=Hi%20Click%20N%20Buy%2C%20I%20want%20to%20track%20my%20order"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="text-gray-400 transition hover:text-white"
@@ -2006,16 +2006,16 @@ defmodule ClicknbuyWeb.HomeComponents do
       <div class="overflow-hidden border-t border-gray-800">
         <div class="animate-marquee-slow flex whitespace-nowrap py-8">
           <span class="mx-8 text-[100px] font-bold text-gray-100 opacity-[0.06] sm:text-[140px] lg:text-[180px]">
-            ClicknBuy
+            Click N Buy
           </span>
           <span class="mx-8 text-[100px] font-bold text-gray-100 opacity-[0.06] sm:text-[140px] lg:text-[180px]">
-            ClicknBuy
+            Click N Buy
           </span>
           <span class="mx-8 text-[100px] font-bold text-gray-100 opacity-[0.06] sm:text-[140px] lg:text-[180px]">
-            ClicknBuy
+            Click N Buy
           </span>
           <span class="mx-8 text-[100px] font-bold text-gray-100 opacity-[0.06] sm:text-[140px] lg:text-[180px]">
-            ClicknBuy
+            Click N Buy
           </span>
         </div>
       </div>
@@ -2024,7 +2024,7 @@ defmodule ClicknbuyWeb.HomeComponents do
       <div class="border-t border-gray-800 py-6 px-4">
         <div class="mx-auto flex max-w-7xl flex-col items-center gap-2 sm:flex-row sm:justify-between">
           <p class="text-sm text-gray-500">
-            &copy; {Date.utc_today().year} ClicknBuy. All rights reserved.
+            &copy; {Date.utc_today().year} Click N Buy. All rights reserved.
           </p>
           <p class="text-sm text-gray-600">
             Designed by

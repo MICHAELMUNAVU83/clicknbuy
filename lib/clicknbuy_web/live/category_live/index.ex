@@ -19,7 +19,7 @@ defmodule ClicknbuyWeb.CategoryLive.Index do
 
       {:ok,
        socket
-       |> assign(:page_title, "#{category.name} | ClicknBuy")
+       |> assign(:page_title, category.name)
        |> assign(:category, category)
        |> assign(:product_types, product_types)
        |> assign(:selected_types, [slug])

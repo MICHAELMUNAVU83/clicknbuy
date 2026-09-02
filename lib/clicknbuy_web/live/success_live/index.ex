@@ -14,11 +14,11 @@ defmodule ClicknbuyWeb.SuccessLive.Index do
     if reference == "" do
       {:ok,
        socket
-       |> assign(:page_title, "Order | ClicknBuy")
+       |> assign(:page_title, "Order")
        |> assign(:status, :no_reference)
        |> assign(:order, nil)}
     else
-      socket = assign(socket, page_title: "Order Confirmed | ClicknBuy", status: :verifying, order: nil)
+      socket = assign(socket, page_title: "Order Confirmed", status: :verifying, order: nil)
 
       if connected?(socket) do
         send(self(), {:verify_payment, reference})

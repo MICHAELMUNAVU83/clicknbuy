@@ -348,9 +348,9 @@ defmodule ClicknbuyWeb.BundleShowLive.Index do
     <nav class="sticky top-0 z-30 border-b border-gray-100 bg-white/95 backdrop-blur">
       <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <a href="/" class="flex items-center gap-2">
-          <img src="/images/clicknbuy-logo.png" alt="ClicknBuy" class="h-8 w-8 rounded-full object-cover" />
+          <img src="/images/click-n-buy-logo.png" alt="Click N Buy" class="h-8 w-8 rounded-full object-contain" />
           <span class="brand-logo text-xl text-gray-900">
-            ClicknBuy<span class="text-[#C8001F]">.</span>
+            Click N Buy<span class="text-[#C8001F]">.</span>
           </span>
         </a>
         <a
