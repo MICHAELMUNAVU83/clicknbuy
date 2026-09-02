@@ -877,8 +877,8 @@ alias Clicknbuy.Accounts.User
 
 admin_users = [
   %{
-    name: "Michael Munavu",
-    email: "michaelmunavu83@gmail.com",
+    name: "Admin",
+    email: "admin@gmail.com",
     password: "123456",
     role: "super_admin"
   }
