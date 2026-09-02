@@ -158,7 +158,7 @@ defmodule ClicknbuyWeb.HomeLive.Index do
   end
 
   defp hero_image(%{slug: slug}) when slug in ["vr-headset", "virtual-reality-vr-headset"],
-    do: "/images/products/electronics/vr-headset-hero-v2.png"
+    do: "/images/products/electronics/vr-headset-hero.webp"
 
   defp hero_image(product), do: product.main_image
 

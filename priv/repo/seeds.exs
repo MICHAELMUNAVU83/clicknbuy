@@ -4,6 +4,9 @@ alias Clicknbuy.Products.Product
 alias Clicknbuy.ProductVariants.ProductVariant
 alias Clicknbuy.Testimonials.Testimonial
 alias Clicknbuy.InfoPages.InfoPage
+alias Clicknbuy.Orders.Order
+
+import Ecto.Query, only: [where: 3]
 
 # Stable Unsplash CDN URLs keep the seed data realistic without checking large
 # binary assets into the repository. The photo IDs are fixed; only Unsplash's
@@ -663,6 +666,86 @@ Enum.each(testimonials, fn attrs ->
 end)
 
 IO.puts("✅  Seeded #{length(testimonials)} testimonials.")
+
+# ─── Orders ───────────────────────────────────────────────────────────────────
+# Keep demo orders easy to identify and make this section safe to rerun without
+# deleting orders created through checkout.
+seed_order_refs = Enum.map(1..10, &"SEED-CNB-#{String.pad_leading(to_string(&1), 4, "0")}")
+
+Order
+|> where([o], o.reference in ^seed_order_refs)
+|> Repo.delete_all()
+
+order_item = fn slug, quantity, options ->
+  product = get_product.(slug)
+
+  %{
+    "id" => product.id,
+    "name" => product.name,
+    "price" => product.base_price,
+    "quantity" => quantity,
+    "image" => product.image,
+    "color" => Keyword.get(options, :color),
+    "size" => Keyword.get(options, :size)
+  }
+end
+
+seed_orders = [
+  {"Amina Wanjiku", "amina.wanjiku@example.com", "0712 345 678", "Kilimani, Nairobi", "delivered",
+   24, [{"wireless-airbuds-pro", 1, [color: "Pearl White", size: "Standard"]}]},
+  {"Brian Otieno", "brian.otieno@example.com", "0723 456 789", "Westlands, Nairobi", "delivered",
+   19, [{"smart-watch-series-5", 1, [color: "Black", size: "41mm"]}]},
+  {"Faith Njeri", "faith.njeri@example.com", "0734 567 890", "Nyali, Mombasa", "shipped", 13,
+   [{"vr-headset", 1, [color: "White", size: "128GB"]}]},
+  {"Kevin Mwangi", "kevin.mwangi@example.com", "0745 678 901", "Thika Road, Nairobi",
+   "processing", 8,
+   [
+     {"rgb-mechanical-keyboard", 1, [color: "Black", size: "Full-size"]},
+     {"wireless-optical-mouse", 1, [color: "Black", size: "Standard"]}
+   ]},
+  {"Lucy Achieng", "lucy.achieng@example.com", "0756 789 012", "Milimani, Kisumu", "paid", 4,
+   [{"portable-party-speaker", 1, [color: "Black", size: "Standard"]}]},
+  {"David Kamau", "david.kamau@example.com", "0767 890 123", "Ruiru, Kiambu", "paid", 2,
+   [{"4k-uhd-monitor-27", 1, [color: "Black", size: "27-inch"]}]},
+  {"Mercy Chebet", "mercy.chebet@example.com", "0778 901 234", "Elgon View, Eldoret", "cancelled",
+   11, [{"studio-over-ear-headphones", 1, [color: "Sand", size: "Standard"]}]},
+  {"John Mutua", "john.mutua@example.com", "0789 012 345", "Naka, Nakuru", "failed", 6,
+   [{"wireless-game-controller", 2, [color: "Black", size: "Standard"]}]},
+  {"Sarah Hassan", "sarah.hassan@example.com", "0701 123 456", "South C, Nairobi", "processing",
+   1, [{"usb-c-docking-station", 1, [color: "Space Grey", size: "Standard"]}]},
+  {"Peter Kiptoo", "peter.kiptoo@example.com", "0711 987 654", "Lang'ata, Nairobi", "pending", 0,
+   [{"vr-headset", 1, [color: "Black", size: "256GB"]}]}
+]
+
+now = DateTime.utc_now() |> DateTime.truncate(:second)
+
+seed_orders
+|> Enum.with_index(1)
+|> Enum.each(fn {{name, email, phone, address, status, days_ago, item_specs}, index} ->
+  items =
+    Enum.map(item_specs, fn {slug, quantity, options} -> order_item.(slug, quantity, options) end)
+
+  total = Enum.sum(Enum.map(items, &(&1["price"] * &1["quantity"])))
+  ordered_at = DateTime.add(now, -days_ago * 86_400, :second)
+
+  {:ok, _} =
+    %Order{}
+    |> Order.changeset(%{
+      reference: Enum.at(seed_order_refs, index - 1),
+      email: email,
+      name: name,
+      phone: phone,
+      address: address,
+      total_amount: total,
+      status: status,
+      items: items
+    })
+    |> Ecto.Changeset.put_change(:inserted_at, ordered_at)
+    |> Ecto.Changeset.put_change(:updated_at, ordered_at)
+    |> Repo.insert()
+end)
+
+IO.puts("✅  Seeded #{length(seed_orders)} demo orders.")
 
 # ── Info Pages ────────────────────────────────────────────────────────────────
 

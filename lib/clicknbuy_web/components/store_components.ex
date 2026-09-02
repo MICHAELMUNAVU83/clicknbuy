@@ -180,7 +180,7 @@ defmodule ClicknbuyWeb.StoreComponents do
   defp account_link(assigns) do
     ~H"""
     <.link
-      navigate={if @current_user, do: "/users/settings", else: "/users/log_in"}
+      navigate={account_destination(@current_user)}
       class="group flex items-center gap-2.5 text-ink transition hover:text-brand"
     >
       <svg class="h-7 w-7 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -201,6 +201,10 @@ defmodule ClicknbuyWeb.StoreComponents do
     </.link>
     """
   end
+
+  defp account_destination(%{role: role}) when role in ["admin", "super_admin"], do: "/admin"
+  defp account_destination(%{}), do: "/users/settings"
+  defp account_destination(nil), do: "/users/log_in"
 
   defp cart_button(assigns) do
     ~H"""
