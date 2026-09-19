@@ -57,7 +57,7 @@ if config_env() == :prod do
   # Override by setting the SITE_URL environment variable.
   config :clicknbuy,
     site_url: System.get_env("SITE_URL") || "https://#{host}",
-    admin_email: System.get_env("ADMIN_EMAIL") || "clicknbuy@gmail.com"
+    admin_email: System.get_env("ADMIN_EMAIL") || "info@clicknbuy.shop"
 
   config :clicknbuy, ClicknbuyWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],

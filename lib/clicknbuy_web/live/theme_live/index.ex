@@ -26,13 +26,13 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
 
   @impl true
   def handle_event("pick_color", params, socket) do
-    color = Map.get(params, "color", Map.get(params, "value", "#2F32CE"))
+    color = Map.get(params, "color", Map.get(params, "value", "#8A37F1"))
     {:noreply, apply_color_change(socket, %{"primary_color" => color})}
   end
 
   @impl true
   def handle_event("pick_accent_color", params, socket) do
-    color = Map.get(params, "color", Map.get(params, "value", "#DB4A44"))
+    color = Map.get(params, "color", Map.get(params, "value", "#7B1CEF"))
     {:noreply, apply_color_change(socket, %{"accent_color" => color})}
   end
 
@@ -162,7 +162,7 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
                 <.input
                   field={@form[:logo_url]}
                   type="text"
-                  placeholder="/images/click-n-buy-logo.png or https://..."
+                  placeholder="/images/PHOTO-2026-09-18-20-26-06.jpg or https://..."
                 />
                 <%= if @settings.logo_url && @settings.logo_url != "" do %>
                   <div class="mt-3 flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
@@ -207,7 +207,7 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
             </div>
             <div class="space-y-6 p-6">
               <% current_color = Phoenix.HTML.Form.input_value(@form, :primary_color) %>
-              <% current_accent = Phoenix.HTML.Form.input_value(@form, :accent_color) || "#DB4A44" %>
+              <% current_accent = Phoenix.HTML.Form.input_value(@form, :accent_color) || "#7B1CEF" %>
               <div>
                 <label class="mb-3 block text-sm font-semibold text-gray-700">
                   Primary Brand Color
@@ -225,7 +225,7 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
                     <.input
                       field={@form[:primary_color]}
                       type="text"
-                      placeholder="#2F32CE"
+                      placeholder="#8A37F1"
                       phx-debounce="300"
                     />
                     <p class="mt-1 text-xs text-gray-500">Type a hex color or use the picker / presets below.</p>
@@ -249,7 +249,7 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
                     <.input
                       field={@form[:accent_color]}
                       type="text"
-                      placeholder="#DB4A44"
+                      placeholder="#7B1CEF"
                       phx-debounce="300"
                     />
                     <p class="mt-1 text-xs text-gray-500">Used for Buy Now / Add to Cart buttons and prices.</p>
@@ -264,7 +264,7 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
                 </p>
                 <div class="flex flex-wrap gap-3">
                   <%= for {name, hex} <- [
-                    {"Storefront Indigo", "#2F32CE"},
+                    {"Click & Buy Violet", "#8A37F1"},
                     {"Royal Blue", "#1D4ED8"},
                     {"Indigo", "#4338CA"},
                     {"Crimson", "#C8001F"},
@@ -296,7 +296,7 @@ defmodule ClicknbuyWeb.ThemeLive.Index do
                 </p>
                 <div class="flex flex-wrap gap-3">
                   <%= for {name, hex} <- [
-                    {"Storefront Red", "#DB4A44"},
+                    {"Click & Buy Deep Violet", "#7B1CEF"},
                     {"Crimson", "#C8001F"},
                     {"Coral", "#F2643F"},
                     {"Rose", "#E11D48"},

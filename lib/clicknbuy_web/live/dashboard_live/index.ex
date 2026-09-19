@@ -53,18 +53,18 @@ defmodule ClicknbuyWeb.DashboardLive.Index do
   # the four pipeline stages read light → dark as an order progresses, while the
   # two terminal states sit outside the ramp (neutral for cancelled, accent red
   # for failed) so they never impersonate a stage.
-  @brand "#2F32CE"
+  @brand "#8A37F1"
   @brand_fill "rgba(47,50,206,0.08)"
-  @ink "#122554"
+  @ink "#2D1648"
   @grid "#E8ECF8"
   @axis_muted "#7286AE"
   @axis_ink "#2C4272"
 
   @status_colors %{
-    "paid" => "#9fa3fb",
-    "processing" => "#5558e6",
-    "shipped" => "#2427A5",
-    "delivered" => "#101340",
+    "paid" => "#C79CF8",
+    "processing" => "#8A37F1",
+    "shipped" => "#6B16D7",
+    "delivered" => "#49158D",
     "cancelled" => "#64748b",
     "failed" => "#DB4A44"
   }

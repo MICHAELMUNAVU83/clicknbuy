@@ -15,7 +15,7 @@ config :clicknbuy,
   site_url: "https://clicknbuy.com",
   # Admin email that receives new-order notifications.
   # Must be a real deliverable address. Override with ADMIN_EMAIL env var.
-  admin_email: "clicknbuy@gmail.com"
+  admin_email: "info@clicknbuy.shop"
 
 # Configures the endpoint
 config :clicknbuy, ClicknbuyWeb.Endpoint,

@@ -56,7 +56,7 @@ Key values can be overridden at runtime via environment variables:
 | `SECRET_KEY_BASE` | (generated)               | Phoenix secret key                   |
 | `PHX_HOST`    | `example.com`                   | Production hostname                  |
 | `SITE_URL`    | `https://clicknbuy.com`     | Absolute base URL for emails & links |
-| `ADMIN_EMAIL` | `clicknbuy@gmail.com`        | Recipient for admin order alerts     |
+| `ADMIN_EMAIL` | `info@clicknbuy.shop`        | Recipient for admin order alerts     |
 | `PAYSTACK_SECRET_KEY` | —                     | Paystack secret key (server-side)    |
 | `PAYSTACK_PUBLIC_KEY` | —                     | Paystack public key (client-side)    |
 | `NEXUS_API_KEY` | —                             | Nexus transactional email API key    |

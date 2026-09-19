@@ -347,11 +347,8 @@ defmodule ClicknbuyWeb.BundleShowLive.Index do
     ~H"""
     <nav class="sticky top-0 z-30 border-b border-gray-100 bg-white/95 backdrop-blur">
       <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <a href="/" class="flex items-center gap-2">
-          <img src="/images/click-n-buy-logo.png" alt="Click N Buy" class="h-8 w-8 rounded-full object-contain" />
-          <span class="brand-logo text-xl text-gray-900">
-            Click N Buy<span class="text-[#C8001F]">.</span>
-          </span>
+        <a href="/" aria-label="Click & Buy home">
+          <img src="/images/PHOTO-2026-09-18-20-26-06.jpg" alt="Click & Buy" class="h-12 w-auto object-contain" />
         </a>
         <a
           href="/cart"

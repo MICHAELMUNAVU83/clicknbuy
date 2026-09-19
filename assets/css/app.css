@@ -3,23 +3,23 @@
 /* ── Brand tokens ─────────────────────────────────────────────────────── */
 /* These defaults are overridden at runtime by root.html.heex via SiteSettings */
 :root {
-  /* Structural indigo */
-  --brand-primary:      #2F32CE;
-  --brand-primary-dark: #2427A5;
-  --brand-primary-soft: #F0F1FF;
+  /* Violet sampled from the Click & Buy logo */
+  --brand-primary:      #8A37F1;
+  --brand-primary-dark: #6B16D7;
+  --brand-primary-soft: #F6F0FE;
 
-  /* Call-to-action red */
-  --brand-accent:       #DB4A44;
-  --brand-accent-dark:  #C13A35;
+  /* Deeper end of the logo gradient for calls to action */
+  --brand-accent:       #7B1CEF;
+  --brand-accent-dark:  #5E0FC2;
 
-  /* Navy ink + page surface */
-  --brand-ink:          #122554;
-  --brand-ink-muted:    #5A6B93;
-  --brand-surface:      #F5F7FF;
+  /* Purple-black ink + violet-tinted page surface */
+  --brand-ink:          #2D1648;
+  --brand-ink-muted:    #745B88;
+  --brand-surface:      #FBF9FE;
   --brand-black:        #111111;
 
   /* Legacy aliases kept for backward compatibility */
-  --brand-red:   #DB4A44;
+  --brand-red:   #7B1CEF;
 
   /* Font stacks — overridden per-tenant via SiteSettings */
   --font-script:  "Dancing Script", cursive;

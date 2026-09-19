@@ -9,7 +9,7 @@
     <% site_name = "Click N Buy" %>
     <% site_url = Clicknbuy.AppConfig.site_url() %>
     <% canonical_url = assigns[:canonical_url] || site_url %>
-    <% seo_image_path = assigns[:og_image] || settings.logo_url || "/images/click-n-buy-logo.png" %>
+    <% seo_image_path = assigns[:og_image] || settings.logo_url || "/images/PHOTO-2026-09-18-20-26-06.jpg" %>
     <% seo_image = if String.starts_with?(seo_image_path, ["http://", "https://"]), do: seo_image_path, else: site_url <> seo_image_path %>
     <% seo_title = assigns[:page_title] || "Shop Smart, Buy Fast" %>
     <% seo_description = assigns[:meta_description] || "Shop electronics, gadgets and everyday essentials at Click N Buy, with competitive prices, fast delivery across Kenya and secure payment." %>
@@ -65,8 +65,8 @@
     <meta name="twitter:image:alt" content="Click N Buy logo" />
 
     <%!-- Favicon --%>
-    <link rel="icon" type="image/png" href="/images/click-n-buy-logo.png" />
-    <link rel="apple-touch-icon" href="/images/click-n-buy-logo.png" />
+    <link rel="icon" type="image/jpeg" href="/images/PHOTO-2026-09-18-20-26-06.jpg" />
+    <link rel="apple-touch-icon" href="/images/PHOTO-2026-09-18-20-26-06.jpg" />
 
     <%!-- Fonts & Styles --%>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -87,8 +87,8 @@
         --brand-primary:      <%= settings.primary_color %>;
         --brand-primary-dark: color-mix(in srgb, <%= settings.primary_color %> 78%, black);
         --brand-primary-soft: color-mix(in srgb, <%= settings.primary_color %> 8%, white);
-        --brand-accent:       <%= settings.accent_color || "#DB4A44" %>;
-        --brand-accent-dark:  color-mix(in srgb, <%= settings.accent_color || "#DB4A44" %> 82%, black);
+        --brand-accent:       <%= settings.accent_color || "#7B1CEF" %>;
+        --brand-accent-dark:  color-mix(in srgb, <%= settings.accent_color || "#7B1CEF" %> 82%, black);
         --font-heading: "<%= settings.font_heading %>", ui-sans-serif, system-ui, sans-serif;
         --font-body:    "<%= settings.font_body %>", ui-sans-serif, system-ui, sans-serif;
         --font-script:  "<%= settings.font_script %>", cursive;
@@ -97,8 +97,8 @@
       body { font-family: var(--font-body); color: var(--brand-ink); }
       h1, h2, h3, h4, h5 { font-family: var(--font-heading); }
       .font-script, .brand-script { font-family: var(--font-script) !important; }
-      /* Legacy hardcoded #C8001F classes now resolve to the red CTA accent, so
-         pages not yet rebuilt keep red buttons instead of turning indigo. */
+      /* Legacy hardcoded #C8001F classes resolve to the logo's deep-violet CTA
+         color so older storefront sections stay on brand. */
       .bg-\[\#C8001F\]            { background-color: var(--brand-accent) !important; }
       .text-\[\#C8001F\]          { color: var(--brand-accent) !important; }
       .border-\[\#C8001F\]        { border-color: var(--brand-accent) !important; }

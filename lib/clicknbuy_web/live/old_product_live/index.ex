@@ -31,7 +31,7 @@ defmodule ClicknbuyWeb.OldProductLive.Index do
          :meta_description,
          "#{String.slice(product.description || "", 0, 150)} — Shop #{product.name} at Click N Buy."
        )
-       |> assign(:og_image, product.main_image || "/images/click-n-buy-logo.png")
+       |> assign(:og_image, product.main_image || "/images/PHOTO-2026-09-18-20-26-06.jpg")
        |> assign(:product, product)
        |> assign(:related_products, related)
        |> assign(:selected_color_id, selected_color_id)

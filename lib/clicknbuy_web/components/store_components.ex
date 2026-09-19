@@ -13,7 +13,7 @@ defmodule ClicknbuyWeb.StoreComponents do
 
   @support_phone "+254 796 770 862"
   @support_phone_tel "+254796770862"
-  @support_email "clicknbuy@gmail.com"
+  @support_email "info@clicknbuy.shop"
 
   @doc "Primary storefront navigation links shown in the category strip."
   def nav_links do
@@ -42,7 +42,13 @@ defmodule ClicknbuyWeb.StoreComponents do
     <div class="bg-brand text-white">
       <div class="mx-auto flex max-w-[1500px] items-center justify-between gap-4 px-4 py-2.5 text-[13px] sm:px-6 lg:px-8">
         <div class="flex items-center gap-2 font-medium">
-          <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+          <svg
+            class="h-4 w-4 shrink-0"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            viewBox="0 0 24 24"
+          >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -57,7 +63,10 @@ defmodule ClicknbuyWeb.StoreComponents do
           <span class="h-4 w-px bg-white/30"></span>
           <p>
             Click N Buy is one of Kenya's fastest-growing stores.
-            <.link navigate="/collections" class="font-semibold underline decoration-white/60 underline-offset-2 hover:decoration-white">
+            <.link
+              navigate="/collections"
+              class="font-semibold underline decoration-white/60 underline-offset-2 hover:decoration-white"
+            >
               Show all products
             </.link>
           </p>
@@ -95,7 +104,11 @@ defmodule ClicknbuyWeb.StoreComponents do
           class="-ml-1 rounded-lg p-2 text-ink transition hover:bg-gray-100 lg:hidden"
         >
           <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
           </svg>
         </button>
 
@@ -117,8 +130,18 @@ defmodule ClicknbuyWeb.StoreComponents do
               aria-label="Search"
               class="flex w-16 items-center justify-center rounded-r bg-brand text-white transition hover:bg-brand-700"
             >
-              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.2-5.2m2.2-5.3a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 21l-5.2-5.2m2.2-5.3a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"
+                />
               </svg>
             </button>
           </div>
@@ -146,8 +169,18 @@ defmodule ClicknbuyWeb.StoreComponents do
             aria-label="Search"
             class="flex w-12 items-center justify-center rounded-r bg-brand text-white"
           >
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.2-5.2m2.2-5.3a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 21l-5.2-5.2m2.2-5.3a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"
+              />
             </svg>
           </button>
         </div>
@@ -160,17 +193,12 @@ defmodule ClicknbuyWeb.StoreComponents do
 
   defp wordmark(assigns) do
     ~H"""
-    <.link navigate="/" class="flex shrink-0 items-center gap-2.5">
-      <svg class="h-8 w-8 text-brand" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-        />
-      </svg>
-      <span class="font-heading-brand text-xl font-extrabold tracking-tight text-brand sm:text-2xl">
-        {@settings.site_name}
-      </span>
+    <.link navigate="/" class="shrink-0" aria-label="Click & Buy home">
+      <img
+        src={@settings.logo_url || "/images/PHOTO-2026-09-18-20-26-06.jpg"}
+        alt={@settings.site_name || "Click & Buy"}
+        class="h-14 w-auto max-w-24 object-contain sm:h-16 sm:max-w-28"
+      />
     </.link>
     """
   end
@@ -183,7 +211,13 @@ defmodule ClicknbuyWeb.StoreComponents do
       navigate={account_destination(@current_user)}
       class="group flex items-center gap-2.5 text-ink transition hover:text-brand"
     >
-      <svg class="h-7 w-7 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+      <svg
+        class="h-7 w-7 shrink-0"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        viewBox="0 0 24 24"
+      >
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -256,7 +290,13 @@ defmodule ClicknbuyWeb.StoreComponents do
             type="button"
             class="flex items-center gap-2.5 text-[13px] font-bold uppercase tracking-wide text-ink transition hover:text-brand"
           >
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              viewBox="0 0 24 24"
+            >
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -274,8 +314,18 @@ defmodule ClicknbuyWeb.StoreComponents do
                   class="flex items-center justify-between px-5 py-2.5 text-sm text-ink transition hover:bg-brand-50 hover:text-brand"
                 >
                   {collection.name}
-                  <svg class="h-4 w-4 text-gray-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                  <svg
+                    class="h-4 w-4 text-gray-300"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                    />
                   </svg>
                 </.link>
               <% end %>
@@ -307,8 +357,17 @@ defmodule ClicknbuyWeb.StoreComponents do
 
         <%!-- Contact pair --%>
         <div class="flex shrink-0 items-center gap-6 py-4 text-[15px] font-semibold">
-          <a href={"tel:#{support_phone_tel()}"} class="flex items-center gap-2 text-ink transition hover:text-accent">
-            <svg class="h-5 w-5 text-accent" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+          <a
+            href={"tel:#{support_phone_tel()}"}
+            class="flex items-center gap-2 text-ink transition hover:text-accent"
+          >
+            <svg
+              class="h-5 w-5 text-accent"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              viewBox="0 0 24 24"
+            >
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -317,8 +376,17 @@ defmodule ClicknbuyWeb.StoreComponents do
             </svg>
             Call: {support_phone()}
           </a>
-          <a href={"mailto:#{support_email()}"} class="flex items-center gap-2 text-ink transition hover:text-accent">
-            <svg class="h-5 w-5 text-accent" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+          <a
+            href={"mailto:#{support_email()}"}
+            class="flex items-center gap-2 text-ink transition hover:text-accent"
+          >
+            <svg
+              class="h-5 w-5 text-accent"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              viewBox="0 0 24 24"
+            >
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -443,8 +511,17 @@ defmodule ClicknbuyWeb.StoreComponents do
       </div>
 
       <div id="cart-drawer-items" class="flex-1 overflow-y-auto px-5 py-4">
-        <div id="cart-drawer-empty" class="flex flex-col items-center justify-center py-16 text-center">
-          <svg class="h-14 w-14 text-gray-200" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+        <div
+          id="cart-drawer-empty"
+          class="flex flex-col items-center justify-center py-16 text-center"
+        >
+          <svg
+            class="h-14 w-14 text-gray-200"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+            viewBox="0 0 24 24"
+          >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -506,7 +583,9 @@ defmodule ClicknbuyWeb.StoreComponents do
   # Breadcrumb
   # ---------------------------------------------------------------------------
 
-  attr :crumbs, :list, required: true, doc: "list of %{label:, href:} — last one renders as plain text"
+  attr :crumbs, :list,
+    required: true,
+    doc: "list of %{label:, href:} — last one renders as plain text"
 
   @doc "Grey breadcrumb strip used on interior pages."
   def breadcrumb(assigns) do
@@ -589,7 +668,13 @@ defmodule ClicknbuyWeb.StoreComponents do
           <%!-- Brand --%>
           <div>
             <div class="flex items-center gap-2.5">
-              <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <svg
+                class="h-8 w-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                viewBox="0 0 24 24"
+              >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -605,10 +690,16 @@ defmodule ClicknbuyWeb.StoreComponents do
               with secure payment on every order.
             </p>
             <div class="mt-6 flex gap-3">
-              <.social_icon href={"https://wa.me/#{String.replace(support_phone_tel(), "+", "")}"} label="WhatsApp">
+              <.social_icon
+                href={"https://wa.me/#{String.replace(support_phone_tel(), "+", "")}"}
+                label="WhatsApp"
+              >
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
               </.social_icon>
-              <.social_icon href={@settings.instagram_url || "https://instagram.com/clicknbuy"} label="Instagram">
+              <.social_icon
+                href={@settings.instagram_url || "https://instagram.com/clicknbuy"}
+                label="Instagram"
+              >
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
               </.social_icon>
               <.social_icon href="https://tiktok.com/@clicknbuy" label="TikTok">
@@ -649,7 +740,9 @@ defmodule ClicknbuyWeb.StoreComponents do
                 {"About Us", "/about"}
               ] do %>
                 <li>
-                  <.link navigate={href} class="text-white/60 transition hover:text-white">{label}</.link>
+                  <.link navigate={href} class="text-white/60 transition hover:text-white">
+                    {label}
+                  </.link>
                 </li>
               <% end %>
             </ul>
@@ -660,19 +753,39 @@ defmodule ClicknbuyWeb.StoreComponents do
             <h3 class="font-heading-brand text-base font-bold">Get in Touch</h3>
             <ul class="mt-5 space-y-3 text-sm">
               <li class="flex gap-3 text-white/60">
-                <svg class="mt-0.5 h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                <svg
+                  class="mt-0.5 h-4 w-4 shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                  />
                 </svg>
                 Nairobi, Kenya
               </li>
               <li>
-                <a href={"tel:#{support_phone_tel()}"} class="text-white/60 transition hover:text-white">
+                <a
+                  href={"tel:#{support_phone_tel()}"}
+                  class="text-white/60 transition hover:text-white"
+                >
                   {support_phone()}
                 </a>
               </li>
               <li>
-                <a href={"mailto:#{support_email()}"} class="text-white/60 transition hover:text-white">
+                <a
+                  href={"mailto:#{support_email()}"}
+                  class="text-white/60 transition hover:text-white"
+                >
                   {support_email()}
                 </a>
               </li>

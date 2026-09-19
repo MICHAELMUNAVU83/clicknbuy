@@ -26,6 +26,6 @@ defmodule Clicknbuy.AppConfig do
     - `ADMIN_EMAIL` environment variable at runtime (prod)
   """
   def admin_email do
-    Application.get_env(:clicknbuy, :admin_email, "clicknbuy@gmail.com")
+    Application.get_env(:clicknbuy, :admin_email, "info@clicknbuy.shop")
   end
 end

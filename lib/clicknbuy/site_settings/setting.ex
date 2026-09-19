@@ -5,15 +5,15 @@ defmodule Clicknbuy.SiteSettings.Setting do
   schema "site_settings" do
     field :site_name, :string, default: "ClicknBuy"
     field :site_tagline, :string, default: "Shop Smart, Buy Fast"
-    field :primary_color, :string, default: "#2F32CE"
-    field :accent_color, :string, default: "#DB4A44"
+    field :primary_color, :string, default: "#8A37F1"
+    field :accent_color, :string, default: "#7B1CEF"
     field :font_heading, :string, default: "Poppins"
     field :font_body, :string, default: "DM Sans"
     field :font_script, :string, default: "Dancing Script"
-    field :logo_url, :string
+    field :logo_url, :string, default: "/images/PHOTO-2026-09-18-20-26-06.jpg"
     field :instagram_url, :string
     field :whatsapp_number, :string
-    field :support_email, :string
+    field :support_email, :string, default: "info@clicknbuy.shop"
 
     timestamps(type: :utc_datetime)
   end
@@ -25,8 +25,12 @@ defmodule Clicknbuy.SiteSettings.Setting do
     setting
     |> cast(attrs, @fields)
     |> validate_required([:site_name, :primary_color])
-    |> validate_format(:primary_color, ~r/^#[0-9A-Fa-f]{6}$/, message: "must be a valid hex color like #2F32CE")
-    |> validate_format(:accent_color, ~r/^#[0-9A-Fa-f]{6}$/, message: "must be a valid hex color like #DB4A44")
+    |> validate_format(:primary_color, ~r/^#[0-9A-Fa-f]{6}$/,
+      message: "must be a valid hex color like #8A37F1"
+    )
+    |> validate_format(:accent_color, ~r/^#[0-9A-Fa-f]{6}$/,
+      message: "must be a valid hex color like #7B1CEF"
+    )
     |> validate_length(:site_name, max: 80)
     |> validate_length(:site_tagline, max: 160)
   end

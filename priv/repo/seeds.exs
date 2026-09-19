@@ -870,7 +870,8 @@ info_pages = [
     ### How Delivery Works
 
     - Once your order is confirmed and payment received, we process and pack within **24 hours**.
-    - You'll receive a **WhatsApp notification** when your parcel is dispatched, including tracking details where applicable.
+    - You'll receiv
+    e a **WhatsApp notification** when your parcel is dispatched, including tracking details where applicable.
     - For bus deliveries, the bus ticket/tracking number will be shared with you.
 
     ### Important Notes

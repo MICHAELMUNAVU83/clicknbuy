@@ -34,10 +34,10 @@ defmodule ClicknbuyWeb.AdminTheme do
   }
 
   @dot %{
-    "paid" => "bg-[#9fa3fb]",
-    "processing" => "bg-[#5558e6]",
-    "shipped" => "bg-[#2427A5]",
-    "delivered" => "bg-[#101340]",
+    "paid" => "bg-[#C79CF8]",
+    "processing" => "bg-[#8A37F1]",
+    "shipped" => "bg-[#6B16D7]",
+    "delivered" => "bg-[#49158D]",
     "cancelled" => "bg-slate-500",
     "failed" => "bg-accent"
   }

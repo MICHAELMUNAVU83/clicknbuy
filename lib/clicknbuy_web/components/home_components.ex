@@ -40,11 +40,8 @@ defmodule ClicknbuyWeb.HomeComponents do
     >
       <%!-- Panel header --%>
       <div class="flex items-center justify-between border-b border-gray-100 px-5 py-4">
-        <a href="/" class="flex items-center gap-2.5">
-          <img src="/images/click-n-buy-logo.png" alt="Click N Buy" class="h-8 w-8 rounded-full object-contain" />
-          <span class="brand-logo text-2xl text-gray-900">
-            Click N Buy<span class="text-[#C8001F]">.</span>
-          </span>
+        <a href="/" aria-label="Click & Buy home">
+          <img src="/images/PHOTO-2026-09-18-20-26-06.jpg" alt="Click & Buy" class="h-12 w-auto object-contain" />
         </a>
         <button
           onclick="closeMobileMenu()"
@@ -335,15 +332,12 @@ defmodule ClicknbuyWeb.HomeComponents do
         </button>
 
         <%!-- Logo --%>
-        <a href="/" class="flex items-center gap-2.5">
+        <a href="/" class="shrink-0" aria-label="Click & Buy home">
           <img
-            src="/images/click-n-buy-logo.png"
-            alt="Click N Buy"
-            class="h-9 w-9 rounded-full object-cover object-top shadow-sm ring-1 ring-black/5"
+            src="/images/PHOTO-2026-09-18-20-26-06.jpg"
+            alt="Click & Buy"
+            class="h-14 w-auto object-contain"
           />
-          <span class="brand-logo text-2xl text-gray-900 sm:text-3xl">
-            Click N Buy<span class="text-[#C8001F]">.</span>
-          </span>
         </a>
 
         <%!-- Desktop nav --%>
@@ -1763,16 +1757,13 @@ defmodule ClicknbuyWeb.HomeComponents do
       <%!-- Brand strip --%>
       <div class="border-b border-white/10 px-4 py-8">
         <div class="mx-auto flex max-w-7xl flex-col items-center gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <a href="/" class="flex items-center gap-3">
+          <a href="/" class="flex items-center gap-3" aria-label="Click & Buy home">
             <img
-              src="/images/click-n-buy-logo.png"
-              alt="Click N Buy"
-              class="h-10 w-10 rounded-full object-cover object-top ring-2 ring-[#C8001F]"
+              src="/images/PHOTO-2026-09-18-20-26-06.jpg"
+              alt="Click & Buy"
+              class="h-20 w-auto rounded-lg object-contain"
             />
             <div>
-              <span class="brand-logo text-3xl text-white">
-                Click N Buy<span class="text-[#C8001F]">.</span>
-              </span>
               <p class="text-[10px] uppercase tracking-widest text-gray-500">
                 Everyday Fashion, Effortlessly You
               </p>

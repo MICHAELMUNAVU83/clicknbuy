@@ -11,15 +11,15 @@ defmodule Clicknbuy.SiteSettings do
   @defaults %Setting{
     site_name: "Click N Buy",
     site_tagline: "Shop Smart, Buy Fast",
-    primary_color: "#2F32CE",
-    accent_color: "#DB4A44",
+    primary_color: "#8A37F1",
+    accent_color: "#7B1CEF",
     font_heading: "Poppins",
     font_body: "DM Sans",
     font_script: "Dancing Script",
-    logo_url: "/images/click-n-buy-logo.png",
+    logo_url: "/images/PHOTO-2026-09-18-20-26-06.jpg",
     instagram_url: nil,
     whatsapp_number: nil,
-    support_email: nil
+    support_email: "info@clicknbuy.shop"
   }
 
   def start_link(_opts) do

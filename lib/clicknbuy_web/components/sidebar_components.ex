@@ -152,9 +152,9 @@ defmodule ClicknbuyWeb.SidebarComponents do
     ~H"""
     <div class="flex items-center gap-2.5 border-b border-gray-100 px-4 py-3.5">
       <img
-        src="/images/click-n-buy-logo.png"
-        alt="Click N Buy"
-        class="h-8 w-8 flex-shrink-0 rounded-full object-cover object-top ring-2 ring-brand/60"
+        src="/images/PHOTO-2026-09-18-20-26-06.jpg"
+        alt="Click & Buy"
+        class="h-12 w-auto flex-shrink-0 object-contain"
       />
       <div class="min-w-0">
         <span class="font-heading-brand block text-[17px] font-extrabold leading-tight tracking-tight text-brand">
