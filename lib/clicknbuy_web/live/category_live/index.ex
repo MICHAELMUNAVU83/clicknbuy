@@ -102,7 +102,6 @@ defmodule ClicknbuyWeb.CategoryLive.Index do
         popular_products={@popular_products}
         filters_open={@filters_open}
       />
-      <.countdown />
 
       <.newsletter />
       <.store_footer collections={@product_types} />
