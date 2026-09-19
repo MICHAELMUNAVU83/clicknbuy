@@ -150,21 +150,15 @@ defmodule ClicknbuyWeb.SidebarComponents do
 
   defp sidebar_logo(assigns) do
     ~H"""
-    <div class="flex items-center gap-2.5 border-b border-gray-100 px-4 py-3.5">
-      <img
-        src="/images/PHOTO-2026-09-18-20-26-06.jpg"
-        alt="Click & Buy"
-        class="h-12 w-auto flex-shrink-0 object-contain"
-      />
-      <div class="min-w-0">
-        <span class="font-heading-brand block text-[17px] font-extrabold leading-tight tracking-tight text-brand">
-          Click N Buy<span class="text-accent">.</span>
-        </span>
-        <span class="block text-[9px] uppercase tracking-widest text-gray-500">
-          Fashion &amp; Function
-        </span>
-      </div>
-      <span class="ml-auto flex-shrink-0 rounded bg-brand/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand">
+    <div class="flex min-h-24 items-center justify-between gap-3 border-b border-gray-100 px-5 py-3">
+      <a href="/admin" class="block min-w-0" aria-label="Click & Buy admin dashboard">
+        <img
+          src="/images/PHOTO-2026-09-18-20-26-06.jpg"
+          alt="Click & Buy"
+          class="h-16 w-auto max-w-24 object-contain object-left"
+        />
+      </a>
+      <span class="shrink-0 rounded-lg bg-brand-50 px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-700">
         Admin
       </span>
     </div>
@@ -520,7 +514,11 @@ defmodule ClicknbuyWeb.SidebarComponents do
   defp nav_icon(%{name: "message-circle"} = assigns) do
     ~H"""
     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+      />
     </svg>
     """
   end
