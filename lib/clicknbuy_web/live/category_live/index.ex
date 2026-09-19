@@ -34,13 +34,14 @@ defmodule ClicknbuyWeb.CategoryLive.Index do
 
   @impl true
   def handle_event("subscribe_newsletter", _params, socket) do
-    {:noreply, put_flash(socket, :info, "Thanks for subscribing! Watch your inbox for new deals.")}
+    {:noreply,
+     put_flash(socket, :info, "Thanks for subscribing! Watch your inbox for new deals.")}
   end
 
   @impl true
   def handle_event("toggle_product_type", %{"slug" => slug}, socket) do
     current = socket.assigns.selected_types
-    next    = if slug in current, do: List.delete(current, slug), else: [slug | current]
+    next = if slug in current, do: List.delete(current, slug), else: [slug | current]
 
     {:noreply,
      socket
@@ -102,7 +103,7 @@ defmodule ClicknbuyWeb.CategoryLive.Index do
         filters_open={@filters_open}
       />
       <.countdown />
-      <.best_sellers bestsellers={@bestsellers} />
+
       <.newsletter />
       <.store_footer collections={@product_types} />
     </div>
