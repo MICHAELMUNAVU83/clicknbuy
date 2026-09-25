@@ -761,7 +761,9 @@ defmodule ClicknbuyWeb.CatalogComponents do
     """
   end
 
-  defp share_url(slug), do: URI.encode_www_form("https://clicknbuy.com/products/#{slug}")
+  defp share_url(slug) do
+    URI.encode_www_form("#{Clicknbuy.AppConfig.site_url()}/products/#{slug}")
+  end
 
   attr :href, :string, required: true
   attr :label, :string, required: true

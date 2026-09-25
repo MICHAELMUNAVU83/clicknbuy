@@ -55,7 +55,7 @@ Key values can be overridden at runtime via environment variables:
 | `DATABASE_URL` | (set in `dev.exs`)             | PostgreSQL connection string         |
 | `SECRET_KEY_BASE` | (generated)               | Phoenix secret key                   |
 | `PHX_HOST`    | `example.com`                   | Production hostname                  |
-| `SITE_URL`    | `https://clicknbuy.com`     | Absolute base URL for emails & links |
+| `SITE_URL`    | `https://clickandbuy.africa` | Absolute base URL for emails & links |
 | `ADMIN_EMAIL` | `info@clicknbuy.shop`        | Recipient for admin order alerts     |
 | `PAYSTACK_SECRET_KEY` | —                     | Paystack secret key (server-side)    |
 | `PAYSTACK_PUBLIC_KEY` | —                     | Paystack public key (client-side)    |
@@ -137,8 +137,8 @@ mix assets.deploy
 mix ecto.migrate
 
 # Start with production config
-PHX_HOST=clicknbuy.com \
-SITE_URL=https://clicknbuy.com \
+PHX_HOST=clickandbuy.africa \
+SITE_URL=https://clickandbuy.africa \
 SECRET_KEY_BASE=<generated> \
 DATABASE_URL=<postgres-url> \
 mix phx.server

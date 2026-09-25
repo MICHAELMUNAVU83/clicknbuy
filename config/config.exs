@@ -12,7 +12,7 @@ config :clicknbuy,
   generators: [timestamp_type: :utc_datetime],
   # Public-facing site URL used in emails and links.
   # Override with the SITE_URL env var in production (see config/runtime.exs).
-  site_url: "https://clicknbuy.com",
+  site_url: "https://clickandbuy.africa",
   # Admin email that receives new-order notifications.
   # Must be a real deliverable address. Override with ADMIN_EMAIL env var.
   admin_email: "info@clicknbuy.shop"

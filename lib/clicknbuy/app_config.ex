@@ -10,11 +10,11 @@ defmodule Clicknbuy.AppConfig do
   Returns the public site URL (no trailing slash).
 
   Configurable via:
-    - `config :clicknbuy, site_url: \"https://clicknbuy.com\"` in config files
+    - `config :clicknbuy, site_url: \"https://clickandbuy.africa\"` in config files
     - `SITE_URL` environment variable at runtime (prod)
   """
   def site_url do
-    Application.get_env(:clicknbuy, :site_url, "https://clicknbuy.com")
+    Application.get_env(:clicknbuy, :site_url, "https://clickandbuy.africa")
     |> String.trim_trailing("/")
   end
 
